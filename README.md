@@ -1,3 +1,7 @@
+## Content
+
+### docs - location of all additional files you should guided by during development
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
