@@ -3,10 +3,11 @@ import React from 'react';
 import MemberTaskManageGrid from '../MemberTaskManageGrid/MemberTaskManageGrid.js';
 import { students, getStudents, setStudents } from '../Students.js';
 import './MembersManageGrid.css';
-//import Header from '../Header/Header.js';
+
 import { Button, RowHeader, Row } from '../GeneralElements/GeneralElements.js';
 import Popup from '../Popup/Popup.js';
 import Form from '../Form/Form.jsx';
+import './MembersManageGrid.css';
 
 const CELLS_HEADER = [
   'id',
@@ -50,13 +51,13 @@ class MembersManageGrid extends React.Component {
   render() {
     if (!students || students.length === 0) {
       return (
-        <>
+        <div id="table">
           <Popup
             name='Register'
             form={<Form newStateMembers={this.handleClick} />}
           />
           <div>Нет зарегистрированных</div>
-        </>
+        </div>
       );
     } else {
       let listItems = this.state.students.map((student) => (
@@ -81,18 +82,21 @@ class MembersManageGrid extends React.Component {
       ));
 
       return (
-        <>
-          <Popup
-            name='Register'
-            form={<Form newStateMembers={this.handleClick} />}
-          />
-          <table>
-            <thead>
-              <RowHeader cells={CELLS_HEADER} />
-            </thead>
-            <tbody>{listItems}</tbody>
-          </table>
-        </>
+        <div id="table">
+          <div className = "container">
+            <Popup
+              name='Register'
+              form={<Form newStateMembers={this.handleClick} 
+              />}
+            />
+            <table>
+              <thead>
+                <RowHeader cells={CELLS_HEADER} />
+              </thead>
+              <tbody>{listItems}</tbody>
+            </table>
+          </div>
+        </div>
       );
     }
   }

@@ -4,13 +4,12 @@ import './GeneralElements.css';
 function Button({ name, ...rest }) {
   return (
     <button className='button' {...rest}>
-      {' '}
-      {name}{' '}
+      {name}
     </button>
   );
 }
 
-const HeaderCell = ({ name }) => <td>{name}</td>;
+const HeaderCell = ({ name }) => <th>{name}</th>;
 
 const RowCell = ({ name }) => <td>{name}</td>;
 
