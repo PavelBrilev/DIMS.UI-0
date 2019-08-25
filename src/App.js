@@ -1,11 +1,13 @@
 import React from 'react';
+import './App.css';
+import MembersManageGrid from './components/MembersManageGrid/MembersManageGrid.js';
 
-const App = () => (
-  <div>
-    Hello!
-    <span>World</span>
-    <br />
-  </div>
-);
+function App() {
+  return (
+    <div>
+      <MembersManageGrid />
+    </div>
+  );
+}
 
 export default App;
