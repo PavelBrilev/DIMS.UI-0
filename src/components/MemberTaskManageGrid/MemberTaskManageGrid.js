@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button, RowHeader, Row } from '../GeneralElements/GeneralElements.js';
 import tasks from '../tasks.js';
-import Header from '../Header/Header.js';
 
 const CELLS_HEADER = ['id', 'name', 'start', 'deadline', 'status', ''];
 
@@ -28,14 +27,16 @@ function MemberTaskManageGrid(event) {
   }
 
   const element = (
-    <table>
-      <thead>
-        <RowHeader cells={CELLS_HEADER} />
-      </thead>
-      <tbody>{listItems}</tbody>
-    </table>
+    <div>
+      <table>
+        <thead>
+          <RowHeader cells={CELLS_HEADER} />
+        </thead>
+        <tbody>{listItems}</tbody>
+      </table>
+    </div>
   );
 
-  ReactDOM.render(element, document.getElementById('root'));
+  ReactDOM.render(element, document.getElementById('table'));
 }
 export default MemberTaskManageGrid;

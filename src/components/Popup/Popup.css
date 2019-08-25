@@ -12,6 +12,7 @@
 .popup_inner {
   width: 450px;
   margin: 50px auto;
-  border-radius: 20px;
+  border-radius: 10px;
   background: white;
+  text-align: center;
 }
