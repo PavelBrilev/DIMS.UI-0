@@ -5,9 +5,10 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
+
   },
   {
     id: 2,
@@ -15,9 +16,9 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
   },
   {
     id: 3,
@@ -25,9 +26,9 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
   },
   {
     id: 4,
@@ -35,9 +36,9 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
   },
   {
     id: 5,
@@ -45,9 +46,9 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
   },
   {
     id: 6,
@@ -55,9 +56,9 @@ const tasks = [
     name: 'Bret',
     start: '01.02.2019',
     deadline: '01.02.2019',
-    compliteDate: '01.02.2019',
-    status: '21',
     note: 'sasasasasas',
+    date: '01.02.2019',
+    status: '21',
   },
 ];
 

@@ -4,5 +4,22 @@
 }
 
 .form-control {
-  width: 400px;
-}
+    width: 400px;
+    display: block;
+    box-sizing: border-box;
+    height: 46px;
+    margin-right: 16px;
+    padding: 12px;
+    font: inherit;
+    border: 1px solid #a1b5c4;
+    border-radius: 4px;
+  }
+  
+  .form-control:focus {
+    border: 1px solid #cad5fd;
+    outline: none;
+  }
+  
+  .form-control:hover {
+    box-shadow: 0 0 10px #cad5fd;
+  }

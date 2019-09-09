@@ -1,13 +1,13 @@
 import React from 'react';
-//import MemberProgressGrid from '../MemberProgressGrid/MemberProgressGrid.js';
-import MemberTaskManageGrid from '../MemberTaskManageGrid/MemberTaskManageGrid.js';
-import { students, getStudents, setStudents } from '../Students.js';
-import './MembersManageGrid.css';
-
-import { Button, RowHeader, Row } from '../GeneralElements/GeneralElements.js';
+import Storage from '../Storage.js';
+import Button from '../GeneralComponents/Button/Button.jsx';
+import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
+import Row from '../GeneralComponents/Row/Row.jsx';
 import Popup from '../Popup/Popup.js';
-import Form from '../Form/Form.jsx';
-import './MembersManageGrid.css';
+import StudentsForm from '../Form/StudentsForm.jsx';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import './AllStudents.css';
 
 const CELLS_HEADER = [
   'id',
@@ -20,31 +20,30 @@ const CELLS_HEADER = [
   '',
 ];
 
-getStudents();
+let storage = Storage();
+let students = storage.getStorage();
 
-class MembersManageGrid extends React.Component {
+class AllStudents extends React.Component {
   constructor(props) {
     super(props);
     this.state = { students: students };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleDel = this.handleDel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleClick() {
-    getStudents();
-    this.setState({ students: students });
+    this.setState({ students: storage.getStorage() });
   }
 
-  handleDel(event) {
+  handleDelete(event) {
     let target = event.target;
     for (let i = 0; i < students.length; i++) {
-      if (students[i].id === target.id) {
+      if (students[i].id == target.id) {
         students.splice(i, 1);
-        setStudents(students);
+        storage.setStorage(students);
       }
     }
-    getStudents();
     this.setState({ students: students });
   }
 
@@ -54,7 +53,7 @@ class MembersManageGrid extends React.Component {
         <div id="table">
           <Popup
             name='Register'
-            form={<Form newStateMembers={this.handleClick} />}
+            form={<StudentsForm newStateMembers={this.handleClick} />}
           />
           <div>Нет зарегистрированных</div>
         </div>
@@ -66,17 +65,13 @@ class MembersManageGrid extends React.Component {
           cellsHeader={CELLS_HEADER}
           key={student.id}
           elements={[
-            <Button name='Progress' />,
-            <Button
-              name='Tasks'
-              onClick={MemberTaskManageGrid}
-              id={student.id}
-            />,
+            <Link className = "button" to={`/studentsDoneTasks/${student.id}`} > Progress </Link> ,
+            <Link className = "button" to={`/studentsTasks/${student.id}`} > Tasks </Link> ,
             <Popup
               name='Edit'
-              form={<Form newStateMembers={this.handleClick} id={student.id} />}
+              form={<StudentsForm newStateMembers={this.handleClick} id={student.id} />}
             />,
-            <Button name='Delete' onClick={this.handleDel} id={student.id} />,
+            <Button name='Delete' onClick={this.handleDelete} id={student.id} />,
           ]}
         />
       ));
@@ -86,7 +81,7 @@ class MembersManageGrid extends React.Component {
           <div className = "container">
             <Popup
               name='Register'
-              form={<Form newStateMembers={this.handleClick} 
+              form={<StudentsForm newStateMembers={this.handleClick} 
               />}
             />
             <table>
@@ -102,4 +97,4 @@ class MembersManageGrid extends React.Component {
   }
 }
 
-export default MembersManageGrid;
+export default AllStudents;

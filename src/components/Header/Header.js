@@ -1,22 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Header.css';
 import logo from './human1.png';
-import { Button } from '../GeneralElements/GeneralElements.js';
-import MembersManageGrid from '../MembersManageGrid/MembersManageGrid.js';
-
 
 function Header() {
   return (
-    <div className="header">
-      <div> 
-        <img src={logo} alt="Dev Incubator"/>
+      <div className="header">
+        <div> 
+          <img src={logo} alt="Dev Incubator"/>
+        </div>
+        <Link to="/" className = "btn__header" > Home </Link> 
+        <Link to="/students" className = "btn__header" > Students </Link> 
+        <Link to="/tasks" className = "btn__header" > Tasks </Link> 
+        <Link to="/" className = "btn__header" > Contacts </Link> 
       </div>
-      <Button className = "btn__header" name='Home' />
-      <Button className = "btn__header" name='Members' />
-      <Button className = "btn__header" name='Tasks' />
-      <Button className = "btn__header" name='Contacts' />
-    </div>
+
+
   );
 }
 

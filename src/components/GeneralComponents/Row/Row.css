@@ -1,0 +1,10 @@
+
+td {
+  color: rgb(16, 16, 48);
+  padding: 9px 8px;
+  transition: .3s linear;
+  border-bottom: 1px solid #ccc;
+}
+
+tr:hover td {background: #e8edff;}
+
