@@ -1,36 +1,36 @@
 import React from 'react';
-import { Button } from '../GeneralElements/GeneralElements.js';
-import { students, setStudents } from '../Students.js';
+import Button from '../GeneralComponents/Button/Button.jsx';
+import Storage from '../Storage.js';
 import './Form.css';
 
 let index;
+let storage = Storage();
+let students = storage.getStorage();
 
-class Form extends React.Component {
+class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.id) {
-      index = students.map((o) => o.id).indexOf(props.id);
-      this.state = students[index];
-    } else {
       this.state = {
         id: '',
         name: '',
         lastName: '',
-        direction: 'Выберите технологию',
+        direction: 'Direction',
         education: '',
         start: '',
         age: '',
       };
-    }
 
     this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeLastName = this.handleChangeLastName.bind(this);
-    this.handleChangeDirection = this.handleChangeDirection.bind(this);
-    this.handleChangeEducation = this.handleChangeEducation.bind(this);
-    this.handleChangeStart = this.handleChangeStart.bind(this);
-    this.handleChangeAge = this.handleChangeAge.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    if (this.props.id) {
+      index = students.map((o) => o.id).indexOf(this.props.id);
+      this.setState(students[index]);
+    }
+  };
 
   handleChangeName(event) {
     this.setState({ name: event.target.value });
@@ -42,37 +42,21 @@ class Form extends React.Component {
     }
   }
 
-  handleChangeLastName(event) {
-    this.setState({ lastName: event.target.value });
-  }
-
-  handleChangeDirection(event) {
-    this.setState({ direction: event.target.value });
-  }
-
-  handleChangeEducation(event) {
-    this.setState({ education: event.target.value });
-  }
-
-  handleChangeStart(event) {
-    this.setState({ start: event.target.value });
-  }
-
-  handleChangeAge(event) {
-    this.setState({ age: event.target.value });
-  }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
-
     if (this.props.id) {
       students[index] = this.state;
-      setStudents(students);
+      storage.setStorage(students);
     } else {
       if (!students || students.length === 0) {
-        setStudents([this.state]);
+        storage.setStorage([this.state]);
       } else {
-        setStudents(students.concat([this.state]));
+        storage.setStorage(students.concat([this.state]));
+        students = storage.getStorage();
       }
     }
     this.props.newStateMembers();
@@ -83,7 +67,7 @@ class Form extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
           <label>
-            Имя:
+            Name:
             <input
               type='text'
               value={this.state.name}
@@ -95,11 +79,12 @@ class Form extends React.Component {
         </div>
         <div className='form-group'>
           <label>
-            Фамилия:
+          Lastname:
             <input
+              name = 'lastName'
               type='text'
               value={this.state.lastName}
-              onChange={this.handleChangeLastName}
+              onChange={this.handleChange}
               className='form-control'
               required
             />
@@ -107,13 +92,14 @@ class Form extends React.Component {
         </div>
         <div className='form-group'>
           <label>
-            Выберите ваше направление:
+          Direction:
             <select
+              name = 'direction'
               value={this.state.direction}
-              onChange={this.handleChangeDirection}
+              onChange={this.handleChange}
               className='form-control'
             >
-              <option value='#'>Выберите направление</option>
+              <option value='#'>Direction</option>
               <option value='Java'>Java</option>
               <option value='JavaScript'>JavaScript</option>
               <option value='.NET'>.NET</option>
@@ -123,33 +109,36 @@ class Form extends React.Component {
         </div>
         <div className='form-group'>
           <label>
-            Образование:
+          Education:
             <input
+              name = 'education'
               type='text'
               value={this.state.education}
-              onChange={this.handleChangeEducation}
+              onChange={this.handleChange}
               className='form-control'
             />
           </label>
         </div>
         <div className='form-group'>
           <label>
-            Дата начала:
+          Start date:
             <input
+              name = 'start'
               type='date'
               value={this.state.start}
-              onChange={this.handleChangeStart}
+              onChange={this.handleChange}
               className='form-control'
             />
           </label>
         </div>
         <div className='form-group'>
           <label>
-            Возраст:
+            Age:
             <input
+              name = 'age'
               type='number'
               value={this.state.age}
-              onChange={this.handleChangeAge}
+              onChange={this.handleChange}
               className='form-control'
             />
           </label>
@@ -162,4 +151,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default StudentsForm;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../GeneralElements/GeneralElements.js';
+import Button from '../GeneralComponents/Button/Button.jsx';
 import './Popup.css';
 
 class Popup extends React.Component {

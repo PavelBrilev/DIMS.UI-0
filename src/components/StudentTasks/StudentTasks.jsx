@@ -1,15 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, RowHeader, Row } from '../GeneralElements/GeneralElements.js';
+import Button from '../GeneralComponents/Button/Button.jsx';
+import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
+import Row from '../GeneralComponents/Row/Row.jsx';
 import tasks from '../tasks.js';
 
 const CELLS_HEADER = ['id', 'name', 'start', 'deadline', 'status', ''];
 
-function MemberTaskManageGrid(event) {
-  let target = event.target;
+class StudentTasks extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() { 
   let listItems = [];
   for (let i = 0; i < tasks.length; i++) {
-    let idx = tasks[i].userId.indexOf(Number(target.id));
+    let idx = tasks[i].userId.indexOf(Number(this.props.id));
     if (idx !== -1) {
       listItems.push(
         <Row
@@ -26,7 +31,7 @@ function MemberTaskManageGrid(event) {
     }
   }
 
-  const element = (
+  return (
     <div>
       <table>
         <thead>
@@ -35,8 +40,8 @@ function MemberTaskManageGrid(event) {
         <tbody>{listItems}</tbody>
       </table>
     </div>
-  );
-
-  ReactDOM.render(element, document.getElementById('table'));
+  )
+  }
 }
-export default MemberTaskManageGrid;
+
+export default StudentTasks;
