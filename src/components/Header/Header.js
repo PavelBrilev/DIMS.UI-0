@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Header.css';
 import logo from './human1.png';
 
@@ -14,10 +14,7 @@ function Header() {
         <Link to="/tasks" className = "btn__header" > Tasks </Link> 
         <Link to="/" className = "btn__header" > Contacts </Link> 
       </div>
-
-
   );
 }
-
 
 export default Header;
