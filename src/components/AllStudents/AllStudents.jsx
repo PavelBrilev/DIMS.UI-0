@@ -5,9 +5,9 @@ import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
 import Row from '../GeneralComponents/Row/Row.jsx';
 import Popup from '../Popup/Popup.js';
 import StudentsForm from '../Form/StudentsForm.jsx';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import './AllStudents.css';
+
 
 const CELLS_HEADER = [
   'id',
@@ -39,12 +39,15 @@ class AllStudents extends React.Component {
   handleDelete(event) {
     let target = event.target;
     for (let i = 0; i < students.length; i++) {
-      if (students[i].id == target.id) {
+      console.log(students)
+
+      if (students[i].id === target.id) {
         students.splice(i, 1);
         storage.setStorage(students);
+        this.setState({ students: storage.getStorage() });
+
       }
     }
-    this.setState({ students: students });
   }
 
   render() {
