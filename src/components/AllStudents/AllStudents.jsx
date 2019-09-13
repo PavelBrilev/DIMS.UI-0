@@ -33,19 +33,17 @@ class AllStudents extends React.Component {
   }
 
   handleClick() {
-    this.setState({ students: storage.getStorage() });
+    students = storage.getStorage();
+    this.setState({ students: students });
   }
 
   handleDelete(event) {
     let target = event.target;
     for (let i = 0; i < students.length; i++) {
-      console.log(students)
-
       if (students[i].id === target.id) {
         students.splice(i, 1);
         storage.setStorage(students);
         this.setState({ students: storage.getStorage() });
-
       }
     }
   }

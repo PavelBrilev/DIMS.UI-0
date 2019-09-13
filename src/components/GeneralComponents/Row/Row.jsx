@@ -15,11 +15,12 @@ function Row(props) {
       }
     }
   }
+
   if (values.length < cells.length) {
     values.push(props.elements);
   }
-  const listItems = values.map((item) => <RowCell name={item} key={item} />);
-
+  
+  const listItems = values.map((item) => <RowCell name={item} key={item.index} />);
   return <tr>{listItems}</tr>;
 }
 

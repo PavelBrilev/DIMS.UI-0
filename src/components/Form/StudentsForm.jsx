@@ -37,6 +37,7 @@ class StudentsForm extends React.Component {
     if (!students || students.length === 0) {
       this.setState({ id: '1' });
     } else if (!this.props.id) {
+      students = storage.getStorage();
       let id = Number(students[students.length - 1].id);
       this.setState({ id: `${id + 1}` });
     }
@@ -55,8 +56,8 @@ class StudentsForm extends React.Component {
       if (!students || students.length === 0) {
         storage.setStorage([this.state]);
       } else {
-        storage.setStorage(students.concat([this.state]));
         students = storage.getStorage();
+        storage.setStorage(students.concat([this.state]));
       }
     }
     this.props.newStateMembers();
