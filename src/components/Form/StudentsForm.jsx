@@ -54,8 +54,8 @@ class StudentsForm extends React.Component {
       if (!students || students.length === 0) {
         storage.setStorage([this.state]);
       } else {
-        storage.setStorage(students.concat([this.state]));
         students = storage.getStorage();
+        storage.setStorage(students.concat([this.state]));
       }
     }
     this.props.newStateMembers();

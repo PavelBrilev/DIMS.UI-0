@@ -34,7 +34,7 @@ class AllStudents extends React.Component {
 
   handleClick() {
     students = storage.getStorage();
-    this.setState({ students: storage.getStorage() });
+    this.setState({ students: students });
   }
 
   handleDelete(event) {
