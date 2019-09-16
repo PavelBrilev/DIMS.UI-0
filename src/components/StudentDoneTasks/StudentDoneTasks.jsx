@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'reactstrap';
 import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
 import Row from '../GeneralComponents/Row/Row.jsx';
 import tasks from '../tasks.js';
@@ -26,13 +27,13 @@ class StudentDoneTasks extends React.Component {
   }
 
   return (
-    <div>
-      <table>
+    <div className='container'>
+      <Table hover>
         <thead>
           <RowHeader cells={CELLS_HEADER} />
         </thead>
         <tbody>{listItems}</tbody>
-      </table>
+      </Table>
     </div>
   )
   }

@@ -8,9 +8,6 @@ table {
   margin: auto;
 }
 
-.container {
-  max-width: 70%;
-  width: 70%;
-  margin: auto;
+.text {
+  text-align: center;
 }
-
