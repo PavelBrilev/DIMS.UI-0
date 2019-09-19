@@ -4,22 +4,19 @@ import './Row.css';
 
 const RowCell = ({ name }) => <td>{name}</td>;
 
-function Row(props) {
-  let obj = props.cells;
-  let cells = props.cellsHeader;
-  let values = [];
-  for (let key in obj) {
-    for (let i = 0; i < cells.length; i++) {
-      if (key.toString() === cells[i]) {
-        values.push(obj[key]);
+function Row({cells, headerСells, elements, ...rest}) {
+  const values = [];
+  for (let key in cells) {
+    for (let i = 0; i < headerСells.length; i++) {
+      if (key.toString() === headerСells[i]) {
+        values.push(cells[key]);
       }
     }
   }
-  if (values.length < cells.length) {
-    values.push(props.elements);
+  if (values.length < headerСells.length) {
+    values.push(elements);
   }
   const listItems = values.map((item) => <RowCell name={item} key={item.index} />);
-
   return <tr>{listItems}</tr>;
 }
 

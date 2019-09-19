@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Storage from '../Storage.js';
 
 let index;
-let storage = Storage();
-let students = storage.getStorage();
+const storage = Storage();
+const students = storage.getValues('students');
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -25,10 +25,7 @@ class StudentsForm extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.id) {
-      index = students.map((o) => o.id).indexOf(this.props.id);
-      this.setState(students[index]);
-    }
+      this.setState(students.find(item => item.id == this.props.id));
   };
 
   handleChangeName(event) {
@@ -49,16 +46,16 @@ class StudentsForm extends React.Component {
     event.preventDefault();
     if (this.props.id) {
       students[index] = this.state;
-      storage.setStorage(students);
+      storage.setValues('students', students);
     } else {
       if (!students || students.length === 0) {
-        storage.setStorage([this.state]);
+        storage.setValues('students', [this.state]);
       } else {
-        students = storage.getStorage();
-        storage.setStorage(students.concat([this.state]));
+        students = storage.getValues('students');
+        storage.setValues('students', students.concat([this.state]));
       }
     }
-    this.props.newStateMembers();
+    this.props.setNewStudent();
   }
 
   render() {

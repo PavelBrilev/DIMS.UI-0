@@ -2,87 +2,91 @@ import axios from "axios";
 
 
 
-let Storage = function(props) {
-let students;
+let Storage = function() {
   
   return {
-    setStorage: function(props) {
-      localStorage.setItem('students', JSON.stringify(props));
+    setValues: (key, values) => {
+      localStorage.setItem(key, JSON.stringify(values));
     },
 
-    getStorage: function() {
-      students = JSON.parse(localStorage.getItem('students'));
-      return students;
+    getValues: (key) => {
+      if (localStorage.getItem(key)) {
+        return JSON.parse(localStorage.getItem(key))
+        }
+        return null;
     },
 
-    getStudentsAxios: () => {
+    getStudents: () => {
     axios.get('/api/profiles')
       .then((response) => {
-        students = response.data;
+        const students = response.data;
+        this.setValues('students', students)
       })
       .catch((error) => {
         console.log(error);
       });
     },
 
-    postStudentsAxios: (props) => {
-      axios.post('/api/member-profile', {
-        Name: props.name, 
-        LastName: props.lastName, 
-        Email: props.email, 
-        Sex: props.swx, 
-        Education: props.eduction, 
-        BirthDate: props.birthDate, 
-        UniversityAverageScore: props.universityAverageScore,
-        MathScore: props.mathScore, 
-        Address: props.address, 
-        MobilePhone: props.mobilePhone, 
-        Skype: props.skype, 
-        StartDate: props.startDate
-        
-    })
+    postStudents: ({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) => {
+      let memberProfile = {
+        id: id,
+        Name: name, 
+        LastName: lastName, 
+        Email: email, 
+        Sex: sex, 
+        Education: education, 
+        BirthDate: birthDate, 
+        UniversityAverageScore: universityAverageScore,
+        MathScore: mathScore, 
+        Address: address, 
+        MobilePhone: mobilePhone, 
+        Skype: skype, 
+        StartDate: startDate
+    };
+      axios.post('/api/member-profile', {memberProfile})
     .then((response) => {
-      students = response.data;
+      const students = response.data;
+      this.setValues('students', students)
     })
     .catch((error) => {
         console.log(error);
     });
     },
 
-    deleteStudentsAxios: (props) => {
+    deleteStudent: (props) => {
       axios.delete({
         url: `/api/member-profile/${props.id}`,
       })
-        .then((response) => {
-        students = response.data
-      });
-      },
+     },
 
-    editStudentsAxios: (props) => {
+    editStudent: ({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) => {
+      let memberProfile = {
+        id: id,
+        Name: name, 
+        LastName: lastName, 
+        Email: email, 
+        Sex: sex, 
+        Education: education, 
+        BirthDate: birthDate, 
+        UniversityAverageScore: universityAverageScore,
+        MathScore: mathScore, 
+        Address: address, 
+        MobilePhone: mobilePhone, 
+        Skype: skype, 
+        StartDate: startDate
+    };
       axios.put({
         method:'post',
-        url: `/api/member-profile/${props.id}`,
-        data: {
-          Name: props.name, 
-          LastName: props.lastName, 
-          Email: props.email, 
-          Sex: props.swx, 
-          Education: props.eduction, 
-          BirthDate: props.birthDate, 
-          UniversityAverageScore: props.universityAverageScore,
-          MathScore: props.mathScore, 
-          Address: props.address, 
-          MobilePhone: props.mobilePhone, 
-          Skype: props.skype, 
-          StartDate: props.startDate
-        }
+        url: `/api/member-profile/${id}`,
+        data: { memberProfile }
       })
         .then((response) => {
-        students = response.data
+          const student = response.data
+          
       });
       },
 
-    getStudentProgressAxios: (props) => {
+    getStudentProgress: (props) => {
     axios.get(`/api/user-progress/${props.id}`)
       .then((response) => {
         return response.data;
@@ -93,7 +97,7 @@ let students;
     },
 
 
-    getStudentTasksAxios: (props) => {
+    getStudentTasks: (props) => {
       axios.get(`/api/member-profile/tasks/${props.id}`)
         .then((response) => {
           return response.data;

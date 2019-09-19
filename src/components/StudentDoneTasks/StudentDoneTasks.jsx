@@ -4,7 +4,7 @@ import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
 import Row from '../GeneralComponents/Row/Row.jsx';
 import tasks from '../tasks.js';
 
-const CELLS_HEADER = ['id', 'name', 'note', 'date'];
+const HEADER_CELLS = ['id', 'name', 'note', 'date'];
 
 class StudentDoneTasks extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class StudentDoneTasks extends React.Component {
       listItems.push(
         <Row
           cells={tasks[i]}
-          cellsHeader={CELLS_HEADER}
+          headerСells={HEADER_CELLS}
           key={tasks[i].id}
         />,
       );
@@ -30,7 +30,7 @@ class StudentDoneTasks extends React.Component {
     <div className='container'>
       <Table hover>
         <thead>
-          <RowHeader cells={CELLS_HEADER} />
+          <RowHeader cells={HEADER_CELLS} />
         </thead>
         <tbody>{listItems}</tbody>
       </Table>
