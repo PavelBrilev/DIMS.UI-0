@@ -45,6 +45,7 @@ class StudentsForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.props.id) {
+      index = students.findIndex(item => item.id == this.props.id);      
       students[index] = this.state;
       storage.setValues('students', students);
     } else {

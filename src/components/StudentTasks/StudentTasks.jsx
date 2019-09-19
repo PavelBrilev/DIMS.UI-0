@@ -12,24 +12,19 @@ class StudentTasks extends React.Component {
   }
 
   render() { 
-  let listItems = [];
-  for (let i = 0; i < tasks.length; i++) {
-    let idx = tasks[i].userId.indexOf(Number(this.props.id));
-    if (idx !== -1) {
-      listItems.push(
-        <Row
-          cells={tasks[i]}
+    const tasksList = tasks.filter(item => item.userId.includes(Number(this.props.id)));
+    const listItems = tasksList.map((task) => (
+      <Row
+          cells={task}
           headerСells={HEADER_CELLS}
-          key={tasks[i].id}
+          key={task.id}
           elements={[
             <Button outline color="primary">Track</Button>,
             <Button outline color="success">Success</Button>,
             <Button outline color="danger">Fail</Button>,
           ]}
-        />,
-      );
-    }
-  }
+        />
+    ))
 
   return (
     <div className='container'>

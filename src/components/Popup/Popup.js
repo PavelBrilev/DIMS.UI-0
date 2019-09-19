@@ -14,9 +14,7 @@ class Popup extends React.Component {
   }
 
   toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
+    this.setState({ modal: !this.state.modal })
   }
 
   render() {

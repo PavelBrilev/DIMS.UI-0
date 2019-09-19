@@ -56,6 +56,7 @@ class AllStudents extends React.Component {
         </div>
       );
     } 
+    
     let listItems = this.state.students.map((student) => (
       <Row
         cells={student}

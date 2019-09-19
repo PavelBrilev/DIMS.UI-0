@@ -3,8 +3,8 @@ import './RowHeader.css';
 
 const HeaderCell = ({ name }) => <th>{name}</th>;
 
-function RowHeader(props) {
-  const listItems = props.cells.map((item) => (
+function RowHeader(cells, ...rest) {
+  const listItems = cells.cells.map((item) => (
     <HeaderCell name={item} key={item} />
   ));
   return <tr>{listItems}</tr>;

@@ -8,15 +8,14 @@ function Row({cells, headerСells, elements, ...rest}) {
   const values = [];
   for (let key in cells) {
     for (let i = 0; i < headerСells.length; i++) {
-      if (key.toString() === headerСells[i]) {
+      if (key === headerСells[i]) {
         values.push(cells[key]);
       }
     }
   }
-  if (values.length < headerСells.length) {
-    values.push(elements);
-  }
-  const listItems = values.map((item) => <RowCell name={item} key={item.index} />);
+  values[values.length] = elements;
+ 
+  const listItems = values.map((item) => <RowCell name={item} key={cells.id} />);
   return <tr>{listItems}</tr>;
 }
 

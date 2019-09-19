@@ -12,20 +12,15 @@ class StudentDoneTasks extends React.Component {
   }
 
   render() { 
-  let listItems = [];
-  for (let i = 0; i < tasks.length; i++) {
-    let idx = tasks[i].userId.indexOf(Number(this.props.id));
-    if (idx !== -1 ) {
-      listItems.push(
-        <Row
-          cells={tasks[i]}
-          headerСells={HEADER_CELLS}
-          key={tasks[i].id}
-        />,
-      );
-    }
-  }
-
+    const tasksList = tasks.filter(item => item.userId.includes(Number(this.props.id)));
+    const listItems = tasksList.map((task) => (
+      <Row
+         cells={task}
+         headerСells={HEADER_CELLS}
+         key={task.id}
+      />
+    ));
+  
   return (
     <div className='container'>
       <Table hover>
@@ -36,8 +31,9 @@ class StudentDoneTasks extends React.Component {
       </Table>
     </div>
   )
-  }
 }
+};
 
 
 export default StudentDoneTasks;
+
