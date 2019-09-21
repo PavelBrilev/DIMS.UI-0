@@ -12,7 +12,8 @@ class StudentDoneTasks extends React.Component {
   }
 
   render() { 
-    const tasksList = tasks.filter(item => item.userId.includes(Number(this.props.id)));
+    const studentId = parseInt(this.props.match.params.studentId)
+    const tasksList = tasks.filter(item => item.userId.includes(studentId));
     const listItems = tasksList.map((task) => (
       <Row
          cells={task}

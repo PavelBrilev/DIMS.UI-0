@@ -5,18 +5,18 @@ import axios from "axios";
 let Storage = function() {
   
   return {
-    setValues: (key, values) => {
+    setValues(key, values) {
       localStorage.setItem(key, JSON.stringify(values));
     },
 
-    getValues: (key) => {
+    getValues(key) {
       if (localStorage.getItem(key)) {
         return JSON.parse(localStorage.getItem(key))
         }
         return null;
     },
 
-    getStudents: () => {
+    getStudents() {
     axios.get('/api/profiles')
       .then((response) => {
         const students = response.data;
@@ -27,7 +27,7 @@ let Storage = function() {
       });
     },
 
-    postStudents: ({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) => {
+    postStudents({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) {
       let memberProfile = {
         id: id,
         Name: name, 
@@ -53,13 +53,13 @@ let Storage = function() {
     });
     },
 
-    deleteStudent: (props) => {
+    deleteStudent(props) {
       axios.delete({
         url: `/api/member-profile/${props.id}`,
       })
      },
 
-    editStudent: ({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) => {
+    editStudent({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) {
       let memberProfile = {
         id: id,
         Name: name, 
@@ -86,7 +86,7 @@ let Storage = function() {
       });
       },
 
-    getStudentProgress: (props) => {
+    getStudentProgress(props) {
     axios.get(`/api/user-progress/${props.id}`)
       .then((response) => {
         return response.data;
@@ -97,7 +97,7 @@ let Storage = function() {
     },
 
 
-    getStudentTasks: (props) => {
+    getStudentTasks(props) {
       axios.get(`/api/member-profile/tasks/${props.id}`)
         .then((response) => {
           return response.data;

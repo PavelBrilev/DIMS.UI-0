@@ -12,16 +12,15 @@ class StudentTasks extends React.Component {
   }
 
   render() { 
-    const tasksList = tasks.filter(item => item.userId.includes(Number(this.props.id)));
+    const studentId = parseInt(this.props.match.params.studentId)
+    const tasksList = tasks.filter(item => item.userId.includes(studentId));
     const listItems = tasksList.map((task) => (
       <Row
           cells={task}
           headerСells={HEADER_CELLS}
           key={task.id}
           elements={[
-            <Button outline color="primary">Track</Button>,
-            <Button outline color="success">Success</Button>,
-            <Button outline color="danger">Fail</Button>,
+            <Button key={`${ task.id }-1`} outline color="primary">Track</Button>,
           ]}
         />
     ))

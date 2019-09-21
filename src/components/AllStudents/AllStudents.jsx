@@ -19,31 +19,35 @@ const HEADER_CELLS = [
   '',
 ];
 
-const storage = Storage();
-const students = storage.getValues('students');
-
-
 class AllStudents extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { students: students };
+    this.state = {};
 
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  componentDidMount() {
+    const students = Storage().getValues('students');
+    this.setState({ students });
+  }
+
   handleClick() {
-    this.setState({ students: storage.getValues('students') });
+    const students = Storage().getValues('students');
+    this.setState({ students });
   }
 
   handleDelete(event) {
-    let target = event.target;
-    let newStudents = storage.getValues('students').filter(item => item.id !== target.id );
-    storage.setValues('students', newStudents);
-    this.setState({ students: newStudents });
+    const { target } = event;
+    const students = Storage().getValues('students').filter(item => item.id !== target.id );
+    Storage().setValues('students', students);
+    this.setState({ students });
   }
 
   render() {
+    const { students } = this.state;
+
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -57,22 +61,45 @@ class AllStudents extends React.Component {
       );
     } 
     
-    let listItems = this.state.students.map((student) => (
-      <Row
-        cells={student}
-        headerСells={HEADER_CELLS}
-        key={student.id}
-        elements={[
-          <Link className = "btn btn-outline-primary" to={`/studentsDoneTasks/${student.id}`} > Progress </Link> ,
-          <Link className = "btn btn-outline-primary" to={`/studentsTasks/${student.id}`} > Tasks </Link> ,
-          <Popup
-            name='Edit'
-            form={<StudentsForm setNewStudent={this.handleClick} id={student.id} />}
-          />,
-          <Button outline color="danger" onClick={this.handleDelete} id={student.id}>Delete </Button>,
-        ]}
-      />
-    ));
+    let listItems = students.map(student => {
+      return (
+        <Row
+          cells={student}
+          headerСells={HEADER_CELLS}
+          key={student.id}
+          elements={[
+            <Link 
+              key={`${student.id}-1`}
+              className="btn btn-outline-primary" 
+              to={{ pathname: `/students/${ student.id }/doneTasks` }}
+            >
+              Progress 
+            </Link>,
+            <Link 
+              key={`${student.id}-2`}
+              className="btn btn-outline-primary" 
+              to={{ pathname: `/students/${ student.id }/tasks` }}
+            >
+              Tasks
+            </Link>,
+            <Popup
+              key={`${student.id}-3`}
+              name='Edit'
+              form={<StudentsForm setNewStudent={this.handleClick} id={student.id} />}
+            />,
+            <Button 
+              outline 
+              color="danger" 
+              id={student.id}
+              key={`${student.id}-4`}
+              onClick={this.handleDelete} 
+            >
+              Delete
+            </Button>,
+          ]}
+        />
+      )
+    });
     return (
         <div className='container'>
           <Popup
