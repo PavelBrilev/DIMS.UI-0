@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-// import Storage from '../Storage.js';
+import Storage from '../Storage.js';
 
-// const storage = Storage();
-// let students = storage.getValues('students');  //needs const
+const storage = Storage();
+let students = storage.getValues('students');  //needs const
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -26,38 +26,39 @@ class StudentsForm extends React.Component {
   }
 
   componentDidMount() {
-    // if(students) {
-      // this.setState(students.find(item => item.id === this.props.id));
-    // }
+    if(students) {
+      this.setState(students.find(item => item.id === this.props.id));
+    }
   };
 
   handleChangeName(event) {
-    // this.setState({ name: event.target.value });
-    // if (!this.props.id  && students.length !== 0) {
-    //   const id = Number(students[students.length - 1].id) + 1;
-    //   this.setState({ id });
-    // }
+    this.setState({ name: event.target.value });
+    if (!this.props.id  && students.length !== 0) {
+      const id = Number(students[students.length - 1].id) + 1;
+      this.setState({ id });
+    }
   }
 
   handleChange(event) {
-    // this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleCheck() {
-    // if(this.props.id) {
-    //   const index = students.findIndex((item) => item.id === this.props.id);      
-    //   students[index] = this.state;
-    // } else if (!students || students.length === 0) {
-    //   students = [this.state];
-    //   } else {
-    //   students = Storage().getValues('students').concat([this.state]);
-    // }
+    if(this.props.id) {
+      const index = students.findIndex((item) => item.id === this.props.id);      
+      students[index] = this.state;
+    } else if (!students || students.length === 0) {
+      students = [this.state];
+      } else {
+      students = Storage().getValues('students').concat([this.state]);
+    }
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     this.handleCheck();
-    // storage.setValues('students', students);
-    // this.props.setNewStudent();
+    storage.setValues('students', students);
+    this.props.setNewStudent();
   }
 
   render() {
