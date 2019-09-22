@@ -1,9 +1,6 @@
 import axios from "axios";
 
-
-
 let Storage = function() {
-  
   return {
     setValues(key, values) {
       localStorage.setItem(key, JSON.stringify(values));
@@ -17,14 +14,34 @@ let Storage = function() {
     },
 
     getStudents() {
-    axios.get('/api/profiles')
-      .then((response) => {
-        const students = response.data;
-        this.setValues('students', students)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      return this.getValues('students')
+    },
+
+    setStudents(students) {
+      return this.setValues('students', students)
+    },
+
+    getStudent(id) {
+      return this.getStudents().find(student => student.id === id)
+    },
+
+    addStudent(student) {
+      this.setStudents(this.getStudents.push(student))
+    },
+
+    updateStudent(student) {
+      this.setStudents(this.getStudents.map(currentStudent => currentStudent.id === student.id ? student : currentStudent))
+    },
+
+    _getStudents() {
+      axios.get('/api/profiles')
+        .then((response) => {
+          const students = response.data;
+          this.setValues('students', students)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     postStudents({id, name, lastName, email, sex, education, birthDate, universityAverageScore, mathScore, address, mobilePhone, skype, startDate}) {
@@ -82,7 +99,7 @@ let Storage = function() {
       })
         .then((response) => {
           const student = response.data
-          
+          return student;
       });
       },
 

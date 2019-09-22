@@ -7,9 +7,6 @@ import tasks from '../tasks.js';
 const HEADER_CELLS = ['id', 'name', 'note', 'date'];
 
 class StudentDoneTasks extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() { 
     const studentId = parseInt(this.props.match.params.studentId)

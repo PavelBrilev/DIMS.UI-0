@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import AllStudents from './components/AllStudents/AllStudents.jsx';
-import Storage from './components/Storage.js';
 import Header from './components/Header/Header.js';
 import StudentTasks from './components/StudentTasks/StudentTasks.jsx';
 import StudentDoneTasks from './components/StudentDoneTasks/StudentDoneTasks.jsx';
