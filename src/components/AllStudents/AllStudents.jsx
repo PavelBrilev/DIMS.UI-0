@@ -29,19 +29,18 @@ class AllStudents extends React.Component {
   }
 
   componentDidMount() {
-    const students = Storage().getValues('students');
+    const students = Storage().getStudents();
     this.setState({ students });
   }
 
   handleClick() {
-    const students = Storage().getValues('students');
+    const students = Storage().getStudents();
     this.setState({ students });
   }
 
   handleDelete(event) {
-    const { target } = event;
-    const students = Storage().getValues('students').filter(item => item.id !== target.id );
-    Storage().setValues('students', students);
+    Storage().deleteStudent(parseInt(event.target.id))
+    const students = Storage().getStudents();
     this.setState({ students });
   }
 
@@ -60,7 +59,7 @@ class AllStudents extends React.Component {
         </div>
       );
     } 
-    
+
     let listItems = students.map(student => {
       return (
         <Row

@@ -2,14 +2,15 @@ import React from 'react';
 import { Button, Table } from 'reactstrap';
 import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
 import Row from '../GeneralComponents/Row/Row.jsx';
-import tasks from '../tasks.js';
+import Storage from '../Storage.js';
 
 const HEADER_CELLS = ['id', 'name', 'start', 'deadline', 'status', ''];
 
 class StudentTasks extends React.Component {
 
   render() { 
-    const studentId = parseInt(this.props.match.params.studentId)
+    const studentId = parseInt(this.props.match.params.studentId);
+    const tasks = Storage().getTasks();
     const tasksList = tasks.filter(item => item.userId.includes(studentId));
     const listItems = tasksList.map((task) => (
       <Row

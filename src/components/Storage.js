@@ -2,15 +2,20 @@ import axios from "axios";
 
 let Storage = function() {
   return {
-    setValues(key, values) {
-      localStorage.setItem(key, JSON.stringify(values));
+    getValues(key) {
+      return localStorage.hasOwnProperty(key) ? JSON.parse(localStorage.getItem(key)) : null
     },
 
-    getValues(key) {
-      if (localStorage.getItem(key)) {
-        return JSON.parse(localStorage.getItem(key))
-        }
-        return null;
+    setValues(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    },
+
+    getArrayId (data) {
+      return (data && data.length ? data[data.length - 1].id : 0) + 1
+    },
+
+    getElementIndexById (data, id) {
+      return data.findIndex(item => item.id === id)
     },
 
     getStudents() {
@@ -18,20 +23,100 @@ let Storage = function() {
     },
 
     setStudents(students) {
-      return this.setValues('students', students)
+      this.setValues('students', students)
     },
 
     getStudent(id) {
-      return this.getStudents().find(student => student.id === id)
+      const students = this.getStudents()
+
+      return students ? students.find(student => student.id === id) : null
     },
 
-    addStudent(student) {
-      this.setStudents(this.getStudents.push(student))
+    saveStudent (student) {
+      if (student.id) {
+        this.updateStudent(student)
+      } else {
+        this.addStudent(student)
+      }
     },
 
-    updateStudent(student) {
-      this.setStudents(this.getStudents.map(currentStudent => currentStudent.id === student.id ? student : currentStudent))
+    addStudent (student) {
+      const students = this.getStudents() || []
+
+      student.id = this.getArrayId(students)
+      students.push(student)
+
+      this.setStudents(students)
     },
+
+    updateStudent (student) {
+      const students = this.getStudents()
+      const index = this.getElementIndexById(students, student.id)
+
+      students[index] = student;
+      this.setStudents(students)
+    },
+
+    deleteStudent (studentId) {
+      const students = this.getStudents();
+      const index = this.getElementIndexById(students, studentId);
+
+      students.splice(index, 1);
+      this.setStudents(students);
+    },
+
+    getTasks() {
+      return this.getValues('tasks')
+    },
+
+    setTasks(tasks) {
+      this.setValues('tasks', tasks)
+    },
+
+    getTask(id) {
+      const tasks = this.getTasks()
+
+      return tasks ? tasks.find(task => task.id === id) : null
+    },
+
+    saveTask (task) {
+      if (task.id) {
+        this.updateTask(task);
+      } else {
+        this.addTask(task)
+      }
+    },
+
+    addTask (task) {
+      const tasks = this.getTasks() || []
+
+      task.id = this.getArrayId(tasks)
+      tasks.push(task)
+
+      this.setTasks(tasks)
+    },
+
+    updateTask (task) {
+      const tasks = this.getTasks()
+      const index = this.getElementIndexById(tasks, task.id)
+
+      tasks[index] = task;
+      this.setTasks(tasks)
+    },
+
+    deleteTasks (taskId) {
+      const tasks = this.getTasks();
+      const index = this.getElementIndexById(tasks, taskId);
+
+      tasks.splice(index, 1);
+      this.setTasks(tasks);
+    },
+
+
+
+
+
+
 
     _getStudents() {
       axios.get('/api/profiles')
@@ -70,7 +155,7 @@ let Storage = function() {
     });
     },
 
-    deleteStudent(props) {
+    __deleteStudent(props) {
       axios.delete({
         url: `/api/member-profile/${props.id}`,
       })

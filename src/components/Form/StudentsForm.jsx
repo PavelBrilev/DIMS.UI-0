@@ -3,81 +3,71 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import Storage from '../Storage.js';
 
-const storage = Storage();
-let students = storage.getValues('students');  //needs const
-
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        id: '1',
+        id: '',
         name: '',
         lastName: '',
         direction: 'Direction',
         education: '',
         start: '',
-        age: '',
+        age: ''
       };
 
-    this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
   }
 
   componentDidMount() {
-    if(students) {
-      this.setState(students.find(item => item.id === this.props.id));
+    const { id } = this.props;
+    if (id) {
+      this.setState(Storage().getStudent(id))
     }
   };
 
-  handleChangeName(event) {
-    this.setState({ name: event.target.value });
-    if (!this.props.id  && students.length !== 0) {
-      const id = Number(students[students.length - 1].id) + 1;
-      this.setState({ id });
-    }
-  }
-
-  handleChange(event) {
+  handleChange (event) {
     this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleCheck() {
-    if(this.props.id) {
-      const index = students.findIndex((item) => item.id === this.props.id);      
-      students[index] = this.state;
-    } else if (!students || students.length === 0) {
-      students = [this.state];
-      } else {
-      students = Storage().getValues('students').concat([this.state]);
-    }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.handleCheck();
-    storage.setValues('students', students);
+  handleSubmit() {
+    Storage().saveStudent(this.state);
     this.props.setNewStudent();
+    this.clearForm();
+
+    return false
+  }
+
+  clearForm () {
+    this.setState({
+      id: '',
+      name: '',
+      lastName: '',
+      direction: 'Direction',
+      education: '',
+      start: '',
+      age: ''
+    });
   }
 
   render() {
     return (
       <AvForm onValidSubmit={this.handleSubmit}>
         <AvGroup>
-          <AvField name="firstName" type="text" label="Name" errorMessage="Min 3 symbols" value={this.state.name} onChange={this.handleChangeName} validate={{
-            required: {value: true},
-            pattern: {value: '^[A-Za-z0-9]+$'},
-            minLength: {value: 3},
-            maxLength: {value: 16}
+          <AvField name="name" type="text" label="Name" value={this.state.name} onChange={this.handleChange} validate={{
+            required: {value: true, errorMessage: 'Please enter a name'},
+            pattern: {value: '^[A-Za-z0-9]+$', errorMessage: 'Your name must be composed only with letter and numbers'},
+            minLength: {value: 3, errorMessage: 'Your name must be between 3 and 16 characters'},
+            maxLength: {value: 16, errorMessage: 'Your name must be between 3 and 16 characters'}
           }} />
         </AvGroup>
         <AvGroup>
-          <AvField type="text" name="lastName" label="Last name" errorMessage="Min 3 symbols" value={this.state.lastName} onChange={this.handleChange} validate={{
-            required: {value: true},
-            pattern: {value: '^[A-Za-z0-9]+$'},
-            minLength: {value: 3},
-            maxLength: {value: 16}
+          <AvField type="text" name="lastName" label="Last name" value={this.state.lastName} onChange={this.handleChange} validate={{
+            required: {value: true, errorMessage: 'Please enter a last name'},
+            pattern: {value: '^[A-Za-z0-9]+$', errorMessage: 'Your last name must be composed only with letter and numbers'},
+            minLength: {value: 3, errorMessage: 'Your last name must be between 3 and 16 characters'},
+            maxLength: {value: 16, errorMessage: 'Your last name must be between 3 and 16 characters'}
           }}/>
         </AvGroup>
         <FormGroup>
@@ -103,9 +93,10 @@ class StudentsForm extends React.Component {
             }} />
         </AvGroup>
         <AvGroup>
-          <AvField name="age" label="Age" type="number" errorMessage="Enter education" value={this.state.age} onChange={this.handleChange} validate={{
-            min: {value: 18},
-            max: {value: 99}
+          <AvField name="age" label="Age" type="number" value={this.state.age} onChange={this.handleChange} validate={{
+            required: {value: true, errorMessage: 'Enter education'},
+            min: {value: 18, errorMessage: 'Must be more than 18'},
+            max: {value: 99, errorMessage: 'Must be less than 18'}
             }} />
         </AvGroup>
         <Button outline type='submit' color="success" block>Submit</Button>

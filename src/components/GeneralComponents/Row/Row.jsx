@@ -4,7 +4,7 @@ import './Row.css';
 const RowCell = ({ name }) => <td>{name}</td>;
 
 function Row({cells, headerСells, elements, ...rest}) {
-  const initialValue = []
+  const initialValue = [];
   const reducer = (accumulator, cellKey) => accumulator.concat([cells[cellKey]]);
   const values = Object.keys(cells).reduce(reducer, initialValue)
 
