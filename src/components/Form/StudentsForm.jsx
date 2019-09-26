@@ -34,21 +34,8 @@ class StudentsForm extends React.Component {
   handleSubmit() {
     Storage().saveStudent(this.state);
     this.props.setNewStudent();
-    this.clearForm();
-
+     this.props.toggle();
     return false
-  }
-
-  clearForm () {
-    this.setState({
-      id: '',
-      name: '',
-      lastName: '',
-      direction: 'Direction',
-      education: '',
-      start: '',
-      age: ''
-    });
   }
 
   render() {
@@ -57,7 +44,6 @@ class StudentsForm extends React.Component {
         <AvGroup>
           <AvField name="name" type="text" label="Name" value={this.state.name} onChange={this.handleChange} validate={{
             required: {value: true, errorMessage: 'Please enter a name'},
-            pattern: {value: '^[A-Za-z0-9]+$', errorMessage: 'Your name must be composed only with letter and numbers'},
             minLength: {value: 3, errorMessage: 'Your name must be between 3 and 16 characters'},
             maxLength: {value: 16, errorMessage: 'Your name must be between 3 and 16 characters'}
           }} />
@@ -65,7 +51,6 @@ class StudentsForm extends React.Component {
         <AvGroup>
           <AvField type="text" name="lastName" label="Last name" value={this.state.lastName} onChange={this.handleChange} validate={{
             required: {value: true, errorMessage: 'Please enter a last name'},
-            pattern: {value: '^[A-Za-z0-9]+$', errorMessage: 'Your last name must be composed only with letter and numbers'},
             minLength: {value: 3, errorMessage: 'Your last name must be between 3 and 16 characters'},
             maxLength: {value: 16, errorMessage: 'Your last name must be between 3 and 16 characters'}
           }}/>

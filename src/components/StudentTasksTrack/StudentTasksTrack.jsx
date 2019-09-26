@@ -1,11 +1,10 @@
 import React from 'react';
 import Storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
-import TasksForm from '../Form/TasksForm.jsx';
-import './AllTasks.css';
+import TasksTrackForm from '../Form/TasksTrackForm.jsx';
 import { Table, Button } from 'reactstrap';
 
-class AllTasks extends React.Component {
+class StudentTasksTrack extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -36,11 +35,6 @@ class AllTasks extends React.Component {
     if (!tasks || tasks.length === 0) {
       return (
         <div className='container'>
-          <Popup
-            className='btn btn-outline-primary btn-block'
-            name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/>
-          </Popup>
           <p className='text'>No tasks</p>
         </div>
       );
@@ -51,13 +45,13 @@ class AllTasks extends React.Component {
         <tr key={task.id}>
           <td >{tasks.indexOf(task)+1}</td>
           <td >{task.taskName}</td>
-          <td >{task.start}</td>
-          <td >{task.deadline}</td>
+          <td >{task.note}</td>
+          <td >{task.doneDate}</td>
           <td >
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksForm setNewTasks={this.handleClick} id={task.id} />
+              <TasksTrackForm setNewTasks={this.handleClick} id={task.id} />
             </Popup>
             <Button 
               outline 
@@ -74,17 +68,13 @@ class AllTasks extends React.Component {
     });
     return (
         <div className='container'>
-          <Popup
-            name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/> 
-          </Popup>
           <Table hover>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Start</th>
-                <th>Deadline</th>
+                <th>Note</th>
+                <th>Done date</th>
                 <th></th>
               </tr>
             </thead>
@@ -96,4 +86,4 @@ class AllTasks extends React.Component {
 }
 
 
-export default AllTasks;
+export default StudentTasksTrack;

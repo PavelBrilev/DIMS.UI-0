@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  margin-bottom: 50px;
+  margin: 0 0 40px 0;
   position: relative;
   top: 0;
   width: 100%;

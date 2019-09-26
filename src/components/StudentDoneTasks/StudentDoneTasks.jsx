@@ -1,31 +1,34 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import RowHeader from '../GeneralComponents/RowHeader/RowHeader.jsx';
-import Row from '../GeneralComponents/Row/Row.jsx';
 import Storage from '../Storage.js';
-
-
-const HEADER_CELLS = ['id', 'name', 'note', 'date'];
 
 class StudentDoneTasks extends React.Component {
 
   render() { 
     const studentId = parseInt(this.props.match.params.studentId);
+    const student = Storage().getStudent(studentId);
     const tasks = Storage().getTasks();
-    const tasksList = tasks.filter(item => item.userId.includes(studentId));
+    const tasksList = tasks.filter(item => item.students.includes(studentId));
     const listItems = tasksList.map((task) => (
-      <Row
-         cells={task}
-         headerСells={HEADER_CELLS}
-         key={task.id}
-      />
+        <tr key={task.id}>
+          <td >{tasksList.indexOf(task)+1}</td>
+          <td >{task.taskName} </td>
+          <td >{task.note} </td>
+          <td >{task.doneDate} </td>
+        </tr>
     ));
   
   return (
     <div className='container'>
+    <h5> {student.name}'s progress:</h5>
       <Table hover>
         <thead>
-          <RowHeader cells={HEADER_CELLS} />
+          <tr>
+            <th>#</th>
+            <th>Task</th>
+            <th>Note</th>
+            <th>Done date</th>
+          </tr>
         </thead>
         <tbody>{listItems}</tbody>
       </Table>
