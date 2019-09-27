@@ -9,7 +9,7 @@ function Header() {
         <div> 
           <img src={logo} alt="Dev Incubator"/>
         </div>
-        <Link to="/login" className = "btn__header" > LogIn </Link> 
+        <Link to="/" className = "btn__header" > LogIn </Link> 
         <Link to="/students" className = "btn__header" > Students </Link> 
         <Link to="/tasks" className = "btn__header" > Tasks </Link> 
         <Link to="/tasksTrack" className = "btn__header" > TasksTrack </Link> 

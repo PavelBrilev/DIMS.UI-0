@@ -33,7 +33,6 @@ class TasksForm extends React.Component {
     const value = target.type === 'checkbox' ? 
                             this.setState({students: this.state.students.concat([parseInt(target.name)])}) 
                             : target.value;
-                            console.log(this.state.students)
     const name = target.name;
 
     this.setState({ [name]: value });

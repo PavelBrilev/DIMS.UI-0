@@ -10,7 +10,9 @@ class StudentsForm extends React.Component {
         id: '',
         name: '',
         lastName: '',
-        direction: 'Direction',
+        password: '',
+        role: '',
+        direction: '',
         education: '',
         start: '',
         age: ''
@@ -34,7 +36,7 @@ class StudentsForm extends React.Component {
   handleSubmit() {
     Storage().saveStudent(this.state);
     this.props.setNewStudent();
-     this.props.toggle();
+    this.props.toggle();
     return false
   }
 
@@ -55,6 +57,22 @@ class StudentsForm extends React.Component {
             maxLength: {value: 16, errorMessage: 'Your last name must be between 3 and 16 characters'}
           }}/>
         </AvGroup>
+        <AvGroup>
+          <AvField type="text" name="password" label="Password" value={this.state.password} onChange={this.handleChange} validate={{
+            required: {value: true, errorMessage: 'Please enter a password'},
+            minLength: {value: 3, errorMessage: 'Your last password must be between 3 and 16 characters'},
+            maxLength: {value: 16, errorMessage: 'Your last password must be between 3 and 16 characters'}
+          }}/>
+        </AvGroup>
+        <FormGroup>
+          <Label for="role">Role</Label>
+          <Input type="select" name="role" id="role" value={this.state.role} onChange={this.handleChange}>
+            <option value='#'>Role</option>
+            <option value='admin'>Admin</option>
+            <option value='mentor'>Mentor</option>
+            <option value='student'>Student</option>
+          </Input>
+        </FormGroup>
         <FormGroup>
           <Label for="direction">Direction</Label>
           <Input type="select" name="direction" id="direction" value={this.state.direction} onChange={this.handleChange}>

@@ -2,35 +2,33 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import './style.css';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
+        login: '',
+        password: ''
       };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
-
-  componentDidMount() {
-    const { id } = this.props;
-    if (id) {
-      this.setState(Storage().getTask(id))
-    }
-  };
 
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit() {
-    Storage().saveTask(this.state);
-    this.props.setNewTasks();
-    this.props.toggle();
+    this.props.auth(this.state);
 
     return false
+  }
+
+  clearForm() {
+    this.setState({ login: '',
+                    password: ''});
   }
 
   render() {
@@ -53,7 +51,7 @@ class LoginPage extends React.Component {
             }} />
           </AvGroup>
           <Button outline type='submit' color="success" block>LogIn</Button>
-          <Button outline color="danger" block>Back</Button>
+          <Button outline onClick={this.clearForm} color="danger" block>Clear</Button>
         </AvForm>
       </div>
       </div>
