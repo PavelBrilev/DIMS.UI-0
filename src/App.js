@@ -17,6 +17,7 @@ class App extends React.Component {
     this.state = {};
 
   this.handleUserInput = this.handleUserInput.bind(this);
+  this.reload = this.reload.bind(this);
   }
 
   reload() {
