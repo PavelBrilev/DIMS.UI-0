@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class TasksTrackForm extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class TasksTrackForm extends React.Component {
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(Storage().getTask(id))
+      this.setState(storage.getTask(id))
     }
   };
 
@@ -25,7 +25,7 @@ class TasksTrackForm extends React.Component {
   }
 
   handleSubmit() {
-    Storage().saveTask(this.state);
+    storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();
 

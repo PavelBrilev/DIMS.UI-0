@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class StudentsForm extends React.Component {
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(Storage().getStudent(id))
+      this.setState(storage.getStudent(id))
     }
   };
 
@@ -34,7 +34,7 @@ class StudentsForm extends React.Component {
   }
 
   handleSubmit() {
-    Storage().saveStudent(this.state);
+    storage.saveStudent(this.state);
     this.props.setNewStudent();
     this.props.toggle();
     return false
@@ -107,6 +107,11 @@ class StudentsForm extends React.Component {
 
     );
   }
+}
+
+StudentsForm.defaultProps = {
+  setNewStudent: () => {},
+  toggle: () => {}
 }
 
 export default StudentsForm;

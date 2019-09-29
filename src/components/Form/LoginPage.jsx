@@ -38,14 +38,14 @@ class LoginPage extends React.Component {
         <AvForm onValidSubmit={this.handleSubmit}>
           <AvGroup>
             <AvField name="login" type="text" label="Login" value={this.state.login} onChange={this.handleChange} validate={{
-              required: {value: true, errorMessage: 'Please enter a login'},
+              required: {value: true, errorMessage: 'Please enter login'},
               minLength: {value: 3, errorMessage: 'Your login must be between 3 and 16 characters'},
               maxLength: {value: 16, errorMessage: 'Your login must be between 3 and 16 characters'}
             }} />
           </AvGroup>
           <AvGroup>
             <AvField name="password" type="password" label="Password" value={this.state.password} onChange={this.handleChange} validate={{
-              required: {value: true, errorMessage: 'Please enter a password'},
+              required: {value: true, errorMessage: 'Please enter password'},
               minLength: {value: 3, errorMessage: 'Your password must be between 3 and 16 characters'},
               maxLength: {value: 16, errorMessage: 'Your password must be between 3 and 16 characters'}
             }} />

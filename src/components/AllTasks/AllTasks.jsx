@@ -1,5 +1,5 @@
 import React from 'react';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import TasksForm from '../Form/TasksForm.jsx';
 import './AllTasks.css';
@@ -10,23 +10,18 @@ class AllTasks extends React.Component {
     super(props);
     this.state = {};
 
-    this.handleClick = this.handleClick.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    const tasks = Storage().getTasks();
-    this.setState({ tasks });
-  }
-
-  handleClick() {
-    const tasks = Storage().getTasks();
+    const tasks = storage.getTasks();
     this.setState({ tasks });
   }
 
   handleDelete(event) {
-    Storage().deleteTasks(parseInt(event.target.id))
-    const tasks = Storage().getTasks();
+    storage.deleteTasks(parseInt(event.target.id))
+    const tasks = storage.getTasks();
     this.setState({ tasks });
   }
 
@@ -39,7 +34,7 @@ class AllTasks extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/>
+            <TasksForm setNewTasks={this.componentDidMount}/>
           </Popup>
           <p className='text'>No tasks</p>
         </div>
@@ -57,7 +52,7 @@ class AllTasks extends React.Component {
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksForm setNewTasks={this.handleClick} id={task.id} />
+              <TasksForm setNewTasks={this.componentDidMount} id={task.id} />
             </Popup>
             <Button 
               outline 
@@ -76,7 +71,7 @@ class AllTasks extends React.Component {
         <div className='container'>
           <Popup
             name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/> 
+            <TasksForm setNewTasks={this.componentDidMount}/> 
           </Popup>
           <Table hover>
             <thead>

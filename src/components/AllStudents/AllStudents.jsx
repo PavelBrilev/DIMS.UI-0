@@ -1,5 +1,5 @@
 import React from 'react';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import StudentsForm from '../Form/StudentsForm.jsx';
 import { Link } from "react-router-dom";
@@ -11,23 +11,18 @@ class AllStudents extends React.Component {
     super(props);
     this.state = {};
 
-    this.handleClick = this.handleClick.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    const students = Storage().getStudents();
-    this.setState({ students });
-  }
-
-  handleClick() {
-    const students = Storage().getStudents();
+    const students = storage.getStudents();
     this.setState({ students });
   }
 
   handleDelete(event) {
-    Storage().deleteStudent(parseInt(event.target.id))
-    const students = Storage().getStudents();
+    storage.deleteStudent(parseInt(event.target.id))
+    const students = storage.getStudents();
     this.setState({ students });
   }
 
@@ -39,7 +34,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Register'>
-            <StudentsForm setNewStudent={this.handleClick} />
+            <StudentsForm setNewStudent={this.componentDidMount} />
           </Popup>
             <p className='text'>No registered</p>
         </div>
@@ -74,7 +69,7 @@ class AllStudents extends React.Component {
               key={`${student.id}-3`}
               className='btn btn-outline-primary'
               name='Edit'>
-              <StudentsForm setNewStudent={this.handleClick} id={student.id}/>
+              <StudentsForm setNewStudent={this.componentDidMount} id={student.id}/>
             </Popup>
             <Button 
               outline 
@@ -94,7 +89,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary'
             name='Register'>
-            <StudentsForm setNewStudent={this.handleClick} />
+            <StudentsForm setNewStudent={this.componentDidMount} />
           </Popup>
           <Table hover>
             <thead>

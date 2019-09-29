@@ -1,13 +1,13 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class StudentDoneTasks extends React.Component {
 
   render() { 
     const studentId = parseInt(this.props.match.params.studentId);
-    const student = Storage().getStudent(studentId);
-    const tasks = Storage().getTasks();
+    const student = storage.getStudent(studentId);
+    const tasks = storage.getTasks();
     const tasksList = tasks.filter(item => item.students.includes(studentId));
     const listItems = tasksList.map((task) => (
         <tr key={task.id}>

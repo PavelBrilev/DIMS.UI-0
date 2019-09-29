@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class TasksForm extends React.Component {
   constructor(props) {
@@ -24,22 +24,20 @@ class TasksForm extends React.Component {
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(Storage().getTask(id))
+      this.setState(storage.getTask(id))
     }
   };
 
   handleChange (event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? 
-                            this.setState({students: this.state.students.concat([parseInt(target.name)])}) 
-                            : target.value;
-    const name = target.name;
-
+    const { target } = event;
+    const { value, name, type } = target;
+    const result = type === 'checkbox' ? this.setState({students: this.state.students.concat([parseInt(name)])}) : value;
+    
     this.setState({ [name]: value });
   }
 
   handleSubmit() {
-    Storage().saveTask(this.state);
+    storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();
 
@@ -47,7 +45,7 @@ class TasksForm extends React.Component {
   }
 
   render() {
-    const checkStudents = Storage().getStudents().map(student => {
+    const checkStudents = storage.getStudents().map(student => {
       return(
         <CustomInput type="checkbox" key={student.id} id={student.name} name={student.id} label={student.name + ' ' + student.lastName} onChange={this.handleChange}/>
       )
