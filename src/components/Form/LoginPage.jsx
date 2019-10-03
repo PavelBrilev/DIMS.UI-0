@@ -10,23 +10,21 @@ class LoginPage extends React.Component {
         login: '',
         password: ''
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.clearForm = this.clearForm.bind(this);
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (event) => {
+    const { target } = event;
+    const { value, name } = target;
+    this.setState({ [name]: value });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.props.auth(this.state);
 
     return false
   }
 
-  clearForm() {
+  clearForm = () => {
     this.setState({ login: '',
                     password: ''});
   }

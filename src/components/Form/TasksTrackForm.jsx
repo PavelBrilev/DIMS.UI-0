@@ -8,9 +8,6 @@ class TasksTrackForm extends React.Component {
     super(props);
       this.state = {
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -20,11 +17,11 @@ class TasksTrackForm extends React.Component {
     }
   };
 
-  handleChange (event) {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();

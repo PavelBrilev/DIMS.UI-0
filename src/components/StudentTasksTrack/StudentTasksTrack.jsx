@@ -8,19 +8,20 @@ class StudentTasksTrack extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
+    this.initTasksTrack();
+  }
+
+  initTasksTrack = () => {
     const tasks = storage.getTasks();
     this.setState({ tasks });
   }
 
-  handleDelete(event) {
+  handleDelete = (event) => {
     storage.deleteTasks(parseInt(event.target.id))
-    this.componentDidMount();
+    this.initTasksTrack();
   }
 
   render() {
@@ -45,7 +46,7 @@ class StudentTasksTrack extends React.Component {
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksTrackForm setNewTasks={this.componentDidMount} id={task.id} />
+              <TasksTrackForm setNewTasks={this.initTasksTrack} id={task.id} />
             </Popup>
             <Button 
               outline 

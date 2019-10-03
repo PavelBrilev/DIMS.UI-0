@@ -8,11 +8,9 @@ class StudentTasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick = () => {
     const tasks = storage.getTasks();
     this.setState({ tasks });
   }

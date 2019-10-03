@@ -17,9 +17,6 @@ class StudentsForm extends React.Component {
         start: '',
         age: ''
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -29,11 +26,13 @@ class StudentsForm extends React.Component {
     }
   };
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (event) => {
+    const { target } = event;
+    const { value, name } = target;
+    this.setState({ [name]: value });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     storage.saveStudent(this.state);
     this.props.setNewStudent();
     this.props.toggle();
