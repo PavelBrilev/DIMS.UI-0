@@ -9,17 +9,14 @@ import StudentDoneTasks from './components/StudentDoneTasks/StudentDoneTasks.jsx
 import StudentTasksTrack from './components/StudentTasksTrack/StudentTasksTrack.jsx';
 import LoginPage from './components/Form/LoginPage.jsx';
 import StudentsForm from './components/Form/StudentsForm.jsx';
-import storage from './components/Storage.js';
+import storage, { Roles as ROLES } from './components/Storage.js';
 
-const {Provider, Consumer} = React.createContext();
+const {Provider, Consumer} = React.createContext({ color: 'gray'});
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-  this.handleUserInput = this.handleUserInput.bind(this);
-  this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +24,7 @@ class App extends React.Component {
     this.setState({ students })
   }
 
-  handleUserInput(props) {
+  handleUserInput = (props) => {
     const result = this.state.students.find(item => item.name === props.login && item.password === props.password);
     if(result) {
       this.setState({ role: result.role })
@@ -38,15 +35,16 @@ class App extends React.Component {
     if(!this.state.students || this.state.students.length === 0) {
       return(
         <div className="container">
-          <StudentsForm setNewStudent={this.componentDidMount}/>
+          <StudentsForm />
         </div> 
       )}
-      if(this.state.role === "admin") {
+      if(this.state.role === ROLES.ADMIN) {
       return (
-        <Provider value={'gray'}>
         <div>
           <Router>
-            <Header/>
+            <Provider>
+                <Header/>
+            </Provider>
             <Route exact path="/" render={() => <LoginPage auth={this.handleUserInput} />} />
             <Route exact path="/students" component={AllStudents} />
             <Route path="/tasks" component={AllTasks} /> 
@@ -55,33 +53,32 @@ class App extends React.Component {
             <Route path="/tasksTrack" component={StudentTasksTrack} /> 
           </Router>
         </div>
-        </Provider>
         )}
-      else if(this.state.role === "mentor") {
+      else if(this.state.role === ROLES.MENTOR) {
         return (
-          <Provider value={'green'}>
           <div>
             <Router>
-              <Header/>
+              <Provider value='green'>
+                <Header/>
+              </Provider>
               <Route exact path="/" render={() => <LoginPage auth={this.handleUserInput} />} />
               <Route path="/tasks" component={AllTasks} /> 
               <Route path="/students/:studentId/doneTasks" component={StudentDoneTasks} /> 
               <Route path="/students/:studentId/tasks" component={StudentTasks} /> 
             </Router>
           </div>
-          </Provider>
           )}
-      else if(this.state.role === "student") {
+      else if(this.state.role === ROLES.STUDENT) {
         return (
-          <Provider value={'blue'}>
           <div>
             <Router>
-              <Header/>
+              <Provider value='blue'>
+                <Header/>
+              </Provider>
               <Route exact path="/" render={() => <LoginPage auth={this.handleUserInput} />} />
               <Route path="/tasksTrack" component={StudentTasksTrack} /> 
             </Router>
           </div>
-          </Provider>
           )} 
         return(
           <LoginPage auth={this.handleUserInput} />

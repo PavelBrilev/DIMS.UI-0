@@ -1,5 +1,11 @@
 import axios from "axios";
 
+export const Roles = {
+  MENTOR: 'mentor',
+  ADMINT: 'admin',
+  USER: 'student'
+};
+
 class Storage {
 
   getValues(key) {
@@ -104,7 +110,7 @@ class Storage {
     this.setTasks(tasks)
   };
 
-  deleteTasks (taskId) {
+  deleteTask(taskId) {
     const tasks = this.getTasks();
     const index = this.getElementIndexById(tasks, taskId);
 
@@ -115,7 +121,7 @@ class Storage {
 
 
   $getStudents() {
-    axios.get('/api/profiles')
+    axios.get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
       .then((response) => {
         const students = response.data;
         this.setValues('students', students)
