@@ -1,34 +1,25 @@
 import React from 'react';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import StudentsForm from '../Form/StudentsForm.jsx';
+import DeleteForm from '../Form/DeleteForm.jsx';
 import { Link } from "react-router-dom";
 import './AllStudents.css';
-import { Table, Button } from 'reactstrap';
+import { Table } from 'reactstrap';
 
 class AllStudents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    const students = Storage().getStudents();
-    this.setState({ students });
+    this.initStudents();
   }
 
-  handleClick() {
-    const students = Storage().getStudents();
-    this.setState({ students });
-  }
-
-  handleDelete(event) {
-    Storage().deleteStudent(parseInt(event.target.id))
-    const students = Storage().getStudents();
-    this.setState({ students });
+  initStudents = () => {
+    const students = storage.getStudents();
+    this.setState({ students })
   }
 
   render() {
@@ -39,7 +30,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Register'>
-            <StudentsForm setNewStudent={this.handleClick} />
+            <StudentsForm setNewStudent={this.initStudents} />
           </Popup>
             <p className='text'>No registered</p>
         </div>
@@ -74,17 +65,16 @@ class AllStudents extends React.Component {
               key={`${student.id}-3`}
               className='btn btn-outline-primary'
               name='Edit'>
-              <StudentsForm setNewStudent={this.handleClick} id={student.id}/>
+              <StudentsForm setNewStudent={this.initStudents} id={student.id}/>
             </Popup>
-            <Button 
-              outline 
-              color="danger" 
+            <Popup 
+              className='btn btn-outline-danger'
+              name = 'Delete'
               id={student.id}
-              key={`${student.id}-4`}
-              onClick={this.handleDelete} 
+              key={`${student.id}-4`} 
             >
-              Delete
-            </Button>
+              <DeleteForm type='students' setNewState={this.initStudents} id={student.id} name={student.name}/>
+            </Popup>
            </td>
         </tr>
       )
@@ -94,7 +84,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary'
             name='Register'>
-            <StudentsForm setNewStudent={this.handleClick} />
+            <StudentsForm setNewStudent={this.initStudents} />
           </Popup>
           <Table hover>
             <thead>

@@ -10,23 +10,21 @@ class LoginPage extends React.Component {
         login: '',
         password: ''
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.clearForm = this.clearForm.bind(this);
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (event) => {
+    const { target } = event;
+    const { value, name } = target;
+    this.setState({ [name]: value });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.props.auth(this.state);
 
     return false
   }
 
-  clearForm() {
+  clearForm = () => {
     this.setState({ login: '',
                     password: ''});
   }
@@ -38,14 +36,14 @@ class LoginPage extends React.Component {
         <AvForm onValidSubmit={this.handleSubmit}>
           <AvGroup>
             <AvField name="login" type="text" label="Login" value={this.state.login} onChange={this.handleChange} validate={{
-              required: {value: true, errorMessage: 'Please enter a login'},
+              required: {value: true, errorMessage: 'Please enter login'},
               minLength: {value: 3, errorMessage: 'Your login must be between 3 and 16 characters'},
               maxLength: {value: 16, errorMessage: 'Your login must be between 3 and 16 characters'}
             }} />
           </AvGroup>
           <AvGroup>
             <AvField name="password" type="password" label="Password" value={this.state.password} onChange={this.handleChange} validate={{
-              required: {value: true, errorMessage: 'Please enter a password'},
+              required: {value: true, errorMessage: 'Please enter password'},
               minLength: {value: 3, errorMessage: 'Your password must be between 3 and 16 characters'},
               maxLength: {value: 16, errorMessage: 'Your password must be between 3 and 16 characters'}
             }} />

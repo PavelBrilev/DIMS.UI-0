@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'reactstrap';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import TasksTrackForm from '../Form/TasksTrackForm.jsx';
 
@@ -8,19 +8,17 @@ class StudentTasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    const tasks = Storage().getTasks();
+  handleClick = () => {
+    const tasks = storage.getTasks();
     this.setState({ tasks });
   }
   
   render() { 
     const studentId = parseInt(this.props.match.params.studentId);
-    const student = Storage().getStudent(studentId);
-    const tasks = Storage().getTasks();
+    const student = storage.getStudent(studentId);
+    const tasks = storage.getTasks();
     const tasksList = tasks.filter(item => item.students.includes(studentId));
     const listItems = tasksList.map((task) => (
         <tr key={task.id}>

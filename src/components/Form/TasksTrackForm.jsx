@@ -1,31 +1,28 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class TasksTrackForm extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(Storage().getTask(id))
+      this.setState(storage.getTask(id))
     }
   };
 
-  handleChange (event) {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit() {
-    Storage().saveTask(this.state);
+  handleSubmit = () => {
+    storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 
 class TasksForm extends React.Component {
   constructor(props) {
@@ -16,30 +16,33 @@ class TasksForm extends React.Component {
         students: [],
         note: ''
       };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(Storage().getTask(id))
+      this.setState(storage.getTask(id))
     }
   };
 
-  handleChange (event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? 
-                            this.setState({students: this.state.students.concat([parseInt(target.name)])}) 
-                            : target.value;
-    const name = target.name;
+  onCheckboxBtnClick = (selected) => {
+    const index = this.state.students.indexOf(selected);
+    if (index < 0) {
+      this.state.students.push(selected);
+    } else {
+      this.state.students.splice(index, 1);
+    }
+    this.setState({ students: [...this.state.students] });
+  }
 
+  handleChange = (event) => {
+    const { target } = event;
+    const { value, name } = target;    
     this.setState({ [name]: value });
   }
 
-  handleSubmit() {
-    Storage().saveTask(this.state);
+  handleSubmit = () => {
+    storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();
 
@@ -47,9 +50,9 @@ class TasksForm extends React.Component {
   }
 
   render() {
-    const checkStudents = Storage().getStudents().map(student => {
+    const checkStudents = storage.getStudents().map(student => {
       return(
-        <CustomInput type="checkbox" key={student.id} id={student.name} name={student.id} label={student.name + ' ' + student.lastName} onChange={this.handleChange}/>
+          <Button outline color="secondary" key={student.id} onClick={() => this.onCheckboxBtnClick(student.id)} active={this.state.students.includes(student.id)}>{student.name}</Button>
       )
     })
     return (
@@ -75,10 +78,10 @@ class TasksForm extends React.Component {
           <Input name="deadline" id="deadline" type="text" value={this.state.deadline} onChange={this.handleChange} />
         </FormGroup>
         <FormGroup>
-          <Label>Students</Label>
-            <div>
-              {checkStudents}
-            </div>
+          <div>Students</div>
+          <ButtonGroup>
+            {checkStudents}
+          </ButtonGroup>
         </FormGroup>
         <Button outline type='submit' color="success" block>Submit</Button>
       </AvForm>

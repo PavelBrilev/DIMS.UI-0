@@ -1,5 +1,5 @@
 import React from 'react';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import TasksTrackForm from '../Form/TasksTrackForm.jsx';
 import { Table, Button } from 'reactstrap';
@@ -8,25 +8,20 @@ class StudentTasksTrack extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    const tasks = Storage().getTasks();
+    this.initTasksTrack();
+  }
+
+  initTasksTrack = () => {
+    const tasks = storage.getTasks();
     this.setState({ tasks });
   }
 
-  handleClick() {
-    const tasks = Storage().getTasks();
-    this.setState({ tasks });
-  }
-
-  handleDelete(event) {
-    Storage().deleteTasks(parseInt(event.target.id))
-    const tasks = Storage().getTasks();
-    this.setState({ tasks });
+  handleDelete = (event) => {
+    storage.deleteTasks(parseInt(event.target.id))
+    this.initTasksTrack();
   }
 
   render() {
@@ -51,7 +46,7 @@ class StudentTasksTrack extends React.Component {
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksTrackForm setNewTasks={this.handleClick} id={task.id} />
+              <TasksTrackForm setNewTasks={this.initTasksTrack} id={task.id} />
             </Popup>
             <Button 
               outline 

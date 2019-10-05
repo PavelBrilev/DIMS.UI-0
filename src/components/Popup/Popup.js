@@ -26,7 +26,7 @@ class Popup extends React.Component {
             {React.Children.map(this.props.children, child => React.cloneElement(child, { toggle: this.toggle })) }
           </ModalBody>
           <ModalFooter>
-            <Button outline color="danger" onClick={this.toggle} block>Cancel</Button>
+            <Button outline color="warning" onClick={this.toggle} block>Cancel</Button>
           </ModalFooter>
         </Modal>
       </>

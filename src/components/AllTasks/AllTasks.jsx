@@ -1,32 +1,23 @@
 import React from 'react';
-import Storage from '../Storage.js';
+import storage from '../Storage.js';
 import Popup from '../Popup/Popup.js';
 import TasksForm from '../Form/TasksForm.jsx';
+import DeleteForm from '../Form/DeleteForm.jsx';
 import './AllTasks.css';
-import { Table, Button } from 'reactstrap';
+import { Table } from 'reactstrap';
 
 class AllTasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    const tasks = Storage().getTasks();
-    this.setState({ tasks });
+    this.initTasks();
   }
 
-  handleClick() {
-    const tasks = Storage().getTasks();
-    this.setState({ tasks });
-  }
-
-  handleDelete(event) {
-    Storage().deleteTasks(parseInt(event.target.id))
-    const tasks = Storage().getTasks();
+  initTasks = () => {
+    const tasks = storage.getTasks();
     this.setState({ tasks });
   }
 
@@ -39,7 +30,7 @@ class AllTasks extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/>
+            <TasksForm setNewTasks={this.initTasks}/>
           </Popup>
           <p className='text'>No tasks</p>
         </div>
@@ -57,17 +48,16 @@ class AllTasks extends React.Component {
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksForm setNewTasks={this.handleClick} id={task.id} />
+              <TasksForm setNewTasks={this.initTasks} id={task.id} />
             </Popup>
-            <Button 
-              outline 
-              color="danger" 
+            <Popup 
+              className='btn btn-outline-danger'
+              name = 'Delete'
               id={task.id}
               key={`${task.id}-2`}
-              onClick={this.handleDelete} 
             >
-              Delete
-            </Button>
+              <DeleteForm type='task' setNewState={this.initTasks} id={task.id} name={task.taskName}/>
+            </Popup>
           </td>
         </tr>
       )
@@ -76,7 +66,7 @@ class AllTasks extends React.Component {
         <div className='container'>
           <Popup
             name='Create'>
-            <TasksForm setNewTasks={this.handleClick}/> 
+            <TasksForm setNewTasks={this.initTasks}/> 
           </Popup>
           <Table hover>
             <thead>
