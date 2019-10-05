@@ -6,66 +6,123 @@ import storage from '../Storage.js';
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        id: '',
-        name: '',
-        lastName: '',
-        password: '',
-        role: '',
-        direction: '',
-        education: '',
-        start: '',
-        age: ''
-      };
+    this.state = {
+      id: '',
+      name: '',
+      lastName: '',
+      password: '',
+      role: '',
+      direction: '',
+      education: '',
+      start: '',
+      age: '',
+    };
   }
 
   componentDidMount() {
     const { id } = this.props;
     if (id) {
-      this.setState(storage.getStudent(id))
+      this.setState(storage.getStudent(id));
     }
-  };
+  }
 
   handleChange = (event) => {
     const { target } = event;
     const { value, name } = target;
     this.setState({ [name]: value });
-  }
+  };
 
-  handleSubmit = () => {
-    storage.saveStudent(this.state);
-    this.props.setNewStudent();
-    this.props.toggle();
-    return false
-  }
+  handleSubmit = (e) => {
+    const { setNewStudent, toggle } = this.props;
+    // e.preventDefault();
+    storage.postStudents(this.state);
+    setNewStudent();
+    toggle();
+    // return false;
+  };
 
   render() {
     return (
       <AvForm onValidSubmit={this.handleSubmit}>
         <AvGroup>
-          <AvField name="name" type="text" label="Name" value={this.state.name} onChange={this.handleChange} validate={{
-            required: {value: true, errorMessage: 'Please enter a name'},
-            minLength: {value: 3, errorMessage: 'Your name must be between 3 and 16 characters'},
-            maxLength: {value: 16, errorMessage: 'Your name must be between 3 and 16 characters'}
-          }} />
+          <AvField
+            name='name'
+            type='text'
+            label='Name'
+            value={this.state.name}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true, errorMessage: 'Please enter a name' },
+            //   minLength: {
+            //     value: 3,
+            //     errorMessage: 'Your name must be between 3 and 16 characters',
+            //   },
+            //   maxLength: {
+            //     value: 16,
+            //     errorMessage: 'Your name must be between 3 and 16 characters',
+            //   },
+            // }}
+          />
         </AvGroup>
         <AvGroup>
-          <AvField type="text" name="lastName" label="Last name" value={this.state.lastName} onChange={this.handleChange} validate={{
-            required: {value: true, errorMessage: 'Please enter a last name'},
-            minLength: {value: 3, errorMessage: 'Your last name must be between 3 and 16 characters'},
-            maxLength: {value: 16, errorMessage: 'Your last name must be between 3 and 16 characters'}
-          }}/>
+          <AvField
+            type='text'
+            name='lastName'
+            label='Last name'
+            value={this.state.lastName}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: {
+            //     value: true,
+            //     errorMessage: 'Please enter a last name',
+            //   },
+            //   minLength: {
+            //     value: 3,
+            //     errorMessage:
+            //       'Your last name must be between 3 and 16 characters',
+            //   },
+            //   maxLength: {
+            //     value: 16,
+            //     errorMessage:
+            //       'Your last name must be between 3 and 16 characters',
+            //   },
+            // }}
+          />
         </AvGroup>
         <AvGroup>
-          <AvField type="text" name="password" label="Password" value={this.state.password} onChange={this.handleChange} validate={{
-            required: {value: true, errorMessage: 'Please enter a password'},
-            minLength: {value: 3, errorMessage: 'Your last password must be between 3 and 16 characters'},
-            maxLength: {value: 16, errorMessage: 'Your last password must be between 3 and 16 characters'}
-          }}/>
+          <AvField
+            type='text'
+            name='password'
+            label='Password'
+            value={this.state.password}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: {
+            //     value: true,
+            //     errorMessage: 'Please enter a password',
+            //   },
+            //   minLength: {
+            //     value: 3,
+            //     errorMessage:
+            //       'Your last password must be between 3 and 16 characters',
+            //   },
+            //   maxLength: {
+            //     value: 16,
+            //     errorMessage:
+            //       'Your last password must be between 3 and 16 characters',
+            //   },
+            // }}
+          />
         </AvGroup>
         <FormGroup>
-          <Label for="role">Role</Label>
-          <Input type="select" name="role" id="role" value={this.state.role} onChange={this.handleChange}>
+          <Label for='role'>Role</Label>
+          <Input
+            type='select'
+            name='role'
+            id='role'
+            value={this.state.role}
+            onChange={this.handleChange}
+          >
             <option value='#'>Role</option>
             <option value='admin'>Admin</option>
             <option value='mentor'>Mentor</option>
@@ -73,8 +130,14 @@ class StudentsForm extends React.Component {
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label for="direction">Direction</Label>
-          <Input type="select" name="direction" id="direction" value={this.state.direction} onChange={this.handleChange}>
+          <Label for='direction'>Direction</Label>
+          <Input
+            type='select'
+            name='direction'
+            id='direction'
+            value={this.state.direction}
+            onChange={this.handleChange}
+          >
             <option value='#'>Direction</option>
             <option value='Java'>Java</option>
             <option value='JavaScript'>JavaScript</option>
@@ -83,34 +146,59 @@ class StudentsForm extends React.Component {
           </Input>
         </FormGroup>
         <AvGroup>
-          <AvField name="education" type="text" label="Education" errorMessage="Enter education" value={this.state.education} onChange={this.handleChange} validate={{
-            required: {value: true},
-            pattern: {value: '^[A-Za-z0-9]+$'},
-          }} />
+          <AvField
+            name='education'
+            type='text'
+            label='Education'
+            errorMessage='Enter education'
+            value={this.state.education}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true },
+            //   pattern: { value: '^[A-Za-z0-9]+$' },
+            // }}
+          />
         </AvGroup>
         <AvGroup>
-          <AvField name="start" label="Start date:" type="text" value={this.state.start} onChange={this.handleChange} errorMessage="Enter start date" title="Use MM/DD/YYYY"  validate={{
-            required: {value: true},
-            date: {format: 'MM/DD/YYYY'}, 
-            }} />
+          <AvField
+            name='start'
+            label='Start date:'
+            type='text'
+            value={this.state.start}
+            onChange={this.handleChange}
+            errorMessage='Enter start date'
+            title='Use MM/DD/YYYY'
+            // validate={{
+            //   required: { value: true },
+            //   date: { format: 'MM/DD/YYYY' },
+            // }}
+          />
         </AvGroup>
         <AvGroup>
-          <AvField name="age" label="Age" type="number" value={this.state.age} onChange={this.handleChange} validate={{
-            required: {value: true, errorMessage: 'Enter education'},
-            min: {value: 18, errorMessage: 'Must be more than 18'},
-            max: {value: 99, errorMessage: 'Must be less than 18'}
-            }} />
+          <AvField
+            name='age'
+            label='Age'
+            type='number'
+            value={this.state.age}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true, errorMessage: 'Enter education' },
+            //   min: { value: 18, errorMessage: 'Must be more than 18' },
+            //   max: { value: 99, errorMessage: 'Must be less than 18' },
+            // }}
+          />
         </AvGroup>
-        <Button outline type='submit' color="success" block>Submit</Button>
+        <Button outline type='submit' color='success' block>
+          Submit
+        </Button>
       </AvForm>
-
     );
   }
 }
 
 StudentsForm.defaultProps = {
   setNewStudent: () => {},
-  toggle: () => {}
-}
+  toggle: () => {},
+};
 
 export default StudentsForm;
