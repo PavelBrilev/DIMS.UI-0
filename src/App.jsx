@@ -9,7 +9,7 @@ import StudentDoneTasks from './components/StudentDoneTasks/StudentDoneTasks.jsx
 import StudentTasksTrack from './components/StudentTasksTrack/StudentTasksTrack.jsx';
 import LoginPage from './components/Form/LoginPage.jsx';
 import StudentsForm from './components/Form/StudentsForm.jsx';
-import storage, { Roles as ROLES } from './components/Storage.js';
+import storage, { Roles as ROLES } from './Storage';
 
 const { Provider, Consumer } = React.createContext({ color: 'gray' });
 

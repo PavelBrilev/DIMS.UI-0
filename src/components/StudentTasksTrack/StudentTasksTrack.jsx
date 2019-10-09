@@ -1,5 +1,5 @@
 import React from 'react';
-import storage from '../Storage.js';
+import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
 import TasksTrackForm from '../Form/TasksTrackForm.jsx';
 import { Table, Button } from 'reactstrap';

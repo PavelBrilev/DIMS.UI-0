@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'reactstrap';
-import storage from '../Storage.js';
+import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
 import TasksTrackForm from '../Form/TasksTrackForm.jsx';
 

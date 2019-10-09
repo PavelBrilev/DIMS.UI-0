@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import storage from '../Storage.js';
+import storage from '../../Storage';
 
 class StudentDoneTasks extends React.Component {
 
