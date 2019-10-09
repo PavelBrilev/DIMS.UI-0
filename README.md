@@ -26,20 +26,20 @@ You will also see any lint errors in the console.
 ## Stack
 
 ### These technologies were used in this project:
-> HTML 5
-> CSS 3
-> ECMAScript 2015
-> React.js
+- HTML 5
+- CSS 3
+- ECMAScript 2015
+- React.js
 
-### Useed these react.js libraries:
-> availity-reactstrap-validation
-> axios
-> bootstrap
-> reactstrap
-> react-datepicker
-> react-router-dom
-> react-scripts
-> redux
+### Useed these libraries:
+- availity-reactstrap-validation
+- axios
+- bootstrap
+- reactstrap
+- react-datepicker
+- react-router-dom
+- react-scripts
+- redux
 
 ## Issue
 
