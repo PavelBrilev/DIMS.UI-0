@@ -1,11 +1,12 @@
 import React from 'react';
 import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
-import StudentsForm from '../Form/StudentsForm.jsx';
-import DeleteForm from '../Form/DeleteForm.jsx';
+import StudentsForm from '../Forms/StudentsForm.jsx';
+import DeleteForm from '../Forms/DeleteForm.jsx';
 import { Link } from "react-router-dom";
-import './AllStudents.css';
+import '../../Styles/styles.css';
 import { Table } from 'reactstrap';
+import { Consumer } from '../../App';
 
 class AllStudents extends React.Component {
   constructor(props) {
@@ -86,7 +87,9 @@ class AllStudents extends React.Component {
             name='Register'>
             <StudentsForm setNewStudent={this.initStudents} />
           </Popup>
-          <Table hover>
+          <Consumer>
+            {theme => (
+          <Table hover id={`${theme}`}>
             <thead>
               <tr>
                 <th>№</th>
@@ -102,7 +105,10 @@ class AllStudents extends React.Component {
               {listItems}
             </tbody>
           </Table>
+            )}
+        </Consumer>
         </div>
+        
     );
   }
 }

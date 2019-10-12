@@ -1,8 +1,10 @@
 import React from 'react';
 import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
-import TasksTrackForm from '../Form/TasksTrackForm.jsx';
+import TasksTrackForm from '../Forms/TasksTrackForm.jsx';
 import { Table, Button } from 'reactstrap';
+import { Consumer } from '../../App';
+import '../../Styles/styles.css';
 
 class StudentTasksTrack extends React.Component {
   constructor(props) {
@@ -63,7 +65,9 @@ class StudentTasksTrack extends React.Component {
     });
     return (
         <div className='container'>
-          <Table hover>
+        <Consumer>
+            {theme => (
+          <Table hover id={`${theme}`}>
             <thead>
               <tr>
                 <th>#</th>
@@ -75,6 +79,8 @@ class StudentTasksTrack extends React.Component {
             </thead>
             <tbody>{listItems}</tbody>
           </Table>
+          )}
+        </Consumer>
         </div>
     );
   }
