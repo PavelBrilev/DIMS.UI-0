@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import storage from '../Storage.js';
+import storage from '../../Storage';
 
 class TasksTrackForm extends React.Component {
   constructor(props) {

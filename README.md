@@ -1,12 +1,19 @@
-## Content
+# DIMS.UI 
 
-### docs - location of all additional files you should guided by during development
+## Dev incubator management system  :books:
+
+### The app was designed to monitor student performance.
+
+### There are three roles in the application:
+- Admin (managies everything, except student's subtasks)
+- Menthor (can add and delete tasks; accepts/does'n accept tasks)
+- Student (can add and delete subtasks; marks as completed tasks)
+
+## Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
+For start the project, you can run:
 
 ### `npm start`
 
@@ -16,57 +23,45 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+## Stack
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### These technologies were used in this project:
+- HTML 5
+- CSS 3
+- ECMAScript 2015
+- React.js
 
-### `npm run build`
+### Useed these libraries:
+- availity-reactstrap-validation
+- axios
+- bootstrap
+- reactstrap
+- react-datepicker
+- react-router-dom
+- react-scripts
+- redux
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Issue
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The application allows you to register new students, delete and change their data. There is
+the ability to create new tasks, indicating students who need to complete them in
+set time. When completing a task, the student can mark the task as completed, 
+the mentor can accept the implementation, or send for revision. Same
+a student can split tasks into smaller subtasks. Access to functionality
+the application depends on the role of the user (admin, mentor or student).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API 
 
-### `npm run eject`
+### For receive data used library axios and back-end (.net framework 4.7.2, ASP.NET mvc, ASP.NET web api, c#)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
+Without this you can use locale storage for data.
+    
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Authors
+[PavelBrilev](https://github.com/PavelBrilev)
+[Maxim Schutsky](https://github.com/maximsan)

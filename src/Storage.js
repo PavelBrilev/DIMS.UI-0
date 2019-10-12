@@ -124,7 +124,8 @@ class Storage {
       .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
       .then((response) => {
         const students = response.data;
-        this.setValues('students', students);
+        console.log(students)
+      //  this.setValues('students', students);
       })
       .catch((error) => {
         console.log(error);

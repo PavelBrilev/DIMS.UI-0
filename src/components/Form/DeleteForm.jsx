@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import storage from '../Storage.js';
+import storage from '../../Storage';
 
 class DeleteForm extends React.Component {
 
