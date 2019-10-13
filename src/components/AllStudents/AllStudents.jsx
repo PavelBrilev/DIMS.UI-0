@@ -7,24 +7,17 @@ import { Link } from "react-router-dom";
 import '../../Styles/styles.css';
 import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
+import { connect } from 'react-redux'
 
 class AllStudents extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.initStudents();
-  }
 
   initStudents = () => {
-    const students = storage.getStudents();
-    this.setState({ students })
-  }
+   const students = storage.getStudents();
+   this.props.onStudents(students);
+ }
 
   render() {
-    const { students } = this.state;
+    const students = this.props.allStudents;
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -91,7 +84,7 @@ class AllStudents extends React.Component {
             {theme => (
           <Table hover id={`${theme}`}>
             <thead>
-              <tr>
+              <tr >
                 <th>№</th>
                 <th>Full Name</th>
                 <th>Direction</th>
@@ -108,10 +101,20 @@ class AllStudents extends React.Component {
             )}
         </Consumer>
         </div>
-        
     );
   }
 }
 
-
-export default AllStudents;
+export default connect(
+  state => ({
+    allStudents: state.studentsState
+  }),
+  dispatch => ({
+    onStudents: (students) => {
+      dispatch({
+        type: 'USER_LIST_SUCCESS',
+        allStudents: students
+      });
+    }
+  })
+)(AllStudents);

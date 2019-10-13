@@ -6,24 +6,17 @@ import DeleteForm from '../Forms/DeleteForm.jsx';
 import '../../Styles/styles.css';
 import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
+import { connect } from 'react-redux'
 
 class AllTasks extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.initTasks();
-  }
 
   initTasks = () => {
     const tasks = storage.getTasks();
-    this.setState({ tasks });
+    this.props.onTasks(tasks);
   }
 
   render() {
-    const { tasks } = this.state;
+    const tasks = this.props.allTasks;
 
     if (!tasks || tasks.length === 0) {
       return (
@@ -91,4 +84,16 @@ class AllTasks extends React.Component {
 }
 
 
-export default AllTasks;
+export default connect(
+  state => ({
+    allTasks: state.tasksState
+  }),
+  dispatch => ({
+    onTasks: (tasks) => {
+      dispatch({
+        type: 'TASKS_LIST_SUCCESS',
+        allTasks: tasks
+      });
+    }
+  })
+)(AllTasks);

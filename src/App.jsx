@@ -18,7 +18,6 @@ class App extends React.Component {
     super(props);
     this.state = {};
   }
-
   componentDidMount() {
     const students = storage.getStudents();
     this.setState({ students });
