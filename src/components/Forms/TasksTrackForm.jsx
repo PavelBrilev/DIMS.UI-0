@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage';
+import PropTypes from 'prop-types';
 
 class TasksTrackForm extends React.Component {
   constructor(props) {
@@ -52,3 +53,10 @@ class TasksTrackForm extends React.Component {
 }
 
 export default TasksTrackForm;
+
+
+TasksTrackForm.propTypes = {
+  id: PropTypes.number,
+  setNewState: PropTypes.func,
+  toggle: PropTypes.func
+};

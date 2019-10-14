@@ -1,11 +1,11 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import storage from '../../Storage';
-import '../../Styles/styles.css';
+import '../../styles/styles.css';
 import { Consumer } from '../../App';
 
-class StudentDoneTasks extends React.Component {
 
+class StudentDoneTasks extends React.Component {
   render() { 
     const studentId = parseInt(this.props.match.params.studentId);
     const student = storage.getStudent(studentId);

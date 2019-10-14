@@ -1,7 +1,9 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import Colors from './COLORS'
+import PropTypes from 'prop-types';
 
-class ThemeControl extends React.Component {
+class ThemeSwitcher extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,9 +16,7 @@ class ThemeControl extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
-      if(this.state.dropdownOpen) {
-      this.props.handleTheme(e.target.value)
-      }
+    this.props.handleTheme(e.target.value)
   }
 
   render() {
@@ -30,13 +30,17 @@ class ThemeControl extends React.Component {
           Theme
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem value='white' onClick={this.toggle} >White</DropdownItem>
-          <DropdownItem value='black' onClick={this.toggle} >Black</DropdownItem>
-          <DropdownItem value='green' onClick={this.toggle} >Green</DropdownItem>
+          <DropdownItem value={Colors.WHITE} onClick={this.toggle} >White</DropdownItem>
+          <DropdownItem value={Colors.BLACK} onClick={this.toggle} >Black</DropdownItem>
+          <DropdownItem value={Colors.GREEN} onClick={this.toggle} >Green</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );
   }
 }
 
-export default ThemeControl;
+export default ThemeSwitcher;
+
+ThemeSwitcher.propTypes = {
+  handleTheme: PropTypes.func
+};

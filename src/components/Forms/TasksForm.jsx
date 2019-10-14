@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage';
+import PropTypes from 'prop-types';
 
 class TasksForm extends React.Component {
   constructor(props) {
@@ -41,9 +42,10 @@ class TasksForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     storage.saveTask(this.state);
-    this.props.setNewTasks();
+    this.props.setNewTasks(this.state);
     this.props.toggle();
 
     return false
@@ -91,3 +93,10 @@ class TasksForm extends React.Component {
 }
 
 export default TasksForm;
+
+
+TasksForm.propTypes = {
+  id: PropTypes.number,
+  setNewState: PropTypes.func,
+  toggle: PropTypes.func
+};

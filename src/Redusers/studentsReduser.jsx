@@ -1,21 +1,17 @@
 import { combineReducers } from 'redux';
-import storage from '../Storage';
 
-const initialStudentsState = storage.getStudents();
-const initialTasksState = storage.getTasks();
-
- const studentsReduser = (state = initialStudentsState, action) => {
+ const studentsReduser = (state = [], action) => {
     switch (action.type) {
-        case 'USER_LIST_SUCCESS': 
-            return [...state, [action.allStudents]]
+        case 'ADD_USER': 
+            return [...state, action.student]
         default: return state;
     }
 }
 
-  function tasksReduser(state = initialTasksState, action) {
+  function tasksReduser(state = [], action) {
     switch (action.type) {
-        case 'TASKS_LIST_SUCCESS': 
-            return [...state, [action.allTasks]]
+        case 'ADD_TASK': 
+            return [...state, action.task]
         default: return state;
     }
   }

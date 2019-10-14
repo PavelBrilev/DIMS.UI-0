@@ -1,23 +1,22 @@
 import React from 'react';
-import storage from '../../Storage';
-import Popup from '../Popup/Popup.js';
-import StudentsForm from '../Forms/StudentsForm.jsx';
-import DeleteForm from '../Forms/DeleteForm.jsx';
+import Popup from '../popup/Popup';
+import StudentsForm from '../forms/StudentsForm';
+import DeleteForm from '../forms/DeleteForm';
 import { Link } from "react-router-dom";
-import '../../Styles/styles.css';
+import '../../styles/styles.css';
 import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 class AllStudents extends React.Component {
 
-  initStudents = () => {
-   const students = storage.getStudents();
-   this.props.onStudents(students);
+  initStudents = (student) => {
+   this.props.fetchStudent(student);
  }
 
   render() {
-    const students = this.props.allStudents;
+    const students = this.props.students;
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -31,9 +30,9 @@ class AllStudents extends React.Component {
       );
     } 
 
-    let listItems = students.map(student => {
+    const listItems = students.map(student => {
       return (
-        <tr key={student.id}>
+        <tr key={students.indexOf(student)}>
           <td >{students.indexOf(student)+1}</td>
           <td >{student.name + ' ' + student.lastName} </td>
           <td >{student.direction} </td>
@@ -107,14 +106,19 @@ class AllStudents extends React.Component {
 
 export default connect(
   state => ({
-    allStudents: state.studentsState
+    students: state.studentsState
   }),
   dispatch => ({
-    onStudents: (students) => {
+    fetchStudent: (student) => {
       dispatch({
-        type: 'USER_LIST_SUCCESS',
-        allStudents: students
+        type: 'ADD_USER',
+        student: student
       });
-    }
-  })
+  } 
+})
 )(AllStudents);
+
+AllStudents.propTypes = {
+  students: PropTypes.array,
+  fetchStudent: PropTypes.func
+};
