@@ -1,27 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
+import './Styles/styles.css';
 import AllStudents from './components/AllStudents/AllStudents.jsx';
 import AllTasks from './components/AllTasks/AllTasks.jsx';
 import Header from './components/Header/Header.js';
 import StudentTasks from './components/StudentTasks/StudentTasks.jsx';
 import StudentDoneTasks from './components/StudentDoneTasks/StudentDoneTasks.jsx';
 import StudentTasksTrack from './components/StudentTasksTrack/StudentTasksTrack.jsx';
-import LoginPage from './components/Form/LoginPage.jsx';
-import StudentsForm from './components/Form/StudentsForm.jsx';
+import LoginPage from './components/Forms/LoginPage.jsx';
+import StudentsForm from './components/Forms/StudentsForm.jsx';
 import storage, { Roles as ROLES } from './Storage';
 
-const { Provider, Consumer } = React.createContext({ color: 'gray' });
+const {Provider, Consumer} = React.createContext('white');
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
   componentDidMount() {
     const students = storage.getStudents();
     this.setState({ students });
+  }
+
+  handleTheme = (theme) => {
+    this.setState({ theme })
   }
 
   handleUserInput = (props) => {
@@ -45,11 +48,10 @@ class App extends React.Component {
     }
     if (this.state.role === ROLES.ADMIN) {
       return (
-        <div>
+      <Provider value={this.state.theme}>
+        <div className={this.state.theme}>
           <Router>
-            <Provider>
-              <Header />
-            </Provider>
+              <Header handleTheme={this.handleTheme}/>
             <Route
               exact
               path='/'
@@ -64,16 +66,16 @@ class App extends React.Component {
             <Route path='/students/:studentId/tasks' component={StudentTasks} />
             <Route path='/tasksTrack' component={StudentTasksTrack} />
           </Router>
-        </div>
+          </div>
+      </Provider>      
       );
     }
     if (this.state.role === ROLES.MENTOR) {
       return (
-        <div>
-          <Router>
-            <Provider value='green'>
-              <Header />
-            </Provider>
+        <Provider value={this.state.theme}>
+        <div className={this.state.theme}>
+            <Router>
+              <Header handleTheme={this.handleTheme}/>
             <Route
               exact
               path='/'
@@ -86,16 +88,16 @@ class App extends React.Component {
             />
             <Route path='/students/:studentId/tasks' component={StudentTasks} />
           </Router>
-        </div>
+          </div>
+        </Provider>
       );
     }
     if (this.state.role === ROLES.STUDENT) {
       return (
-        <div>
+        <Provider value={this.state.theme}>
+        <div className={this.state.theme}>
           <Router>
-            <Provider value='blue'>
-              <Header />
-            </Provider>
+              <Header handleTheme={this.handleTheme}/>
             <Route
               exact
               path='/'
@@ -103,11 +105,12 @@ class App extends React.Component {
             />
             <Route path='/tasksTrack' component={StudentTasksTrack} />
           </Router>
-        </div>
+          </div>
+        </Provider>
       );
     }
     return <LoginPage auth={this.handleUserInput} />;
   }
 }
 
-export { App, Consumer };
+export  { App, Consumer };

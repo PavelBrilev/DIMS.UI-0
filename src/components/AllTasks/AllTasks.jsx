@@ -1,28 +1,22 @@
 import React from 'react';
 import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
-import TasksForm from '../Form/TasksForm.jsx';
-import DeleteForm from '../Form/DeleteForm.jsx';
-import './AllTasks.css';
+import TasksForm from '../Forms/TasksForm.jsx';
+import DeleteForm from '../Forms/DeleteForm.jsx';
+import '../../Styles/styles.css';
 import { Table } from 'reactstrap';
+import { Consumer } from '../../App';
+import { connect } from 'react-redux'
 
 class AllTasks extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.initTasks();
-  }
 
   initTasks = () => {
     const tasks = storage.getTasks();
-    this.setState({ tasks });
+    this.props.onTasks(tasks);
   }
 
   render() {
-    const { tasks } = this.state;
+    const tasks = this.props.allTasks;
 
     if (!tasks || tasks.length === 0) {
       return (
@@ -68,22 +62,38 @@ class AllTasks extends React.Component {
             name='Create'>
             <TasksForm setNewTasks={this.initTasks}/> 
           </Popup>
-          <Table hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Start</th>
-                <th>Deadline</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>{listItems}</tbody>
-          </Table>
+          <Consumer>
+              {theme => (
+            <Table hover id={`${theme}`}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Start</th>
+                  <th>Deadline</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>{listItems}</tbody>
+            </Table>
+          )}
+        </Consumer>
         </div>
     );
   }
 }
 
 
-export default AllTasks;
+export default connect(
+  state => ({
+    allTasks: state.tasksState
+  }),
+  dispatch => ({
+    onTasks: (tasks) => {
+      dispatch({
+        type: 'TASKS_LIST_SUCCESS',
+        allTasks: tasks
+      });
+    }
+  })
+)(AllTasks);

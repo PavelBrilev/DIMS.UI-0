@@ -34,11 +34,10 @@ class StudentsForm extends React.Component {
 
   handleSubmit = (e) => {
     const { setNewStudent, toggle } = this.props;
-    // e.preventDefault();
-    storage.postStudents(this.state);
+    e.preventDefault();
+    storage.saveStudent(this.state);
     setNewStudent();
     toggle();
-    // return false;
   };
 
   render() {

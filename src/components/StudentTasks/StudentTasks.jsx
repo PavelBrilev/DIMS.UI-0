@@ -2,7 +2,9 @@ import React from 'react';
 import { Button, Table } from 'reactstrap';
 import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
-import TasksTrackForm from '../Form/TasksTrackForm.jsx';
+import TasksTrackForm from '../Forms/TasksTrackForm.jsx';
+import '../../Styles/styles.css';
+import { Consumer } from '../../App';
 
 class StudentTasks extends React.Component {
   constructor(props) {
@@ -44,20 +46,24 @@ class StudentTasks extends React.Component {
   return (
     <div className='container'>
       <h5> Hi, dear {student.name}! This is your current tasks:</h5>
-      <Table hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Start</th>
-            <th>Deadline</th>
-            <th>Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{listItems}</tbody>
-      </Table>
+      <Consumer>
+        {theme => (
+          <Table hover id={`${theme}`}>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Start</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>{listItems}</tbody>
+          </Table>
+          )}
+        </Consumer>
     </div>
   )
   }

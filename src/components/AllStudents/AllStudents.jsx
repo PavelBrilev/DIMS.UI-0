@@ -1,29 +1,23 @@
 import React from 'react';
 import storage from '../../Storage';
 import Popup from '../Popup/Popup.js';
-import StudentsForm from '../Form/StudentsForm.jsx';
-import DeleteForm from '../Form/DeleteForm.jsx';
+import StudentsForm from '../Forms/StudentsForm.jsx';
+import DeleteForm from '../Forms/DeleteForm.jsx';
 import { Link } from "react-router-dom";
-import './AllStudents.css';
+import '../../Styles/styles.css';
 import { Table } from 'reactstrap';
+import { Consumer } from '../../App';
+import { connect } from 'react-redux'
 
 class AllStudents extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.initStudents();
-  }
 
   initStudents = () => {
-    const students = storage.getStudents();
-    this.setState({ students })
-  }
+   const students = storage.getStudents();
+   this.props.onStudents(students);
+ }
 
   render() {
-    const { students } = this.state;
+    const students = this.props.allStudents;
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -86,9 +80,11 @@ class AllStudents extends React.Component {
             name='Register'>
             <StudentsForm setNewStudent={this.initStudents} />
           </Popup>
-          <Table hover>
+          <Consumer>
+            {theme => (
+          <Table hover id={`${theme}`}>
             <thead>
-              <tr>
+              <tr >
                 <th>№</th>
                 <th>Full Name</th>
                 <th>Direction</th>
@@ -102,10 +98,23 @@ class AllStudents extends React.Component {
               {listItems}
             </tbody>
           </Table>
+            )}
+        </Consumer>
         </div>
     );
   }
 }
 
-
-export default AllStudents;
+export default connect(
+  state => ({
+    allStudents: state.studentsState
+  }),
+  dispatch => ({
+    onStudents: (students) => {
+      dispatch({
+        type: 'USER_LIST_SUCCESS',
+        allStudents: students
+      });
+    }
+  })
+)(AllStudents);

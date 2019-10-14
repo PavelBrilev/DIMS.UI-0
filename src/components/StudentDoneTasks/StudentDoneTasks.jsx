@@ -1,6 +1,8 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import storage from '../../Storage';
+import '../../Styles/styles.css';
+import { Consumer } from '../../App';
 
 class StudentDoneTasks extends React.Component {
 
@@ -21,7 +23,9 @@ class StudentDoneTasks extends React.Component {
   return (
     <div className='container'>
     <h5> {student.name}'s progress:</h5>
-      <Table hover>
+    <Consumer>
+            {theme => (
+      <Table hover id={`${theme}`}>
         <thead>
           <tr>
             <th>#</th>
@@ -32,6 +36,8 @@ class StudentDoneTasks extends React.Component {
         </thead>
         <tbody>{listItems}</tbody>
       </Table>
+      )}
+        </Consumer>
     </div>
   )
 }
