@@ -1,9 +1,10 @@
 import React from 'react';
-import '../../Styles/styles.css';
+import '../../styles/styles.css';
 import logo from './human1.png';
 import { Link } from "react-router-dom";
-import ThemeControl from '../ThemeControl/ThemeControl';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import { Consumer } from '../../App';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
 
@@ -23,7 +24,7 @@ class Header extends React.Component {
         <Link to="/students"  className = {'btn__header'} > Students </Link>
         <Link to="/tasks" className = {'btn__header'} > Tasks </Link>
         <Link to="/tasksTrack" className = {'btn__header'} > TasksTrack </Link>
-        <ThemeControl handleTheme={this.handleTheme}/>
+        <ThemeSwitcher handleTheme={this.handleTheme}/>
       </div>
       )}
     </Consumer>
@@ -32,3 +33,7 @@ class Header extends React.Component {
 }
 
 export default Header;
+
+Header.propTypes = {
+  handleTheme: PropTypes.func
+};

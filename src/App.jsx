@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './Styles/styles.css';
-import AllStudents from './components/AllStudents/AllStudents.jsx';
-import AllTasks from './components/AllTasks/AllTasks.jsx';
-import Header from './components/Header/Header.js';
-import StudentTasks from './components/StudentTasks/StudentTasks.jsx';
-import StudentDoneTasks from './components/StudentDoneTasks/StudentDoneTasks.jsx';
-import StudentTasksTrack from './components/StudentTasksTrack/StudentTasksTrack.jsx';
-import LoginPage from './components/Forms/LoginPage.jsx';
-import StudentsForm from './components/Forms/StudentsForm.jsx';
+import './styles/styles.css';
+import AllStudents from './components/students/AllStudents';
+import AllTasks from './components/tasks/AllTasks';
+import Header from './components/header/Header';
+import StudentTasks from './components/studentTasks/StudentTasks';
+import StudentDoneTasks from './components/studentDoneTasks/StudentDoneTasks';
+import StudentTasksTrack from './components/studentTasksTrack/StudentTasksTrack';
+import LoginPage from './components/forms/LoginPage';
+import StudentsForm from './components/forms/StudentsForm';
 import storage, { Roles as ROLES } from './Storage';
 
 const {Provider, Consumer} = React.createContext('white');

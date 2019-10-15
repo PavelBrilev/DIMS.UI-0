@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
-
-
+import PropTypes from 'prop-types';
 
 class Popup extends React.Component {
   constructor(props) {
@@ -36,3 +35,9 @@ class Popup extends React.Component {
 
 
 export default Popup;
+
+Popup.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string,
+  children: PropTypes.element
+};

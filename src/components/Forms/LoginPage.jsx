@@ -31,7 +31,6 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <div>
       <div className='login__container'>
         <AvForm onValidSubmit={this.handleSubmit}>
           <AvGroup>
@@ -51,7 +50,6 @@ class LoginPage extends React.Component {
           <Button outline type='submit' color="success" block>LogIn</Button>
           <Button outline onClick={this.clearForm} color="danger" block>Clear</Button>
         </AvForm>
-      </div>
       </div>
     );
   }

@@ -1,23 +1,21 @@
 import React from 'react';
-import storage from '../../Storage';
-import Popup from '../Popup/Popup.js';
-import TasksForm from '../Forms/TasksForm.jsx';
-import DeleteForm from '../Forms/DeleteForm.jsx';
-import '../../Styles/styles.css';
+import Popup from '../popup/Popup';
+import TasksForm from '../forms/TasksForm';
+import DeleteForm from '../forms/DeleteForm';
+import '../../styles/styles.css';
 import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 class AllTasks extends React.Component {
 
-  initTasks = () => {
-    const tasks = storage.getTasks();
-    this.props.onTasks(tasks);
+  initTasks = (task) => {
+    this.props.fetchTasks(task);
   }
 
   render() {
-    const tasks = this.props.allTasks;
-
+    const tasks = this.props.tasks;
     if (!tasks || tasks.length === 0) {
       return (
         <div className='container'>
@@ -86,14 +84,19 @@ class AllTasks extends React.Component {
 
 export default connect(
   state => ({
-    allTasks: state.tasksState
+    tasks: state.tasksState
   }),
   dispatch => ({
-    onTasks: (tasks) => {
+    fetchTasks: (task) => {
       dispatch({
-        type: 'TASKS_LIST_SUCCESS',
-        allTasks: tasks
+        type: 'ADD_TASK',
+        task: task
       });
     }
   })
 )(AllTasks);
+
+AllTasks.propTypes = {
+  tasks: PropTypes.array,
+  fetchTasks: PropTypes.func
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import storage from '../../Storage';
+import PropTypes from 'prop-types';
 
 class DeleteForm extends React.Component {
 
@@ -26,3 +27,11 @@ class DeleteForm extends React.Component {
 }
 
 export default DeleteForm;
+
+DeleteForm.propTypes = {
+  type: PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.number,
+  setNewState: PropTypes.func,
+  toggle: PropTypes.func
+};

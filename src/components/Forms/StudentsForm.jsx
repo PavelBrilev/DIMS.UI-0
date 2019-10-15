@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage'
+import PropTypes from 'prop-types';
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class StudentsForm extends React.Component {
     const { setNewStudent, toggle } = this.props;
     e.preventDefault();
     storage.saveStudent(this.state);
-    setNewStudent();
+    setNewStudent(this.state);
     toggle();
   };
 
@@ -201,3 +202,9 @@ StudentsForm.defaultProps = {
 };
 
 export default StudentsForm;
+
+
+StudentsForm.propTypes = {
+  setNewState: PropTypes.func,
+  toggle: PropTypes.func
+};

@@ -6,8 +6,8 @@
 
 ### There are three roles in the application:
 - Admin (Has access rights to everything except students' subtasks and etc for other roles)
-- Menthor (can add and delete tasks; accepts/does'n accept tasks)
-- Student (can add and delete subtasks; marks as completed tasks)
+- Menthor (Has access rights to add and delete tasks; accepts/does'n accept tasks)
+- Student (Has access rights to add and delete subtasks; marks as completed tasks)
 
 ## Getting Started
 
@@ -34,9 +34,9 @@ You will also see any lint errors in the console.
 ### Back-end:
 - .net framework 4.7.2
 - ASP.NET mvc
-- ASP.NET 
-- web api
+- ASP.NET web api
 - C#
+- MSSQL
 
 Without this you can use locale storage for data.
 
