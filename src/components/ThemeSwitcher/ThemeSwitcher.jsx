@@ -16,7 +16,9 @@ class ThemeSwitcher extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
-    this.props.handleTheme(e.target.value)
+    if(this.state.dropdownOpen) {
+      this.props.handleTheme(e.target.value)
+    }
   }
 
   render() {

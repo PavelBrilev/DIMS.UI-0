@@ -1,8 +1,13 @@
-# DIMS.UI 
+<h1 align="center">Welcome to dims.ui 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+</p>
 
-## Dev incubator management system  :books:
+> The app was designed to monitor student performance
 
-### The app was designed to monitor student performance.
+### 🏠 [Homepage](https://github.com/PavelBrilev/DIMS.UI-0)
+
+### ✨ [Demo](https://github.com/PavelBrilev/DIMS.UI-0)
 
 ### There are three roles in the application:
 - Admin (Has access rights to everything except students' subtasks and etc for other roles)
@@ -59,5 +64,15 @@ the mentor can accept the implementation, or send for revision. The student
 can split tasks into smaller subtasks. Access to functionality
 the application depends on the role of the user (admin, mentor or student).
 
-## Authors
-[PavelBrilev](https://github.com/PavelBrilev)
+## Author
+
+👤 **PavelBrilev**
+
+* Github: [@PavelBrilev](https://github.com/PavelBrilev)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
