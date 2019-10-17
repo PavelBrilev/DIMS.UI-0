@@ -10,10 +10,6 @@ import PropTypes from 'prop-types';
 
 class AllTasks extends React.Component {
 
-  initTasks = (task) => {
-    this.props.fetchTasks(task);
-  }
-
   render() {
     const tasks = this.props.tasks;
     if (!tasks || tasks.length === 0) {
@@ -22,7 +18,7 @@ class AllTasks extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Create'>
-            <TasksForm setNewTasks={this.initTasks}/>
+            <TasksForm setNewTasks={this.props.addTasks}/>
           </Popup>
           <p className='text'>No tasks</p>
         </div>
@@ -40,7 +36,7 @@ class AllTasks extends React.Component {
             <Popup
               key={`${task.id}-1`}
               name='Edit' >
-              <TasksForm setNewTasks={this.initTasks} id={task.id} />
+              <TasksForm setNewTasks={this.props.editTasks} id={task.id} />
             </Popup>
             <Popup 
               className='btn btn-outline-danger'
@@ -48,7 +44,7 @@ class AllTasks extends React.Component {
               id={task.id}
               key={`${task.id}-2`}
             >
-              <DeleteForm type='task' setNewState={this.initTasks} id={task.id} name={task.taskName}/>
+              <DeleteForm type='task' setNewState={this.props.delTasks} id={task.id} name={task.taskName}/>
             </Popup>
           </td>
         </tr>
@@ -58,7 +54,7 @@ class AllTasks extends React.Component {
         <div className='container'>
           <Popup
             name='Create'>
-            <TasksForm setNewTasks={this.initTasks}/> 
+            <TasksForm setNewTasks={this.props.addTasks}/> 
           </Popup>
           <Consumer>
               {theme => (
@@ -81,22 +77,43 @@ class AllTasks extends React.Component {
   }
 }
 
-
-export default connect(
-  state => ({
+const mapStateToProps = (state) => {
+  return {
     tasks: state.tasksState
-  }),
-  dispatch => ({
-    fetchTasks: (task) => {
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTasks: (task) => {
       dispatch({
         type: 'ADD_TASK',
         task: task
       });
+    },
+    delTasks: (taskId) => {
+      dispatch({
+        type: 'DEL_TASK',
+        taskId: taskId
+      });
+    },
+    editTasks: (updatedTask) => {
+      dispatch({
+        type: 'EDIT_TASK',
+        updatedTask: updatedTask
+      });
     }
-  })
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(AllTasks);
 
 AllTasks.propTypes = {
   tasks: PropTypes.array,
-  fetchTasks: PropTypes.func
+  addTasks: PropTypes.func,
+  delTasks: PropTypes.func,
+  editTasks: PropTypes.func
 };

@@ -11,10 +11,6 @@ import PropTypes from 'prop-types';
 
 class AllStudents extends React.Component {
 
-  initStudents = (student) => {
-   this.props.fetchStudent(student);
- }
-
   render() {
     const students = this.props.students;
     if (!students || students.length === 0) {
@@ -23,7 +19,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary btn-block'
             name='Register'>
-            <StudentsForm setNewStudent={this.initStudents} />
+            <StudentsForm setNewStudent={this.props.addStudent} />
           </Popup>
             <p className='text'>No registered</p>
         </div>
@@ -58,7 +54,7 @@ class AllStudents extends React.Component {
               key={`${student.id}-3`}
               className='btn btn-outline-primary'
               name='Edit'>
-              <StudentsForm setNewStudent={this.initStudents} id={student.id}/>
+              <StudentsForm setNewStudent={this.props.editStudent} id={student.id}/>
             </Popup>
             <Popup 
               className='btn btn-outline-danger'
@@ -66,7 +62,7 @@ class AllStudents extends React.Component {
               id={student.id}
               key={`${student.id}-4`} 
             >
-              <DeleteForm type='students' setNewState={this.initStudents} id={student.id} name={student.name}/>
+              <DeleteForm type='students' setNewState={this.props.delStudent} id={student.id} name={student.name}/>
             </Popup>
            </td>
         </tr>
@@ -77,7 +73,7 @@ class AllStudents extends React.Component {
           <Popup
             className='btn btn-outline-primary'
             name='Register'>
-            <StudentsForm setNewStudent={this.initStudents} />
+            <StudentsForm setNewStudent={this.props.addStudent} />
           </Popup>
           <Consumer>
             {theme => (
@@ -104,21 +100,43 @@ class AllStudents extends React.Component {
   }
 }
 
-export default connect(
-  state => ({
+const mapStateToProps = (state) => {
+  return {
     students: state.studentsState
-  }),
-  dispatch => ({
-    fetchStudent: (student) => {
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addStudent: (student) => {
       dispatch({
         type: 'ADD_USER',
         student: student
-      });
-  } 
-})
+      })
+    },
+    delStudent: (studentId) => {
+      dispatch({
+        type: 'DEL_USER',
+        studentId: studentId
+      })
+    },
+    editStudent: (updatedStudent) => {
+      dispatch({
+        type: 'EDIT_USER',
+        updatedStudent: updatedStudent
+      })
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(AllStudents);
 
 AllStudents.propTypes = {
   students: PropTypes.array,
-  fetchStudent: PropTypes.func
+  addStudent: PropTypes.func,
+  delStudent: PropTypes.func,
+  editStudent: PropTypes.func
 };

@@ -11,7 +11,7 @@ class DeleteForm extends React.Component {
     } else if (this.props.type === 'task') {
       storage.deleteTask(parseInt(this.props.id))
     }
-    this.props.setNewState();
+    this.props.setNewState(this.props.id);
     this.props.toggle();
   }
 
@@ -31,7 +31,7 @@ export default DeleteForm;
 DeleteForm.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   setNewState: PropTypes.func,
   toggle: PropTypes.func
 };

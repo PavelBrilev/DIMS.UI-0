@@ -56,7 +56,7 @@ export default TasksTrackForm;
 
 
 TasksTrackForm.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   setNewState: PropTypes.func,
   toggle: PropTypes.func
 };
