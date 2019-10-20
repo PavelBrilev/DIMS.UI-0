@@ -119,18 +119,18 @@ class Storage {
     this.setTasks(tasks);
   }
 
-  $getStudents() {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-      .then((response) => {
-        const students = response.data;
-        console.log(students)
-      //  this.setValues('students', students);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  // getStudents() {
+  //   axios
+  //     .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       this.props.dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+  //       this.setValues('students', response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
 
   postStudents({
     id,

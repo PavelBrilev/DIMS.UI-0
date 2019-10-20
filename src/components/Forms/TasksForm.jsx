@@ -3,6 +3,7 @@ import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage';
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons';
 
 class TasksForm extends React.Component {
   constructor(props) {
@@ -47,8 +48,6 @@ class TasksForm extends React.Component {
     storage.saveTask(this.state);
     this.props.setNewTasks(this.state);
     this.props.toggle();
-
-    return false
   }
 
   render() {
@@ -85,7 +84,8 @@ class TasksForm extends React.Component {
             {checkStudents}
           </ButtonGroup>
         </FormGroup>
-        <Button outline type='submit' color="success" block>Submit</Button>
+        
+        <Button outline type='submit' color="success" block>{icons.submitIcon}Submit</Button>
       </AvForm>
 
     );

@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
+import storage from '../Storage';
 
  const studentsReduser = (state = [], action) => {
     switch (action.type) {
+        case 'ADD_ALL_USERS': 
+            return state.concat(action.students);
         case 'ADD_USER': 
             return [...state, action.student]
         case 'DEL_USER': 
@@ -16,7 +19,9 @@ import { combineReducers } from 'redux';
     }
 }
 
-  function tasksReduser(state = [], action) {
+const initTasksState = storage.getTasks()
+
+  function tasksReduser(state = initTasksState, action) {
     switch (action.type) {
         case 'ADD_TASK': 
             return [...state, action.task]

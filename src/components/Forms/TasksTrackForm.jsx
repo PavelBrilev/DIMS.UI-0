@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage';
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons'
 
 class TasksTrackForm extends React.Component {
   constructor(props) {
@@ -22,12 +23,11 @@ class TasksTrackForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     storage.saveTask(this.state);
     this.props.setNewTasks();
     this.props.toggle();
-
-    return false
   }
 
   render() {
@@ -45,7 +45,7 @@ class TasksTrackForm extends React.Component {
             maxLength: {value: 300, errorMessage: 'Your description must be less than 300 characters'}
           }}/>
         </AvGroup>
-        <Button outline type='submit' color="success" block>Submit</Button>
+        <Button outline type='submit' color="success" block> {icons.submitIcon} Submit</Button>
       </AvForm>
 
     );

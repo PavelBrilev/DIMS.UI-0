@@ -8,9 +8,10 @@ import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { icons } from '../../styles/icons'
 
 class AllStudents extends React.Component {
-
   render() {
     const students = this.props.students;
     if (!students || students.length === 0) {
@@ -18,6 +19,7 @@ class AllStudents extends React.Component {
         <div className='container'>
           <Popup
             className='btn btn-outline-primary btn-block'
+            icon={icons.create}
             name='Register'>
             <StudentsForm setNewStudent={this.props.addStudent} />
           </Popup>
@@ -30,17 +32,18 @@ class AllStudents extends React.Component {
       return (
         <tr key={students.indexOf(student)}>
           <td >{students.indexOf(student)+1}</td>
-          <td >{student.name + ' ' + student.lastName} </td>
-          <td >{student.direction} </td>
-          <td >{student.education} </td>
-          <td >{student.start} </td>
-          <td >{student.age} </td>
+          <td >{student.FullName} </td>
+          <td >{student.Direction} </td>
+          <td >{student.Education} </td>
+          <td >{student.StartDate} </td>
+          <td >{student.Age} </td>
           <td >
             <Link 
               key={`${student.id}-1`}
               className="btn btn-outline-primary" 
               to={{ pathname: `/students/${ student.id }/doneTasks` }}
             >
+            {icons.progressIcon}
               Progress 
             </Link>
             <Link 
@@ -48,21 +51,24 @@ class AllStudents extends React.Component {
               className="btn btn-outline-primary" 
               to={{ pathname: `/students/${ student.id }/tasks` }}
             >
+            {icons.tasksIcon}
               Tasks
             </Link>
             <Popup
               key={`${student.id}-3`}
               className='btn btn-outline-primary'
+              icon={icons.editIcon}
               name='Edit'>
               <StudentsForm setNewStudent={this.props.editStudent} id={student.id}/>
             </Popup>
             <Popup 
               className='btn btn-outline-danger'
+              icon={icons.deleteIcon}
               name = 'Delete'
               id={student.id}
               key={`${student.id}-4`} 
             >
-              <DeleteForm type='students' setNewState={this.props.delStudent} id={student.id} name={student.name}/>
+              <DeleteForm type='students' setNewState={this.props.delStudent} id={student.UserId} name={student.FullName}/>
             </Popup>
            </td>
         </tr>
@@ -72,6 +78,7 @@ class AllStudents extends React.Component {
         <div className='container'>
           <Popup
             className='btn btn-outline-primary'
+            icon={icons.create}
             name='Register'>
             <StudentsForm setNewStudent={this.props.addStudent} />
           </Popup>
@@ -108,12 +115,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addStudent: (student) => {
-      dispatch({
-        type: 'ADD_USER',
-        student: student
-      })
+    addStudent: (newStudent) => {
+      const asyncAddStudent = () => {
+          return (dispatch) => {
+            axios.post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, {newStudent})
+            .then((response) => {
+              dispatch({ type: 'ADD_USER', students: response.data });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+      }
+      dispatch(asyncAddStudent());
     },
+
     delStudent: (studentId) => {
       dispatch({
         type: 'DEL_USER',

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import storage from '../../Storage';
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons'
 
 class DeleteForm extends React.Component {
 
@@ -19,7 +20,7 @@ class DeleteForm extends React.Component {
     return (
       <div>
         <p> Delete {this.props.name} ? </p>
-        <Button outline type='button' color="danger" onClick={this.handleDelete} block >Delete</Button>
+        <Button outline type='button' color="danger" onClick={this.handleDelete} block >{icons.deleteIcon} Delete</Button>
       </div>
 
     );

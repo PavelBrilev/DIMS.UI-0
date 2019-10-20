@@ -3,20 +3,18 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage'
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons'
 
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      name: '',
-      lastName: '',
-      password: '',
-      role: '',
-      direction: '',
-      education: '',
-      start: '',
-      age: '',
+      UserId: '',
+      FullName: '',
+      Direction: '',
+      Education: '',
+      Start: '',
+      Age: '',
     };
   }
 
@@ -36,7 +34,7 @@ class StudentsForm extends React.Component {
   handleSubmit = (e) => {
     const { setNewStudent, toggle } = this.props;
     e.preventDefault();
-    storage.saveStudent(this.state);
+//    storage.saveStudent(this.state);
     setNewStudent(this.state);
     toggle();
   };
@@ -46,10 +44,10 @@ class StudentsForm extends React.Component {
       <AvForm onValidSubmit={this.handleSubmit}>
         <AvGroup>
           <AvField
-            name='name'
+            name='FullName'
             type='text'
-            label='Name'
-            value={this.state.name}
+            label='Full Name'
+            value={this.state.FullName}
             onChange={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Please enter a name' },
@@ -64,29 +62,29 @@ class StudentsForm extends React.Component {
             // }}
           />
         </AvGroup>
-        <AvGroup>
+        {/* <AvGroup>
           <AvField
             type='text'
             name='lastName'
             label='Last name'
             value={this.state.lastName}
             onChange={this.handleChange}
-            // validate={{
-            //   required: {
-            //     value: true,
-            //     errorMessage: 'Please enter a last name',
-            //   },
-            //   minLength: {
-            //     value: 3,
-            //     errorMessage:
-            //       'Your last name must be between 3 and 16 characters',
-            //   },
-            //   maxLength: {
-            //     value: 16,
-            //     errorMessage:
-            //       'Your last name must be between 3 and 16 characters',
-            //   },
-            // }}
+             validate={{
+               required: {
+                 value: true,
+                 errorMessage: 'Please enter a last name',
+               },
+               minLength: {
+                 value: 3,
+                 errorMessage:
+                   'Your last name must be between 3 and 16 characters',
+               },
+               maxLength: {
+                 value: 16,
+                 errorMessage:
+                   'Your last name must be between 3 and 16 characters',
+               },
+             }}
           />
         </AvGroup>
         <AvGroup>
@@ -96,22 +94,22 @@ class StudentsForm extends React.Component {
             label='Password'
             value={this.state.password}
             onChange={this.handleChange}
-            // validate={{
-            //   required: {
-            //     value: true,
-            //     errorMessage: 'Please enter a password',
-            //   },
-            //   minLength: {
-            //     value: 3,
-            //     errorMessage:
-            //       'Your last password must be between 3 and 16 characters',
-            //   },
-            //   maxLength: {
-            //     value: 16,
-            //     errorMessage:
-            //       'Your last password must be between 3 and 16 characters',
-            //   },
-            // }}
+             validate={{
+               required: {
+                 value: true,
+                 errorMessage: 'Please enter a password',
+               },
+               minLength: {
+                 value: 3,
+                 errorMessage:
+                   'Your last password must be between 3 and 16 characters',
+               },
+               maxLength: {
+                 value: 16,
+                 errorMessage:
+                   'Your last password must be between 3 and 16 characters',
+               },
+             }}
           />
         </AvGroup>
         <FormGroup>
@@ -128,14 +126,14 @@ class StudentsForm extends React.Component {
             <option value='mentor'>Mentor</option>
             <option value='student'>Student</option>
           </Input>
-        </FormGroup>
+        </FormGroup> */}
         <FormGroup>
           <Label for='direction'>Direction</Label>
           <Input
             type='select'
-            name='direction'
+            name='Direction'
             id='direction'
-            value={this.state.direction}
+            value={this.state.Direction}
             onChange={this.handleChange}
           >
             <option value='#'>Direction</option>
@@ -147,11 +145,11 @@ class StudentsForm extends React.Component {
         </FormGroup>
         <AvGroup>
           <AvField
-            name='education'
+            name='Education'
             type='text'
             label='Education'
             errorMessage='Enter education'
-            value={this.state.education}
+            value={this.state.Education}
             onChange={this.handleChange}
             // validate={{
             //   required: { value: true },
@@ -161,10 +159,10 @@ class StudentsForm extends React.Component {
         </AvGroup>
         <AvGroup>
           <AvField
-            name='start'
+            name='StartDate'
             label='Start date:'
             type='text'
-            value={this.state.start}
+            value={this.state.StartDate}
             onChange={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
@@ -176,10 +174,10 @@ class StudentsForm extends React.Component {
         </AvGroup>
         <AvGroup>
           <AvField
-            name='age'
+            name='Age'
             label='Age'
             type='number'
-            value={this.state.age}
+            value={this.state.Age}
             onChange={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Enter education' },
@@ -189,7 +187,7 @@ class StudentsForm extends React.Component {
           />
         </AvGroup>
         <Button outline type='submit' color='success' block>
-          Submit
+        {icons.submitIcon} Submit
         </Button>
       </AvForm>
     );

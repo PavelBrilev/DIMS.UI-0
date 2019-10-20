@@ -6,15 +6,11 @@ import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reducers from './redusers/studentsReduser'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import storage from './Storage';
+import thunk from 'redux-thunk'
 
-const initialStudentsState = storage.getStudents();
-const initialTasksState = storage.getTasks();
-
-const initialState = { studentsState: initialStudentsState, tasksState: initialTasksState};
-const store = createStore(reducers, initialState);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render( <Provider store={store}><App/></Provider>, document.getElementById('root'));
 

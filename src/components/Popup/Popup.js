@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons'
 
 class Popup extends React.Component {
   constructor(props) {
@@ -19,13 +20,13 @@ class Popup extends React.Component {
   render() {
     return (
       <>
-        <Button outline className={this.props.className} color="primary" onClick={this.toggle}>{this.props.name}</Button>
+        <Button outline className={this.props.className} color="primary" onClick={this.toggle}>{this.props.icon} {this.props.name}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalBody>
             {React.Children.map(this.props.children, child => React.cloneElement(child, { toggle: this.toggle })) }
           </ModalBody>
           <ModalFooter>
-            <Button outline color="warning" onClick={this.toggle} block>Cancel</Button>
+            <Button outline color="warning" onClick={this.toggle} block> {icons.cancelIcon} Cancel</Button>
           </ModalFooter>
         </Modal>
       </>

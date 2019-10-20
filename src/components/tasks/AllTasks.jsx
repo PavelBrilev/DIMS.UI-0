@@ -7,6 +7,7 @@ import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import { icons } from '../../styles/icons'
 
 class AllTasks extends React.Component {
 
@@ -17,6 +18,7 @@ class AllTasks extends React.Component {
         <div className='container'>
           <Popup
             className='btn btn-outline-primary btn-block'
+            icon={icons.create}
             name='Create'>
             <TasksForm setNewTasks={this.props.addTasks}/>
           </Popup>
@@ -35,11 +37,13 @@ class AllTasks extends React.Component {
           <td >
             <Popup
               key={`${task.id}-1`}
+              icon={icons.editIcon}
               name='Edit' >
               <TasksForm setNewTasks={this.props.editTasks} id={task.id} />
             </Popup>
             <Popup 
               className='btn btn-outline-danger'
+              icon={icons.deleteIcon}
               name = 'Delete'
               id={task.id}
               key={`${task.id}-2`}
