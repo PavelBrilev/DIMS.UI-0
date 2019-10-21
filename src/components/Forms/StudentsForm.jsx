@@ -34,7 +34,7 @@ class StudentsForm extends React.Component {
   handleSubmit = (e) => {
     const { setNewStudent, toggle } = this.props;
     e.preventDefault();
-//    storage.saveStudent(this.state);
+    storage.saveStudent(this.state);
     setNewStudent(this.state);
     toggle();
   };
@@ -62,14 +62,14 @@ class StudentsForm extends React.Component {
             // }}
           />
         </AvGroup>
-        {/* <AvGroup>
+        <AvGroup>
           <AvField
             type='text'
             name='lastName'
             label='Last name'
             value={this.state.lastName}
             onChange={this.handleChange}
-             validate={{
+             /* validate={{
                required: {
                  value: true,
                  errorMessage: 'Please enter a last name',
@@ -84,7 +84,7 @@ class StudentsForm extends React.Component {
                  errorMessage:
                    'Your last name must be between 3 and 16 characters',
                },
-             }}
+             }} */
           />
         </AvGroup>
         <AvGroup>
@@ -94,7 +94,7 @@ class StudentsForm extends React.Component {
             label='Password'
             value={this.state.password}
             onChange={this.handleChange}
-             validate={{
+             /* validate={{
                required: {
                  value: true,
                  errorMessage: 'Please enter a password',
@@ -109,7 +109,7 @@ class StudentsForm extends React.Component {
                  errorMessage:
                    'Your last password must be between 3 and 16 characters',
                },
-             }}
+             }} */
           />
         </AvGroup>
         <FormGroup>
@@ -126,7 +126,7 @@ class StudentsForm extends React.Component {
             <option value='mentor'>Mentor</option>
             <option value='student'>Student</option>
           </Input>
-        </FormGroup> */}
+        </FormGroup>
         <FormGroup>
           <Label for='direction'>Direction</Label>
           <Input

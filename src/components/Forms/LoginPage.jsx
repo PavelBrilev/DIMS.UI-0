@@ -3,7 +3,6 @@ import { Button } from 'reactstrap';
 import './style.css';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import { connect } from 'react-redux'
-import storage from '../../Storage'
 import axios from 'axios';
 import { icons } from '../../styles/icons'
 
@@ -24,7 +23,7 @@ class LoginPage extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.persist();
     this.props.auth(this.state);
     this.props.addStudents();
   }
