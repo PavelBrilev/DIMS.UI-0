@@ -5,6 +5,7 @@ import Popup from '../popup/Popup';
 import TasksTrackForm from '../forms/TasksTrackForm';
 import '../../styles/styles.css';
 import { Consumer } from '../../App';
+import { icons } from '../../styles/icons'
 
 class StudentTasks extends React.Component {
   constructor(props) {
@@ -32,13 +33,14 @@ class StudentTasks extends React.Component {
           <td >
             <Popup
               key={`${task.id}-1`}
+              icon={icons.editIcon}
               name='Edit' >
               <TasksTrackForm setNewTasks={this.handleClick} id={task.id} />
             </Popup>
           </td>
           <td >
-            <Button key={`${ task.id }-1`} outline color="success">Success</Button>
-            <Button key={`${ task.id }-2`} outline color="danger">Fail</Button>
+            <Button key={`${ task.id }-1`} outline color="success"> {icons.doneIcon} Success</Button>
+            <Button key={`${ task.id }-2`} outline color="danger"> {icons.cancelIcon} Fail</Button>
           </td>
         </tr>
     ))

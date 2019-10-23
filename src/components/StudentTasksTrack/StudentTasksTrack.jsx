@@ -5,6 +5,7 @@ import TasksTrackForm from '../forms/TasksTrackForm';
 import { Table, Button } from 'reactstrap';
 import { Consumer } from '../../App';
 import '../../styles/styles.css';
+import { icons } from '../../styles/icons'
 
 class StudentTasksTrack extends React.Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class StudentTasksTrack extends React.Component {
           <td >
             <Popup
               key={`${task.id}-1`}
+              icon={icons.editIcon}
               name='Edit' >
               <TasksTrackForm setNewTasks={this.initTasksTrack} id={task.id} />
             </Popup>
@@ -57,6 +59,7 @@ class StudentTasksTrack extends React.Component {
               key={`${task.id}-2`}
               onClick={this.handleDelete} 
             >
+              {icons.deleteIcon}
               Delete
             </Button>
           </td>

@@ -7,8 +7,8 @@ import Header from './components/header/Header';
 import StudentTasks from './components/studentTasks/StudentTasks';
 import StudentDoneTasks from './components/studentDoneTasks/StudentDoneTasks';
 import StudentTasksTrack from './components/studentTasksTrack/StudentTasksTrack';
+import StudentsForm from './components/forms/StudentsForm'
 import LoginPage from './components/forms/LoginPage';
-import StudentsForm from './components/forms/StudentsForm';
 import storage, { Roles as ROLES } from './Storage';
 
 const {Provider, Consumer} = React.createContext('white');
@@ -38,7 +38,6 @@ class App extends React.Component {
 
   render() {
     const { students } = this.state;
-
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -69,7 +68,7 @@ class App extends React.Component {
           </div>
       </Provider>      
       );
-    }
+   }
     if (this.state.role === ROLES.MENTOR) {
       return (
         <Provider value={this.state.theme}>
