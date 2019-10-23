@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
         case 'ADD_ALL_USERS': 
             return state.concat(action.students);
         case 'ADD_USER': 
-            return [...state, action.student]
+            return [...state, action.student];
         case 'DEL_USER': 
             return state.filter((item) => item.id !== action.studentId);
         case 'EDIT_USER': 

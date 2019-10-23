@@ -12,6 +12,11 @@ import axios from 'axios';
 import { icons } from '../../styles/icons'
 
 class AllStudents extends React.Component {
+  componentDidMount() {
+    if(this.props.students.length === 0) {
+      return this.props.addStudents();
+    }
+  }
   render() {
     const students = this.props.students;
     if (!students || students.length === 0) {
@@ -59,7 +64,7 @@ class AllStudents extends React.Component {
               className='btn btn-outline-primary'
               icon={icons.editIcon}
               name='Edit'>
-              <StudentsForm setNewStudent={this.props.editStudent} id={student.id}/>
+              <StudentsForm setNewStudent={this.props.editStudent} id={student.UserId}/>
             </Popup>
             <Popup 
               className='btn btn-outline-danger'
@@ -115,6 +120,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addStudents: () => {
+      const asyncGetStudents = () => {
+          return (dispatch) => {
+            axios
+            .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+            .then((response) => {
+              dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+      }
+      dispatch(asyncGetStudents());
+    },    
     addStudent: (newStudent) => {
       const asyncAddStudent = () => {
           return (dispatch) => {

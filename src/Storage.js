@@ -25,7 +25,7 @@ class Storage {
     return data.findIndex((item) => item.id === id);
   }
 
-  getStudents() {
+  getStudentsLocal() {
     return this.getValues('students');
   }
 
@@ -33,7 +33,7 @@ class Storage {
     this.setValues('students', students);
   }
 
-  getStudent(id) {
+  getStudentLocal(id) {
     const students = this.getStudents();
 
     return students ? students.find((student) => student.id === id) : null;
@@ -72,7 +72,7 @@ class Storage {
     this.setStudents(students);
   }
 
-  getTasks() {
+  getTasksLocal() {
     return this.getValues('tasks');
   }
 
@@ -124,7 +124,6 @@ class Storage {
   //     .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
   //     .then((response) => {
   //       console.log(response.data)
-  //       this.props.dispatch({ type: 'ADD_ALL_USERS', students: response.data });
   //       this.setValues('students', response.data);
   //     })
   //     .catch((error) => {
@@ -132,94 +131,48 @@ class Storage {
   //     });
   // }
 
-  postStudents({
-    id,
-    name,
-    lastName,
-    email,
-    sex,
-    education,
-    birthDate,
-    universityAverageScore,
-    mathScore,
-    address,
-    mobilePhone,
-    skype,
-    startDate,
-  }) {
-    let memberProfile = {
-      id: id,
-      Name: name,
-      LastName: lastName,
-      Email: email,
-      Sex: sex,
-      Education: education,
-      BirthDate: birthDate,
-      UniversityAverageScore: universityAverageScore,
-      MathScore: mathScore,
-      Address: address,
-      MobilePhone: mobilePhone,
-      Skype: skype,
-      StartDate: startDate,
-    };
-
-    const config = {
-      method: 'post',
-      url: `${process.env.REACT_APP_BASE_URL}api/member-profile`,
-      data: memberProfile,
-    };
-
-    axios(config)
+  getStudent(id) {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`)
       .then((response) => {
-        const students = response.data;
-        this.setValues('students', students);
+        console.log(response.data)
+        return response.data;
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  postStudent(student) {
+    const config = {
+      method: 'post',
+      url: `${process.env.REACT_APP_BASE_URL}api/member-profile`,
+      data: student,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  
   __deleteStudent(props) {
     axios.delete({
       url: `/api/member-profile/${props.id}`,
     });
   }
 
-  editStudent({
-    id,
-    name,
-    lastName,
-    email,
-    sex,
-    education,
-    birthDate,
-    universityAverageScore,
-    mathScore,
-    address,
-    mobilePhone,
-    skype,
-    startDate,
-  }) {
-    const memberProfile = {
-      id,
-      Name: name,
-      LastName: lastName,
-      Email: email,
-      Sex: sex,
-      Education: education,
-      BirthDate: birthDate,
-      UniversityAverageScore: universityAverageScore,
-      MathScore: mathScore,
-      Address: address,
-      MobilePhone: mobilePhone,
-      Skype: skype,
-      StartDate: startDate,
-    };
+  editStudent(id) {
     axios
       .put({
         method: 'post',
         url: `${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`,
-        data: { memberProfile },
+        data: { id },
       })
       .then((response) => {
         const student = response.data;
@@ -244,7 +197,19 @@ class Storage {
         console.log(error);
       });
   }
+
+
+  getTasks() {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}api/tasks`)
+      .then((response) => {console.log(response.data)})
+      .catch((error) => {console.log(error)});
+  };
+
+
 }
+
+
 
 const storage = new Storage();
 

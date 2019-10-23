@@ -2,8 +2,6 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import './style.css';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import { connect } from 'react-redux'
-import axios from 'axios';
 import { icons } from '../../styles/icons'
 
 
@@ -25,7 +23,6 @@ class LoginPage extends React.Component {
   handleSubmit = (e) => {
     e.persist();
     this.props.auth(this.state);
-    this.props.addStudents();
   }
 
   clearForm = () => {
@@ -49,44 +46,15 @@ class LoginPage extends React.Component {
               required: {value: true, errorMessage: 'Please enter password'},
               minLength: {value: 3, errorMessage: 'Your password must be between 3 and 16 characters'},
               maxLength: {value: 16, errorMessage: 'Your password must be between 3 and 16 characters'}
+              //add rules
             }} />
           </AvGroup>
           <Button outline type='submit' color="success" block>{icons.submitIcon} LogIn</Button>
-          <Button outline onClick={this.clearForm} color="danger" block> {icons.cancelIcon} Clear</Button>
+          {/* <Button outline onClick={this.clearForm} color="danger" block> {icons.cancelIcon} Register</Button> */}
         </AvForm>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    students: state.studentsState
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addStudents: () => {
-      const asyncGetStudents = () => {
-          return (dispatch) => {
-            
-            axios
-            .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-            .then((response) => {
-              dispatch({ type: 'ADD_ALL_USERS', students: response.data });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }
-      }
-      dispatch(asyncGetStudents());
-    }    
-  }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LoginPage);
+export default LoginPage;
