@@ -1,6 +1,11 @@
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import Colors from './COLORS'
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+import Colors from './colors';
 import PropTypes from 'prop-types';
 
 class ThemeSwitcher extends React.Component {
@@ -16,25 +21,36 @@ class ThemeSwitcher extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
-    if(this.state.dropdownOpen) {
-      this.props.handleTheme(e.target.value)
+    if (this.state.dropdownOpen) {
+      this.props.handleTheme(e.target.value);
     }
-  }
+  };
 
   render() {
     return (
-      <Dropdown className = {'btn__header'} isOpen={this.state.dropdownOpen} toggle={this.toggle} onClick={this.toggle}>
+      <Dropdown
+        className={'btn__header'}
+        isOpen={this.state.dropdownOpen}
+        toggle={this.toggle}
+        onClick={this.toggle}
+      >
         <DropdownToggle
-          tag="span"
-          data-toggle="dropdown"
+          tag='span'
+          data-toggle='dropdown'
           aria-expanded={this.state.dropdownOpen}
         >
           Theme
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem value={Colors.WHITE} onClick={this.toggle} >White</DropdownItem>
-          <DropdownItem value={Colors.BLACK} onClick={this.toggle} >Black</DropdownItem>
-          <DropdownItem value={Colors.GREEN} onClick={this.toggle} >Green</DropdownItem>
+          <DropdownItem value={Colors.WHITE} onClick={this.toggle}>
+            White
+          </DropdownItem>
+          <DropdownItem value={Colors.BLACK} onClick={this.toggle}>
+            Black
+          </DropdownItem>
+          <DropdownItem value={Colors.GREEN} onClick={this.toggle}>
+            Green
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );
@@ -44,5 +60,5 @@ class ThemeSwitcher extends React.Component {
 export default ThemeSwitcher;
 
 ThemeSwitcher.propTypes = {
-  handleTheme: PropTypes.func
+  handleTheme: PropTypes.func,
 };

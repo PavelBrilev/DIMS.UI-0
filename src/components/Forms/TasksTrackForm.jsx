@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../storage';
-import PropTypes from 'prop-types';
 import { icons } from '../../styles/icons';
 
 class TasksTrackForm extends React.Component {

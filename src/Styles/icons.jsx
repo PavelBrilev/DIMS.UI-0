@@ -1,4 +1,4 @@
-import React from './node_modules/react';
+import React from 'react';
 import {
   MdDeleteForever,
   MdSend,
@@ -7,7 +7,7 @@ import {
   MdAddCircleOutline,
   MdList,
   MdEqualizer,
-} from './node_modules/react-icons/md';
+} from 'react-icons/md';
 
 export const icons = {
   deleteIcon: <MdDeleteForever />,
