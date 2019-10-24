@@ -8,14 +8,7 @@ import { icons } from '../../styles/icons'
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      UserId: '',
-      FullName: '',
-      Direction: '',
-      Education: '',
-      Start: '',
-      Age: '',
-    };
+    this.state = { };
   }
 
   componentDidMount() {
@@ -33,8 +26,8 @@ class StudentsForm extends React.Component {
 
   handleSubmit = (e) => {
     const { setNewStudent, toggle } = this.props;
-    e.preventDefault();
-    storage.saveStudent(this.state);
+    e.persist();
+    storage.postStudent(this.state);
     setNewStudent(this.state);
     toggle();
   };
@@ -44,10 +37,10 @@ class StudentsForm extends React.Component {
       <AvForm onValidSubmit={this.handleSubmit}>
         <AvGroup>
           <AvField
-            name='FullName'
+            name='Name'
             type='text'
             label='Full Name'
-            value={this.state.FullName}
+            value={this.state.Name}
             onChange={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Please enter a name' },
@@ -65,9 +58,9 @@ class StudentsForm extends React.Component {
         <AvGroup>
           <AvField
             type='text'
-            name='lastName'
+            name='LastName'
             label='Last name'
-            value={this.state.lastName}
+            value={this.state.LastName}
             onChange={this.handleChange}
              /* validate={{
                required: {
@@ -90,9 +83,9 @@ class StudentsForm extends React.Component {
         <AvGroup>
           <AvField
             type='text'
-            name='password'
-            label='Password'
-            value={this.state.password}
+            name='Email'
+            label='Email'
+            value={this.state.Email}
             onChange={this.handleChange}
              /* validate={{
                required: {
@@ -113,34 +106,16 @@ class StudentsForm extends React.Component {
           />
         </AvGroup>
         <FormGroup>
-          <Label for='role'>Role</Label>
+          <Label for='sex'>Sex</Label>
           <Input
             type='select'
-            name='role'
-            id='role'
-            value={this.state.role}
+            name='Sex'
+            id='sex'
+            value={this.state.Sex}
             onChange={this.handleChange}
           >
-            <option value='#'>Role</option>
-            <option value='admin'>Admin</option>
-            <option value='mentor'>Mentor</option>
-            <option value='student'>Student</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for='direction'>Direction</Label>
-          <Input
-            type='select'
-            name='Direction'
-            id='direction'
-            value={this.state.Direction}
-            onChange={this.handleChange}
-          >
-            <option value='#'>Direction</option>
-            <option value='Java'>Java</option>
-            <option value='JavaScript'>JavaScript</option>
-            <option value='.NET'>.NET</option>
-            <option value='SalesForce'>SalesForce</option>
+            <option value='Man'>Man</option>
+            <option value='Woman'>Woman</option>
           </Input>
         </FormGroup>
         <AvGroup>
@@ -159,10 +134,10 @@ class StudentsForm extends React.Component {
         </AvGroup>
         <AvGroup>
           <AvField
-            name='StartDate'
-            label='Start date:'
+            name='BirthDate'
+            label='Birth Date:'
             type='text'
-            value={this.state.StartDate}
+            value={this.state.BirthDate}
             onChange={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
@@ -174,15 +149,86 @@ class StudentsForm extends React.Component {
         </AvGroup>
         <AvGroup>
           <AvField
-            name='Age'
-            label='Age'
+            name='UniversityAverageScore'
+            label='University average score'
             type='number'
-            value={this.state.Age}
+            value={this.state.UniversityAverageScore}
             onChange={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Enter education' },
             //   min: { value: 18, errorMessage: 'Must be more than 18' },
             //   max: { value: 99, errorMessage: 'Must be less than 18' },
+            // }}
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            name='MathScore'
+            label='Math score'
+            type='number'
+            value={this.state.MathScore}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true, errorMessage: 'Enter education' },
+            //   min: { value: 18, errorMessage: 'Must be more than 18' },
+            //   max: { value: 99, errorMessage: 'Must be less than 18' },
+            // }}
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            name='Address'
+            type='text'
+            label='Address'
+            errorMessage='Enter Address'
+            value={this.state.Address}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true },
+            //   pattern: { value: '^[A-Za-z0-9]+$' },
+            // }}
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            name='MobilePhone'
+            type='text'
+            label='MobilePhone'
+            errorMessage='Enter Mobile Phone'
+            value={this.state.MobilePhone}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true },
+            //   pattern: { value: '^[A-Za-z0-9]+$' },
+            // }}
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            name='Skype'
+            type='text'
+            label='Skype'
+            errorMessage='Enter Skype'
+            value={this.state.Skype}
+            onChange={this.handleChange}
+            // validate={{
+            //   required: { value: true },
+            //   pattern: { value: '^[A-Za-z0-9]+$' },
+            // }}
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            name='StartDate'
+            label='Start Date:'
+            type='text'
+            value={this.state.StartDate}
+            onChange={this.handleChange}
+            errorMessage='Enter start date'
+            title='Use MM/DD/YYYY'
+            // validate={{
+            //   required: { value: true },
+            //   date: { format: 'MM/DD/YYYY' },
             // }}
           />
         </AvGroup>

@@ -19,7 +19,7 @@ class App extends React.Component {
     this.state = {};
   }
   componentDidMount() {
-    const students = storage.getStudents();
+    const students = storage.getStudentsLocal();
     this.setState({ students });
   }
 

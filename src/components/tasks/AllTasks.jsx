@@ -20,7 +20,7 @@ const ItemTypes = {
 const style = {
   padding: '0.5rem 1rem',
   marginBottom: '.5rem',
-  cursor: 'move',
+  cursor: 'grab',
 }
 
 const Task = ({ id, task, index, moveTask, setTasks, tasks }) => {
