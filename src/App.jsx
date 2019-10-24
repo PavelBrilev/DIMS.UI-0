@@ -17,8 +17,12 @@ const { Provider, Consumer } = React.createContext('white');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      role: ROLES.ADMIN,
+      theme: '',
+    };
   }
+
   componentDidMount() {
     const students = storage.getStudentsLocal();
     this.setState({ students });
@@ -39,13 +43,7 @@ class App extends React.Component {
 
   render() {
     const { students } = this.state;
-    if (!students || students.length === 0) {
-      return (
-        <div className='container'>
-          <StudentsForm />
-        </div>
-      );
-    }
+
     if (this.state.role === ROLES.ADMIN) {
       return (
         <Provider value={this.state.theme}>

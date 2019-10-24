@@ -6,6 +6,9 @@
     "plugin:jsx-a11y/recommended"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "import/prefer-default-export": "off",
+    "arrow-body-style": ["error", "always"],
+    "eslint arrow-parens": ["error", "always"]
   }
 }

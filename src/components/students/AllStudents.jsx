@@ -1,25 +1,28 @@
 import React from 'react';
-import Popup from '../popup/Popup';
-import StudentsForm from '../forms/StudentsForm';
-import DeleteForm from '../forms/DeleteForm';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../../styles/styles.css';
 import { Table } from 'reactstrap';
-import { Consumer } from '../../App';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import StudentsForm from '../forms/StudentsForm';
+import DeleteForm from '../forms/DeleteForm';
+import { Consumer } from '../../App';
+import Popup from '../popup/Popup';
 import { icons } from '../../styles/icons';
+import { addStudent } from '../../redusers/actions';
+
+import '../../styles/styles.css';
 
 class AllStudents extends React.Component {
   componentDidMount() {
-    if (this.props.students.length === 0) {
+    if (!this.props.students.length) {
       return this.props.addStudents();
     }
   }
+
   render() {
-    const students = this.props.students;
-    if (!students || students.length === 0) {
+    const { students } = this.props;
+    if (!students || !students.length) {
       return (
         <div className='container'>
           <Popup
@@ -27,68 +30,67 @@ class AllStudents extends React.Component {
             icon={icons.create}
             name='Register'
           >
-            <StudentsForm setNewStudent={this.props.addStudent} />
+            <StudentsForm setNewStudent={this.props.dispatch(addStudent)} />
           </Popup>
           <p className='text'>No registered</p>
         </div>
       );
     }
 
-    const listItems = students.map((student) => {
-      return (
-        <tr key={students.indexOf(student)}>
-          <td>{students.indexOf(student) + 1}</td>
-          <td>{student.FullName} </td>
-          <td>{student.Direction} </td>
-          <td>{student.Education} </td>
-          <td>{student.StartDate} </td>
-          <td>{student.Age} </td>
-          <td>
-            <Link
-              key={`${student.id}-1`}
-              className='btn btn-outline-primary'
-              to={{ pathname: `/students/${student.id}/doneTasks` }}
-            >
-              {icons.progressIcon}
-              Progress
-            </Link>
-            <Link
-              key={`${student.id}-2`}
-              className='btn btn-outline-primary'
-              to={{ pathname: `/students/${student.id}/tasks` }}
-            >
-              {icons.tasksIcon}
-              Tasks
-            </Link>
-            <Popup
-              key={`${student.id}-3`}
-              className='btn btn-outline-primary'
-              icon={icons.editIcon}
-              name='Edit'
-            >
-              <StudentsForm
-                setNewStudent={this.props.editStudent}
-                id={student.UserId}
-              />
-            </Popup>
-            <Popup
-              className='btn btn-outline-danger'
-              icon={icons.deleteIcon}
-              name='Delete'
-              id={student.id}
-              key={`${student.id}-4`}
-            >
-              <DeleteForm
-                type='students'
-                setNewState={this.props.delStudent}
-                id={student.UserId}
-                name={student.FullName}
-              />
-            </Popup>
-          </td>
-        </tr>
-      );
-    });
+    const listItems = students.map((student) => (
+      <tr key={students.indexOf(student)}>
+        <td>{students.indexOf(student) + 1}</td>
+        <td>{student.FullName} </td>
+        <td>{student.Direction} </td>
+        <td>{student.Education} </td>
+        <td>{student.StartDate} </td>
+        <td>{student.Age} </td>
+        <td>
+          <Link
+            key={`${student.id}-1`}
+            className='btn btn-outline-primary'
+            to={{ pathname: `/students/${student.id}/doneTasks` }}
+          >
+            {icons.progressIcon}
+            Progress
+          </Link>
+          <Link
+            key={`${student.id}-2`}
+            className='btn btn-outline-primary'
+            to={{ pathname: `/students/${student.id}/tasks` }}
+          >
+            {icons.tasksIcon}
+            Tasks
+          </Link>
+          <Popup
+            key={`${student.id}-3`}
+            className='btn btn-outline-primary'
+            icon={icons.editIcon}
+            name='Edit'
+          >
+            <StudentsForm
+              setNewStudent={this.props.editStudent}
+              id={student.UserId}
+            />
+          </Popup>
+          <Popup
+            className='btn btn-outline-danger'
+            icon={icons.deleteIcon}
+            name='Delete'
+            id={student.id}
+            key={`${student.id}-4`}
+          >
+            <DeleteForm
+              type='students'
+              setNewState={this.props.delStudent}
+              id={student.UserId}
+              name={student.FullName}
+            />
+          </Popup>
+        </td>
+      </tr>
+    ));
+
     return (
       <div className='container'>
         <Popup
@@ -96,7 +98,9 @@ class AllStudents extends React.Component {
           icon={icons.create}
           name='Register'
         >
-          <StudentsForm setNewStudent={this.props.addStudent} />
+          <StudentsForm
+            setNewStudent={(data) => this.props.dispatch(addStudent(data))}
+          />
         </Popup>
         <Consumer>
           {(theme) => (
@@ -109,7 +113,7 @@ class AllStudents extends React.Component {
                   <th>Education</th>
                   <th>Start</th>
                   <th>Age</th>
-                  <th></th>
+                  <th />
                 </tr>
               </thead>
               <tbody>{listItems}</tbody>
@@ -121,61 +125,43 @@ class AllStudents extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    students: state.studentsState,
-  };
-};
+const mapStateToProps = (state) => ({
+  students: state.studentsState,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addStudents: () => {
-      const asyncGetStudents = () => {
-        return (dispatch) => {
-          axios
-            .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-            .then((response) => {
-              dispatch({ type: 'ADD_ALL_USERS', students: response.data });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        };
+const mapDispatchToProps = (dispatch) => ({
+  addStudents: () => {
+    const asyncGetStudents = () => {
+      return (dispatch) => {
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+          .then((response) => {
+            dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+          })
+          .catch((error) => {
+            if (error.response && error.response.data) {
+              console.log(error.response.data.ExceptionMessage);
+            }
+            console.log(`${error.message}`);
+          });
       };
-      dispatch(asyncGetStudents());
-    },
-    addStudent: (newStudent) => {
-      const asyncAddStudent = () => {
-        return (dispatch) => {
-          axios
-            .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, {
-              newStudent,
-            })
-            .then((response) => {
-              dispatch({ type: 'ADD_USER', students: response.data });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        };
-      };
-      dispatch(asyncAddStudent());
-    },
-
-    delStudent: (studentId) => {
-      dispatch({
-        type: 'DEL_USER',
-        studentId: studentId,
-      });
-    },
-    editStudent: (updatedStudent) => {
-      dispatch({
-        type: 'EDIT_USER',
-        updatedStudent: updatedStudent,
-      });
-    },
-  };
-};
+    };
+    dispatch(asyncGetStudents());
+  },
+  delStudent: (studentId) => {
+    dispatch({
+      type: 'DEL_USER',
+      studentId: studentId,
+    });
+  },
+  editStudent: (updatedStudent) => {
+    dispatch({
+      type: 'EDIT_USER',
+      updatedStudent: updatedStudent,
+    });
+  },
+  dispatch,
+});
 
 export default connect(
   mapStateToProps,
@@ -184,7 +170,6 @@ export default connect(
 
 AllStudents.propTypes = {
   students: PropTypes.array,
-  addStudent: PropTypes.func,
   delStudent: PropTypes.func,
   editStudent: PropTypes.func,
 };

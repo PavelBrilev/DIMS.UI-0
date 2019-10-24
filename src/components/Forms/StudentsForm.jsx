@@ -1,14 +1,17 @@
 import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import storage from '../../storage';
 import PropTypes from 'prop-types';
+import storage from '../../storage';
 import { icons } from '../../styles/icons';
+import { setValidationRules } from './form-validation';
 
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      Sex: 'M',
+    };
   }
 
   componentDidMount() {
@@ -27,7 +30,6 @@ class StudentsForm extends React.Component {
   handleSubmit = (e) => {
     const { setNewStudent, toggle } = this.props;
     e.persist();
-    storage.postStudent(this.state);
     setNewStudent(this.state);
     toggle();
   };
@@ -39,20 +41,10 @@ class StudentsForm extends React.Component {
           <AvField
             name='Name'
             type='text'
-            label='Full Name'
+            label='First name'
             value={this.state.Name}
             onChange={this.handleChange}
-            // validate={{
-            //   required: { value: true, errorMessage: 'Please enter a name' },
-            //   minLength: {
-            //     value: 3,
-            //     errorMessage: 'Your name must be between 3 and 16 characters',
-            //   },
-            //   maxLength: {
-            //     value: 16,
-            //     errorMessage: 'Your name must be between 3 and 16 characters',
-            //   },
-            // }}
+            // validate={validateField('First name')}
           />
         </AvGroup>
         <AvGroup>
@@ -62,22 +54,17 @@ class StudentsForm extends React.Component {
             label='Last name'
             value={this.state.LastName}
             onChange={this.handleChange}
-            /* validate={{
-               required: {
-                 value: true,
-                 errorMessage: 'Please enter a last name',
-               },
-               minLength: {
-                 value: 3,
-                 errorMessage:
-                   'Your last name must be between 3 and 16 characters',
-               },
-               maxLength: {
-                 value: 16,
-                 errorMessage:
-                   'Your last name must be between 3 and 16 characters',
-               },
-             }} */
+            /* validate={setValidationRules('Last name')} */
+          />
+        </AvGroup>
+        <AvGroup>
+          <AvField
+            type='text'
+            name='DirectionId'
+            label='Direction (React/Angular/.NET)'
+            value={this.state.DirectionId}
+            onChange={this.handleChange}
+            /* validate={setValidationRules('Direction')} */
           />
         </AvGroup>
         <AvGroup>
@@ -87,22 +74,7 @@ class StudentsForm extends React.Component {
             label='Email'
             value={this.state.Email}
             onChange={this.handleChange}
-            /* validate={{
-               required: {
-                 value: true,
-                 errorMessage: 'Please enter a password',
-               },
-               minLength: {
-                 value: 3,
-                 errorMessage:
-                   'Your last password must be between 3 and 16 characters',
-               },
-               maxLength: {
-                 value: 16,
-                 errorMessage:
-                   'Your last password must be between 3 and 16 characters',
-               },
-             }} */
+            /* validate={setValidationRules('Valid Email')} */
           />
         </AvGroup>
         <FormGroup>

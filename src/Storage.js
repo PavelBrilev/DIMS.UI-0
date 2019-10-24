@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Roles = {
   MENTOR: 'mentor',
-  ADMINT: 'admin',
+  ADMIN: 'admin',
   USER: 'student',
 };
 
