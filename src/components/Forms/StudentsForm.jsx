@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import storage from '../../Storage'
+import storage from '../../storage';
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons'
+import { icons } from '../../styles/icons';
 
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class StudentsForm extends React.Component {
             label='Last name'
             value={this.state.LastName}
             onChange={this.handleChange}
-             /* validate={{
+            /* validate={{
                required: {
                  value: true,
                  errorMessage: 'Please enter a last name',
@@ -87,7 +87,7 @@ class StudentsForm extends React.Component {
             label='Email'
             value={this.state.Email}
             onChange={this.handleChange}
-             /* validate={{
+            /* validate={{
                required: {
                  value: true,
                  errorMessage: 'Please enter a password',
@@ -233,7 +233,7 @@ class StudentsForm extends React.Component {
           />
         </AvGroup>
         <Button outline type='submit' color='success' block>
-        {icons.submitIcon} Submit
+          {icons.submitIcon} Submit
         </Button>
       </AvForm>
     );
@@ -247,8 +247,7 @@ StudentsForm.defaultProps = {
 
 export default StudentsForm;
 
-
 StudentsForm.propTypes = {
   setNewState: PropTypes.func,
-  toggle: PropTypes.func
+  toggle: PropTypes.func,
 };

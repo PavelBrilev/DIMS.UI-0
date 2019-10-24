@@ -135,7 +135,7 @@ class Storage {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {
@@ -152,15 +152,13 @@ class Storage {
 
     axios(config)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-
-  
   __deleteStudent(props) {
     axios.delete({
       url: `/api/member-profile/${props.id}`,
@@ -198,18 +196,17 @@ class Storage {
       });
   }
 
-
   getTasks() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}api/tasks`)
-      .then((response) => {console.log(response.data)})
-      .catch((error) => {console.log(error)});
-  };
-
-
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
-
-
 
 const storage = new Storage();
 
