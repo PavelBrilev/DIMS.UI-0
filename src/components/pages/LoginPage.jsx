@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import { icons } from '../../styles/icons';
-import './style.css';
+import '../../styles/styles.css';
 
 class LoginPage extends React.Component {
   constructor(props) {

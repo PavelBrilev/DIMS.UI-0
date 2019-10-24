@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher';
 import { Consumer } from '../../App';
-import logo from './human1.png';
+import logo from '../../assets/human1.png';
 import '../../styles/styles.css';
 
 class Header extends React.Component {
