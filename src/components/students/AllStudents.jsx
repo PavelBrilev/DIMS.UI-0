@@ -10,6 +10,7 @@ import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
 import { icons } from '../../styles/icons';
 import { addStudent } from '../../redusers/actions';
+import { FETCH_USERS } from '../../redusers/ationTypes';
 
 import '../../styles/styles.css';
 
@@ -126,7 +127,9 @@ class AllStudents extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  students: state.studentsState,
+  students: state.studentsState.students,
+  message: state.studentsState.message,
+  errors: state.studentsState.errors,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -136,7 +139,7 @@ const mapDispatchToProps = (dispatch) => ({
         axios
           .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
           .then((response) => {
-            dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+            dispatch({ type: FETCH_USERS, students: response.data });
           })
           .catch((error) => {
             if (error.response && error.response.data) {
