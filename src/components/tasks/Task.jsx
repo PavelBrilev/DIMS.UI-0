@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 // import HTML5Backend from 'react-dnd-html5-backend';
-import { useDrag, useDrop } from 'react-dnd';
+// import { useDrag, useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
@@ -16,42 +16,47 @@ const style = {
 
 const Task = ({ id, task, index, moveTask, setTasks, tasks }) => {
   const ref = useRef(null);
-  const [, drop] = useDrop({
-    accept: ItemTypes.TASK,
-    hover(item, monitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      moveTask(dragIndex, hoverIndex);
-      item.index = hoverIndex;
-    },
-  });
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.TASK, id, index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-  const opacity = isDragging ? 0.3 : 1;
-  drag(drop(ref));
+
+  // const [, drop] = useDrop({
+  //   accept: ItemTypes.TASK,
+  //   hover(item, monitor) {
+  //     if (!ref.current) {
+  //       return;
+  //     }
+  //     const dragIndex = item.index;
+  //     const hoverIndex = index;
+  //     if (dragIndex === hoverIndex) {
+  //       return;
+  //     }
+  //     const hoverBoundingRect = ref.current.getBoundingClientRect();
+  //     const hoverMiddleY =
+  //       (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+  //     const clientOffset = monitor.getClientOffset();
+  //     const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+  //     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+  //       return;
+  //     }
+  //     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+  //       return;
+  //     }
+  //     moveTask(dragIndex, hoverIndex);
+  //     item.index = hoverIndex;
+  //   },
+  // });
+
+  // const [{ isDragging }, drag] = useDrag({
+  //   item: { type: ItemTypes.TASK, id, index },
+  //   collect: (monitor) => ({
+  //     isDragging: monitor.isDragging(),
+  //   }),
+  // });
+
+  // const opacity = isDragging ? 0.3 : 1;
+
+  // drag(drop(ref));
+
   return (
-    <tr key={task.id} ref={ref} style={{ ...style, opacity }}>
+    <tr key={task.id} ref={ref} style={{ ...style }}>
       <td>{task.id}</td>
       <td>{task.taskName}</td>
       <td>{task.start}</td>
