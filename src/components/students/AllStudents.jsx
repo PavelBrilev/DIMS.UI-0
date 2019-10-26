@@ -8,7 +8,7 @@ import StudentsForm from '../forms/StudentsForm';
 import DeleteForm from '../forms/DeleteForm';
 import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
-import { icons } from '../icons';
+import { icons } from '../common/icons';
 import { addStudent } from '../../redusers/actions';
 import { FETCH_USERS } from '../../redusers/ationTypes';
 
