@@ -1,24 +1,28 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import storage from '../../storage';
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons';
+import storage from '../../storage';
+import { icons } from '../common/icons';
 
 class DeleteForm extends React.Component {
   handleDelete = () => {
-    if (this.props.type === 'students') {
-      storage.deleteStudent(parseInt(this.props.id));
-    } else if (this.props.type === 'task') {
-      storage.deleteTask(parseInt(this.props.id));
+    const { type, id, setNewState, toggle } = this.props;
+
+    if (type === 'students') {
+      storage.deleteStudent(parseInt(id, 10));
+    } else if (type === 'task') {
+      storage.deleteTask(parseInt(id, 10));
     }
-    this.props.setNewState(this.props.id);
-    this.props.toggle();
+    setNewState(id);
+    toggle();
   };
 
   render() {
+    const { name } = this.props;
+
     return (
       <div>
-        <p> Delete {this.props.name} ? </p>
+        <p>{`Delete ${name}?`}</p>
         <Button
           outline
           type='button'
@@ -26,7 +30,7 @@ class DeleteForm extends React.Component {
           onClick={this.handleDelete}
           block
         >
-          {icons.deleteIcon} Delete
+          {`${icons.deleteIcon} Delete`}
         </Button>
       </div>
     );
@@ -36,9 +40,14 @@ class DeleteForm extends React.Component {
 export default DeleteForm;
 
 DeleteForm.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   setNewState: PropTypes.func,
   toggle: PropTypes.func,
+};
+
+DeleteForm.defaultProps = {
+  setNewState: () => {},
+  toggle: () => {},
 };

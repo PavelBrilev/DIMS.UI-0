@@ -5,7 +5,7 @@ import Popup from '../popup/Popup';
 import TasksTrackForm from '../forms/TasksTrackForm';
 import '../../styles/styles.css';
 import { Consumer } from '../../App';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 
 class StudentTasks extends React.Component {
   constructor(props) {
@@ -26,10 +26,10 @@ class StudentTasks extends React.Component {
     const listItems = tasksList.map((task) => (
       <tr key={task.id}>
         <td>{tasksList.indexOf(task) + 1}</td>
-        <td>{task.taskName} </td>
-        <td>{task.start} </td>
-        <td>{task.deadline} </td>
-        <td>{task.status} </td>
+        <td>{task.taskName}</td>
+        <td>{task.start}</td>
+        <td>{task.deadline}</td>
+        <td>{task.status}</td>
         <td>
           <Popup key={`${task.id}-1`} icon={icons.editIcon} name='Edit'>
             <TasksTrackForm setNewTasks={this.handleClick} id={task.id} />
@@ -37,11 +37,12 @@ class StudentTasks extends React.Component {
         </td>
         <td>
           <Button key={`${task.id}-1`} outline color='success'>
-            {' '}
-            {icons.doneIcon} Success
+            {icons.doneIcon}
+            Success
           </Button>
           <Button key={`${task.id}-2`} outline color='danger'>
-            {icons.cancelIcon} Fail
+            {icons.cancelIcon}
+            Fail
           </Button>
         </td>
       </tr>
@@ -49,7 +50,10 @@ class StudentTasks extends React.Component {
 
     return (
       <div className='container'>
-        <h5> Hi, dear {student.name}! This is your current tasks:</h5>
+        <h5>
+          Hi, dear
+          {student.name}! This is your current tasks:
+        </h5>
         <Consumer>
           {(theme) => (
             <Table hover id={`${theme}`}>
@@ -60,8 +64,8 @@ class StudentTasks extends React.Component {
                   <th>Start</th>
                   <th>Deadline</th>
                   <th>Status</th>
-                  <th></th>
-                  <th></th>
+                  <th />
+                  <th />
                 </tr>
               </thead>
               <tbody>{listItems}</tbody>

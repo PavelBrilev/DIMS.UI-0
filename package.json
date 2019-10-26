@@ -1,28 +1,28 @@
 {
   "name": "dims.ui",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "availity-reactstrap-validation": "^2.6.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "husky": "^3.0.1",
+    "husky": "^3.0.9",
     "immutability-helper": "^3.0.1",
-    "lint-staged": "^9.2.1",
-    "pretty-quick": "^1.11.1",
+    "lint-staged": "^9.4.2",
+    "pretty-quick": "^2.0.0",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
+    "react": "^16.11.0",
     "react-calendar": "^2.19.2",
-    "react-datepicker": "^2.8.0",
+    "react-datepicker": "^2.9.6",
     "react-dnd": "^9.4.0",
     "react-dnd-html5-backend": "^9.4.0",
-    "react-dom": "^16.9.0",
-    "react-hook-form": "^3.24.1",
-    "react-icons": "^3.7.0",
+    "react-dom": "^16.11.0",
+    "react-hook-form": "^3.26.1",
+    "react-icons": "^3.8.0",
     "react-redux": "^7.1.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "reactstrap": "^8.0.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "reactstrap": "^8.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },
@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "precommit": "pretty-quick --staged && prettier --check src/**/*.js",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,9 +50,10 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
     "prettier": "^1.18.2"
   }
 }

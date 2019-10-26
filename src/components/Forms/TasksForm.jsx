@@ -3,7 +3,7 @@ import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../storage';
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 
 class TasksForm extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import PropTypes from 'prop-types';
 import storage from '../../storage';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 import { setValidationRules } from './form-validation';
 
 class StudentsForm extends React.Component {
