@@ -5,7 +5,7 @@ import TasksTrackForm from '../forms/TasksTrackForm';
 import { Table, Button } from 'reactstrap';
 import { Consumer } from '../../App';
 import '../../styles/styles.css';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 
 class StudentTasksTrack extends React.Component {
   constructor(props) {

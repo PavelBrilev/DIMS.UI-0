@@ -8,8 +8,8 @@ import storage from '../../storage';
 import StudentsForm from '../forms/StudentsForm';
 import DeleteForm from '../Forms/DeleteForm';
 import { Consumer } from '../../App';
-import Popup from '../Popup/Popup';
-import { icons } from '../../styles/icons';
+import Popup from '../popup/Popup';
+import { icons } from '../icons';
 import { addStudent } from '../../redusers/actions';
 import { FETCH_USERS } from '../../redusers/ationTypes';
 
@@ -42,11 +42,11 @@ class AllStudents extends React.Component {
     const listItems = students.map((student) => (
       <tr key={students.indexOf(student)}>
         <td>{students.indexOf(student) + 1}</td>
-        <td>{student.FullName} </td>
-        <td>{student.Direction} </td>
-        <td>{student.Education} </td>
-        <td>{student.StartDate} </td>
-        <td>{student.Age} </td>
+        <td>{student.FullName}</td>
+        <td>{student.Direction}</td>
+        <td>{student.Education}</td>
+        <td>{student.StartDate}</td>
+        <td>{student.Age}</td>
         <td>
           <Link
             key={`${student.id}-1`}

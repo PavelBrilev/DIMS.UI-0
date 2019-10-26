@@ -4,7 +4,7 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage'
 import PropTypes from 'prop-types';
 import storage from '../../storage';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 import { setValidationRules } from './form-validation';
 
 class StudentsForm extends React.Component {

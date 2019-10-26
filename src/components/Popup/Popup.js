@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons';
+import { icons } from '../common/icons';
 
 class Popup extends React.Component {
   constructor(props) {

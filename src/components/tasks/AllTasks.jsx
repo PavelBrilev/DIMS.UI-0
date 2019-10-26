@@ -1,16 +1,15 @@
 import React, { useRef, useState, useCallback } from 'react';
-import Popup from '../Popup/Popup';
-import TasksForm from '../Forms/TasksForm';
-import DeleteForm from '../Forms/DeleteForm';
-import '../../styles/styles.css';
 import { Table } from 'reactstrap';
-import { Consumer } from '../../App';
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons';
-import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { useDrag, useDrop } from 'react-dnd';
 import update from 'immutability-helper';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { useDrag, useDrop, DndProvider } from 'react-dnd';
+import Popup from '../popup/Popup';
+import TasksForm from '../forms/TasksForm';
+import DeleteForm from '../forms/DeleteForm';
+import '../../styles/styles.css';
+import { Consumer } from '../../App';
+import { icons } from '../common/icons';
 import storage from '../../storage';
 
 const ItemTypes = {
@@ -143,35 +142,34 @@ const AllTasks = () => {
         </div>
       </DndProvider>
     );
-  } else {
-    return (
-      <DndProvider backend={HTML5Backend}>
-        <div className='container'>
-          <Popup name='Create'>
-            <TasksForm setNewTasks={(task) => setTasks(tasks.concat(task))} />
-          </Popup>
-          <Consumer>
-            {(theme) => (
-              <DndProvider backend={HTML5Backend}>
-                <Table hover id={`${theme}`}>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Start</th>
-                      <th>Deadline</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>{tasks.map((task, i) => renderTask(task, i))}</tbody>
-                </Table>
-              </DndProvider>
-            )}
-          </Consumer>
-        </div>
-      </DndProvider>
-    );
   }
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div className='container'>
+        <Popup name='Create'>
+          <TasksForm setNewTasks={(task) => setTasks(tasks.concat(task))} />
+        </Popup>
+        <Consumer>
+          {(theme) => (
+            <DndProvider backend={HTML5Backend}>
+              <Table hover id={`${theme}`}>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Start</th>
+                    <th>Deadline</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>{tasks.map((task, i) => renderTask(task, i))}</tbody>
+              </Table>
+            </DndProvider>
+          )}
+        </Consumer>
+      </div>
+    </DndProvider>
+  );
 };
 
 export default AllTasks;
