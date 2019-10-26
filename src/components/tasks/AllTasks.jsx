@@ -1,9 +1,9 @@
 import React, { useRef, useState, useCallback } from 'react';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { Table } from 'reactstrap';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';
