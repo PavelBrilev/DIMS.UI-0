@@ -9,8 +9,8 @@ import DeleteForm from '../forms/DeleteForm';
 import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
 import { icons } from '../common/icons';
-import { addStudent } from '../../redusers/actions';
-import { FETCH_USERS } from '../../redusers/ationTypes';
+import { addStudent } from '../../reducers/actions';
+import { FETCH_USERS } from '../../reducers/ationTypes';
 
 import '../../styles/styles.css';
 
