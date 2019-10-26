@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Table } from 'reactstrap';
 import storage from '../../storage';
 import Popup from '../popup/Popup';
-import TasksTrackForm from '../forms/TasksTrackForm';
+import TasksTrackForm from '../common/forms/tasks-track-from/TasksTrackForm';
 import '../../styles/styles.css';
 import { Consumer } from '../../App';
 import { icons } from '../common/icons';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import storage from '../../storage';
-import { icons } from '../common/icons';
+import storage from '../../../../storage';
+import { icons } from '../../icons';
 
 class DeleteForm extends React.Component {
   handleDelete = () => {

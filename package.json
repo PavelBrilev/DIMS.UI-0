@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "precommit": "pretty-quick --staged && prettier --check src/**/*.js",
     "lint": "eslint .",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "coveralls": "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "eslintConfig": {
     "extends": "react-app"
