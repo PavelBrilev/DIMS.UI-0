@@ -41,7 +41,6 @@ class StudentTasks extends React.Component {
             {icons.doneIcon} Success
           </Button>
           <Button key={`${task.id}-2`} outline color='danger'>
-            {' '}
             {icons.cancelIcon} Fail
           </Button>
         </td>
