@@ -21,7 +21,7 @@ class Popup extends React.Component {
     return (
       <>
         <Button outline className={this.props.className} color="primary" onClick={this.toggle}>{this.props.icon} {this.props.name}</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+        <Modal size='l' isOpen={this.state.modal} toggle={this.toggle} >
           <ModalBody>
             {React.Children.map(this.props.children, child => React.cloneElement(child, { toggle: this.toggle })) }
           </ModalBody>

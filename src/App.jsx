@@ -37,7 +37,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { students } = this.state;
+    const { students, role } = this.state;
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -45,7 +45,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.role === ROLES.ADMIN) {
+    if (role === ROLES.ADMIN) {
       return (
       <Provider value={this.state.theme}>
         <div className={this.state.theme}>
@@ -69,7 +69,7 @@ class App extends React.Component {
       </Provider>      
       );
    }
-    if (this.state.role === ROLES.MENTOR) {
+    if (role === ROLES.MENTOR) {
       return (
         <Provider value={this.state.theme}>
         <div className={this.state.theme}>
@@ -91,7 +91,7 @@ class App extends React.Component {
         </Provider>
       );
     }
-    if (this.state.role === ROLES.STUDENT) {
+    if (role === ROLES.STUDENT) {
       return (
         <Provider value={this.state.theme}>
         <div className={this.state.theme}>

@@ -8,8 +8,8 @@ import { Table } from 'reactstrap';
 import { Consumer } from '../../App';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { icons } from '../../styles/icons'
+import storage from '../../Storage';
 
 class AllStudents extends React.Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class AllStudents extends React.Component {
     }
   }
   render() {
-    const students = this.props.students;
+    const {students} = this.props;
     if (!students || students.length === 0) {
       return (
         <div className='container'>
@@ -121,35 +121,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addStudents: () => {
-      const asyncGetStudents = () => {
-          return (dispatch) => {
-            axios
-            .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-            .then((response) => {
-              dispatch({ type: 'ADD_ALL_USERS', students: response.data });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }
-      }
-      dispatch(asyncGetStudents());
+      dispatch(storage.getStudents());
     },    
     addStudent: (newStudent) => {
-      const asyncAddStudent = () => {
-          return (dispatch) => {
-            axios.post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, {newStudent})
-            .then((response) => {
-              dispatch({ type: 'ADD_USER', students: response.data });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }
-      }
-      dispatch(asyncAddStudent());
+      console.dir(newStudent)
+      dispatch(storage.addStudent(newStudent));
     },
-
     delStudent: (studentId) => {
       dispatch({
         type: 'DEL_USER',
@@ -171,7 +148,13 @@ export default connect(
 )(AllStudents);
 
 AllStudents.propTypes = {
-  students: PropTypes.array,
+  students: PropTypes.arrayOf(
+            PropTypes.shape({
+              FullName: PropTypes.string,
+              Direction: PropTypes.string,
+              Education: PropTypes.string,
+              StartDate: PropTypes.string,
+              Age: PropTypes.number })),
   addStudent: PropTypes.func,
   delStudent: PropTypes.func,
   editStudent: PropTypes.func

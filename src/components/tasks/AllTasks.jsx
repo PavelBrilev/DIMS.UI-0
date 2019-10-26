@@ -97,7 +97,7 @@ const Task = ({ id, task, index, moveTask, setTasks, tasks }) => {
 }
 
 const AllTasks = () => {
-    const [tasks, setTasks] = useState( storage.getTasks())
+    const [tasks, setTasks] = useState(storage.getTasks())
     const moveTask = useCallback(
       (dragIndex, hoverIndex) => {
         const dragTask = tasks[dragIndex]
