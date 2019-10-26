@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 // import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
 import App from './App';
-import { reducers, studentsInitilState } from './reducers/index';
+import reducers, { studentsInitilState } from './reducers/index';
 
 // const initialState = {
 //   /*expected state goes here */
