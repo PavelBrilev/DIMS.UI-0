@@ -7,10 +7,11 @@ import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';
-import '../../styles/styles.css';
 import { Consumer } from '../../App';
 import { icons } from '../common/icons';
 import storage from '../../storage';
+
+import '../../styles/styles.css';
 
 const ItemTypes = {
   TASK: 'task',

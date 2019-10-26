@@ -1,8 +1,9 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import storage from '../../storage';
-import '../../styles/styles.css';
 import { Consumer } from '../../App';
+
+import '../../styles/styles.css';
 
 class StudentDoneTasks extends React.Component {
   render() {

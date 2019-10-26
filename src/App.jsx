@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AllStudents from './components/students/AllStudents';
 import AllTasks from './components/tasks/AllTasks';
 import Header from './components/header/Header';
-import StudentTasks from './components/studentTasks/StudentTasks';
-import StudentDoneTasks from './components/studentDoneTasks/StudentDoneTasks';
-import StudentTasksTrack from './components/studentTasksTrack/StudentTasksTrack';
+import StudentTasks from './components/student-tasks/StudentTasks';
+import StudentDoneTasks from './components/student-done-tasks/StudentDoneTasks';
+import StudentTasksTrack from './components/student-tasks-track/StudentTasksTrack';
 import LoginPage from './components/pages/LoginPage';
 import storage, { Roles as ROLES } from './storage';
 
