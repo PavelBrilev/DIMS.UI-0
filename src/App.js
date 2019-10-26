@@ -43,6 +43,10 @@ class App extends React.Component {
   render() {
     const { students } = this.state;
 
+    <h1 data-testid='header' className='app-header'>
+      DIMS React App
+    </h1>;
+
     if (this.state.role === ROLES.ADMIN) {
       return (
         <Provider value={this.state.theme}>
