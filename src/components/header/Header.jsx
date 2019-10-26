@@ -20,21 +20,17 @@ class Header extends React.Component {
             <div>
               <img src={logo} alt='Dev Incubator' />
             </div>
-            <Link to='/' className={'btn__header'}>
-              {' '}
-              LogIn{' '}
+            <Link to='/' className='btn__header'>
+              LogIn
             </Link>
-            <Link to='/students' className={'btn__header'}>
-              {' '}
-              Students{' '}
+            <Link to='/students' className='btn__header'>
+              Students
             </Link>
-            <Link to='/tasks' className={'btn__header'}>
-              {' '}
-              Tasks{' '}
+            <Link to='/tasks' className='btn__header'>
+              Tasks
             </Link>
-            <Link to='/tasksTrack' className={'btn__header'}>
-              {' '}
-              TasksTrack{' '}
+            <Link to='/tasksTrack' className='btn__header'>
+              TasksTrack
             </Link>
             <ThemeSwitcher handleTheme={this.handleTheme} />
           </div>
