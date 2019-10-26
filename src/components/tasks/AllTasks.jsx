@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
-import Popup from '../popup/Popup';
-import TasksForm from '../forms/TasksForm';
-import DeleteForm from '../forms/DeleteForm';
+import Popup from '../Popup/Popup';
+import TasksForm from '../Forms/TasksForm';
+import DeleteForm from '../Forms/DeleteForm';
 import '../../styles/styles.css';
 import { Table } from 'reactstrap';
 import { Consumer } from '../../App';

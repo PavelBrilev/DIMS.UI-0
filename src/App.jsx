@@ -96,7 +96,7 @@ class App extends React.Component {
         </Provider>
       );
     }
-    if (role === ROLES.STUDENT) {
+    if (this.state.role === ROLES.STUDENT) {
       return (
         <Provider value={this.state.theme}>
           <div className={this.state.theme}>

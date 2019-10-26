@@ -18,7 +18,7 @@ class DeleteForm extends React.Component {
   render() {
     return (
       <div>
-        <p> Delete {this.props.name} ? </p>
+        <p> {`Delete ${this.props.name}?`} </p>
         <Button
           outline
           type='button'
