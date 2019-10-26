@@ -14,5 +14,12 @@
     "react/static-property-placement": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-curly-newline": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

@@ -1,6 +1,10 @@
 <h1 align="center">Welcome to dims.ui 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=2592000" />
+
+[![Coverage Status](https://coveralls.io/repos/github/Dev-incubator/DIMS.UI-0/badge.svg?branch=dev)](https://coveralls.io/github/Dev-incubator/DIMS.UI-0?branch=dev)
+[![Build Status](https://travis-ci.org/Dev-incubator/DIMS.UI-0.svg?branch=dev)](https://travis-ci.org/Dev-incubator/DIMS.UI-0)
+
 </p>
 
 > The app was designed to monitor student performance
