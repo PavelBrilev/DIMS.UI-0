@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Roles = {
   MENTOR: 'mentor',
-  ADMINT: 'admin',
+  ADMIN: 'admin',
   USER: 'student',
 };
 
@@ -136,7 +136,7 @@ class Storage {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {
@@ -149,8 +149,7 @@ class Storage {
       axios
       .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newStudent)
       .then((response) => {
-        console.log(response.data)
-        dispatch({ type: 'ADD_USER', students: response.data });
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -195,18 +194,17 @@ class Storage {
       });
   }
 
-
   getTasks() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}api/tasks`)
-      .then((response) => {console.log(response.data)})
-      .catch((error) => {console.log(error)});
-  };
-
-
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
-
-
 
 const storage = new Storage();
 

@@ -3,7 +3,9 @@ import { Col, Row, Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import storage from '../../Storage'
 import PropTypes from 'prop-types';
-import { icons } from '../../styles/icons'
+import storage from '../../storage';
+import { icons } from '../../styles/icons';
+import { setValidationRules } from './form-validation';
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -248,8 +250,7 @@ StudentsForm.defaultProps = {
 
 export default StudentsForm;
 
-
 StudentsForm.propTypes = {
   setNewState: PropTypes.func,
-  toggle: PropTypes.func
+  toggle: PropTypes.func,
 };
