@@ -12,7 +12,7 @@ import {
  */
 test('ThemeConsumer shows default value', () => {
   const { getByText } = render(<ThemeConsumer />);
-  expect(getByText(/^Color is:/)).toHaveTextContent('Color is: Unknown');
+  expect(getByText(/^Color is:/)).toHaveTextContent('Color is:');
 });
 
 /**
@@ -52,5 +52,5 @@ test('NameProvider/Consumer shows name of character', () => {
       <ThemeConsumer />
     </ThemeProvider>,
   );
-  expect(getByText(/^My color is:/).textContent).toBe('My color is: red');
+  expect(getByText(/^Color is: /).textContent).toBe('Color is: red');
 });
