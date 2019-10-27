@@ -1,12 +1,14 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import storage from '../../storage';
-import { Consumer } from '../../App';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
 class StudentDoneTasks extends React.Component {
   render() {
+    const { Consumer } = ThemeContext;
+
     const studentId = parseInt(this.props.match.params.studentId);
     const student = storage.getStudent(studentId);
     const tasks = storage.getTasks();

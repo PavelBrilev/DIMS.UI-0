@@ -3,8 +3,8 @@ import { Table, Button } from 'reactstrap';
 import storage from '../../storage';
 import Popup from '../popup/Popup';
 import TasksTrackForm from '../common/forms/tasks-track-from/TasksTrackForm';
-import { Consumer } from '../../App';
 import { icons } from '../common/icons';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
@@ -29,6 +29,8 @@ class StudentTasksTrack extends React.Component {
   };
 
   render() {
+    const { Consumer } = ThemeContext;
+
     const { tasks } = this.state;
 
     if (!tasks || tasks.length === 0) {
