@@ -6,7 +6,7 @@ import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';
 import { icons } from '../common/icons';
-import { ItemTypes } from './item-types';
+import { ItemTypes } from '../../constants/item-types';
 
 const style = {
   padding: '0.5rem 1rem',

@@ -43,7 +43,7 @@ class StudentsForm extends React.Component {
             type='text'
             label='First name'
             value={this.state.Name}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={validateField('First name')}
           />
         </AvGroup>
@@ -53,7 +53,7 @@ class StudentsForm extends React.Component {
             name='LastName'
             label='Last name'
             value={this.state.LastName}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             /* validate={setValidationRules('Last name')} */
           />
         </AvGroup>
@@ -73,7 +73,7 @@ class StudentsForm extends React.Component {
             name='Email'
             label='Email'
             value={this.state.Email}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             /* validate={setValidationRules('Valid Email')} */
           />
         </AvGroup>
@@ -86,8 +86,8 @@ class StudentsForm extends React.Component {
             value={this.state.Sex}
             onChange={this.handleChange}
           >
-            <option value='Man'>Man</option>
-            <option value='Woman'>Woman</option>
+            <option value='M'>Man</option>
+            <option value='W'>Woman</option>
           </Input>
         </FormGroup>
         <AvGroup>
@@ -97,7 +97,7 @@ class StudentsForm extends React.Component {
             label='Education'
             errorMessage='Enter education'
             value={this.state.Education}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true },
             //   pattern: { value: '^[A-Za-z0-9]+$' },
@@ -110,7 +110,7 @@ class StudentsForm extends React.Component {
             label='Birth Date:'
             type='text'
             value={this.state.BirthDate}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
             // validate={{
@@ -125,7 +125,7 @@ class StudentsForm extends React.Component {
             label='University average score'
             type='number'
             value={this.state.UniversityAverageScore}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Enter education' },
             //   min: { value: 18, errorMessage: 'Must be more than 18' },
@@ -139,7 +139,7 @@ class StudentsForm extends React.Component {
             label='Math score'
             type='number'
             value={this.state.MathScore}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true, errorMessage: 'Enter education' },
             //   min: { value: 18, errorMessage: 'Must be more than 18' },
@@ -154,7 +154,7 @@ class StudentsForm extends React.Component {
             label='Address'
             errorMessage='Enter Address'
             value={this.state.Address}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true },
             //   pattern: { value: '^[A-Za-z0-9]+$' },
@@ -168,7 +168,7 @@ class StudentsForm extends React.Component {
             label='MobilePhone'
             errorMessage='Enter Mobile Phone'
             value={this.state.MobilePhone}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true },
             //   pattern: { value: '^[A-Za-z0-9]+$' },
@@ -182,7 +182,7 @@ class StudentsForm extends React.Component {
             label='Skype'
             errorMessage='Enter Skype'
             value={this.state.Skype}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             // validate={{
             //   required: { value: true },
             //   pattern: { value: '^[A-Za-z0-9]+$' },
@@ -195,7 +195,7 @@ class StudentsForm extends React.Component {
             label='Start Date:'
             type='text'
             value={this.state.StartDate}
-            onChange={this.handleChange}
+            onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
             // validate={{

@@ -9,8 +9,10 @@ import DeleteForm from '../common/forms/delete-form/DeleteForm';
 import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
 import { icons } from '../common/icons';
-import { addStudent } from '../../reducers/actions';
-import { FETCH_USERS } from '../../reducers/ationTypes';
+import { addUser, deleteUser } from '../../reducers/actions';
+import { FETCH_USERS, DELETE_USER } from '../../reducers/ationTypes';
+import Thead from './Thead';
+import Tbody from './Tbody';
 
 import '../../styles/styles.css';
 
@@ -21,24 +23,8 @@ class AllStudents extends React.Component {
     }
   }
 
-  render() {
-    const { students } = this.props;
-    if (!students || !students.length) {
-      return (
-        <div className='container'>
-          <Popup
-            className='btn btn-outline-primary btn-block'
-            icon={icons.create}
-            name='Register'
-          >
-            <StudentsForm setNewStudent={this.props.dispatch(addStudent)} />
-          </Popup>
-          <p className='text'>No registered</p>
-        </div>
-      );
-    }
-
-    const listItems = students.map((student) => (
+  listItems = (students) => {
+    return students.map((student) => (
       <tr key={students.indexOf(student)}>
         <td>{students.indexOf(student) + 1}</td>
         <td>{student.FullName}</td>
@@ -83,7 +69,7 @@ class AllStudents extends React.Component {
           >
             <DeleteForm
               type='students'
-              setNewState={this.props.delStudent}
+              setNewState={this.props.deleteStudent}
               id={student.UserId}
               name={student.FullName}
             />
@@ -91,33 +77,42 @@ class AllStudents extends React.Component {
         </td>
       </tr>
     ));
+  };
+
+  createPopUpForm = () => {
+    return (
+      <Popup
+        className='btn btn-outline-primary btn-block'
+        icon={icons.create}
+        name='Register'
+      >
+        <StudentsForm
+          setNewStudent={(data) => this.props.dispatch(addUser(data))}
+        />
+      </Popup>
+    );
+  };
+
+  render() {
+    const { students } = this.props;
+
+    if (!students || !students.length) {
+      return (
+        <div className='container'>
+          {this.createPopUpForm()}
+          <p className='text'>No registered</p>
+        </div>
+      );
+    }
 
     return (
       <div className='container'>
-        <Popup
-          className='btn btn-outline-primary'
-          icon={icons.create}
-          name='Register'
-        >
-          <StudentsForm
-            setNewStudent={(data) => this.props.dispatch(addStudent(data))}
-          />
-        </Popup>
+        {this.createPopUpForm()}
         <Consumer>
           {(theme) => (
             <Table hover id={`${theme}`}>
-              <thead>
-                <tr>
-                  <th>№</th>
-                  <th>Full Name</th>
-                  <th>Direction</th>
-                  <th>Education</th>
-                  <th>Start</th>
-                  <th>Age</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>{listItems}</tbody>
+              <Thead />
+              <Tbody>{this.listItems(students)}</Tbody>
             </Table>
           )}
         </Consumer>
@@ -126,10 +121,10 @@ class AllStudents extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  students: state.studentsState.students,
-  message: state.studentsState.message,
-  errors: state.studentsState.errors,
+const mapStateToProps = ({ studentsState }) => ({
+  students: studentsState.students,
+  message: studentsState.message,
+  errors: studentsState.errors,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -151,11 +146,13 @@ const mapDispatchToProps = (dispatch) => ({
     };
     dispatch(asyncGetStudents());
   },
-  delStudent: (studentId) => {
-    dispatch({
-      type: 'DEL_USER',
-      studentId: studentId,
-    });
+  deleteStudent: (id) => {
+    dispatch(
+      deleteUser({
+        type: DELETE_USER,
+        id,
+      }),
+    );
   },
   editStudent: (updatedStudent) => {
     dispatch({
@@ -173,6 +170,12 @@ export default connect(
 
 AllStudents.propTypes = {
   students: PropTypes.array,
-  delStudent: PropTypes.func,
+  deleteUser: PropTypes.func,
   editStudent: PropTypes.func,
+};
+
+AllStudents.defaultProps = {
+  students: [],
+  deleteUser: () => {},
+  editStudent: () => {},
 };

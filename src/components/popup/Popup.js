@@ -36,7 +36,6 @@ class Popup extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button outline color='warning' onClick={this.toggle} block>
-              {' '}
               {icons.cancelIcon} Cancel
             </Button>
           </ModalFooter>
