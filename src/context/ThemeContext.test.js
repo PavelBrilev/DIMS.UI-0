@@ -4,7 +4,7 @@ import {
   ThemeContext,
   ThemeConsumer,
   ThemeProvider,
-} from '../../context/ThemeContext';
+} from '../context/ThemeContext';
 
 /**
  * Test default values by rendering a context consumer without a
