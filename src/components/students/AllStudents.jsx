@@ -19,7 +19,15 @@ import '../../styles/styles.css';
 class AllStudents extends React.Component {
   componentDidMount() {
     if (!this.props.students.length) {
-      return this.props.addStudents();
+      this.props.addStudents();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // this.props.addStudents();
+    // below we need some library fo deep checking
+    if (this.props.students !== prevProps.students) {
+      // add students to store here
     }
   }
 
