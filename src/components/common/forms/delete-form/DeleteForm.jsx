@@ -15,7 +15,6 @@ class DeleteForm extends React.Component {
     //   storage.deleteTask(parseInt(id, 10));
     // }
 
-    debugger;
     setNewState(id);
     toggle();
   };

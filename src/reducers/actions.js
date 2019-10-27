@@ -17,7 +17,6 @@ export const addUser = (newUser) => (dispatch) => {
 };
 
 export const deleteUser = (user) => (dispatch) => {
-  debugger;
   axios
     .delete(`${process.env.REACT_APP_BASE_URL}api/member-profile/${user.id}`)
     .then((response) => {
