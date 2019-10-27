@@ -1,29 +1,27 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import storage from '../../storage';
 import StudentsForm from '../forms/StudentsForm';
-import DeleteForm from '../Forms/DeleteForm';
+import DeleteForm from '../forms/DeleteForm';
 import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
-import { icons } from '../icons';
-import { addStudent } from '../../redusers/actions';
-import { FETCH_USERS } from '../../redusers/ationTypes';
+import { icons } from '../common/icons';
+import { addStudent, addStudents } from '../../redusers/actions';
 
 import '../../styles/styles.css';
 
 class AllStudents extends React.Component {
   componentDidMount() {
-    if (!this.props.students.length) {
-      return this.props.addStudents();
+    const { students, dispatch } = this.props;
+    if (!students.length) {
+      return dispatch(addStudents());
     }
   }
 
   render() {
-    const { students } = this.props;
+    const { students, dispatch } = this.props;
     if (!students || !students.length) {
       return (
         <div className='container'>
@@ -32,7 +30,7 @@ class AllStudents extends React.Component {
             icon={icons.create}
             name='Register'
           >
-            <StudentsForm setNewStudent={this.props.dispatch(addStudent)} />
+            <StudentsForm setNewStudent={dispatch(addStudent)} />
           </Popup>
           <p className='text'>No registered</p>
         </div>
@@ -53,16 +51,14 @@ class AllStudents extends React.Component {
             className='btn btn-outline-primary'
             to={{ pathname: `/students/${student.id}/doneTasks` }}
           >
-            {icons.progressIcon}
-            Progress
+            {`${icons.progressIcon} Progress`}
           </Link>
           <Link
             key={`${student.id}-2`}
             className='btn btn-outline-primary'
             to={{ pathname: `/students/${student.id}/tasks` }}
           >
-            {icons.tasksIcon}
-            Tasks
+            {`${icons.tasksIcon} Tasks`}
           </Link>
           <Popup
             key={`${student.id}-3`}
@@ -84,7 +80,6 @@ class AllStudents extends React.Component {
           >
             <DeleteForm
               type='students'
-              setNewState={this.props.delStudent}
               id={student.UserId}
               name={student.FullName}
             />
@@ -101,7 +96,9 @@ class AllStudents extends React.Component {
           name='Register'
         >
           <StudentsForm
-            setNewStudent={(data) => this.props.dispatch(addStudent(data))}
+            setNewStudent={(data) => {
+              dispatch(addStudent(data));
+            }}
           />
         </Popup>
         <Consumer>
@@ -133,33 +130,8 @@ const mapStateToProps = (state) => ({
   errors: state.studentsState.errors,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addStudents: () => {
-      dispatch(storage.getStudents());
-    },    
-    addStudent: (newStudent) => {
-      console.dir(newStudent)
-      dispatch(storage.addStudent(newStudent));
-    },
-    delStudent: (studentId) => {
-      dispatch({
-        type: 'DEL_USER',
-        studentId: studentId
-      })
-    },
-    editStudent: (updatedStudent) => {
-      dispatch({
-        type: 'EDIT_USER',
-        updatedStudent: updatedStudent
-      })
-    }
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  mapStateToProps
 )(AllStudents);
 
 AllStudents.propTypes = {

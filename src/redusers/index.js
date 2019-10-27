@@ -4,7 +4,7 @@ import {
   FETCH_USERS,
   DELETE_USER,
   ADD_USER_SUCCESS,
-} from './ationTypes';
+} from './actionTypes';
 
 const studentsInitilState = { students: [], errors: [], message: '' };
 

@@ -1,9 +1,29 @@
 import axios from 'axios';
-import { ADD_USER_ERROR, ADD_USER_SUCCESS } from './ationTypes';
+import {
+  ADD_USER_ERROR,
+  ADD_USER_SUCCESS,
+  FETCH_USERS,
+  DELETE_USER,
+} from './actionTypes';
+
+
+export const addStudents = () => (dispatch) => {
+  axios
+    .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+    .then((response) => {
+      dispatch({ type: FETCH_USERS, students: response.data });
+    })
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        console.log(error.response.data.ExceptionMessage);
+      }
+      console.log(`${error.message}`);
+    });
+};
+
 
 export const addStudent = (newStudent) => (dispatch) => {
   // dispatch for starting request
-
   axios
     .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newStudent)
     .then((response) => {
@@ -19,5 +39,21 @@ export const addStudent = (newStudent) => (dispatch) => {
       }
       console.error(`${error.message}`);
       // ADD HANDLE FOR ERRORS!
+    });
+};
+
+export const delStudent = (id) => (dispatch) => {
+  axios
+    .delete({
+      url: `/api/member-profile/${id}`,
+    })
+    .then((response) => {
+      dispatch({ type: DELETE_USER, message: response.data });
+    })
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        console.log(error.response.data.ExceptionMessage);
+      }
+      console.log(`${error.message}`);
     });
 };

@@ -1,28 +1,27 @@
 import React from 'react';
 import { Col, Row, Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import storage from '../../Storage'
+import storage from '../../storage'
 import PropTypes from 'prop-types';
-import storage from '../../storage';
 import { icons } from '../common/icons';
 import { setValidationRules } from './form-validation';
 
 class StudentsForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      Name: '', 
-      LastName: '', 
-      Email: '', 
-      Sex: '', 
-      Education: '', 
-      BirthDate: '', 
+    this.state = {
+      Name: '',
+      LastName: '',
+      Email: '',
+      Sex: '',
+      Education: '',
+      BirthDate: '',
       UniversityAverageScore: '',
-      MathScore: '', 
-      Address: '', 
-      MobilePhone: '', 
-      Skype: '', 
-      StartDate: '' 
+      MathScore: '',
+      Address: '',
+      MobilePhone: '',
+      Skype: '',
+      StartDate: '',
     };
   }
 
@@ -57,17 +56,7 @@ class StudentsForm extends React.Component {
               label='Name'
               value={this.state.Name}
               onChange={this.handleChange}
-              validate={{
-                required: { value: true, errorMessage: 'Please enter a name' },
-                minLength: {
-                  value: 3,
-                  errorMessage: 'Your name must be between 3 and 16 characters',
-                },
-                maxLength: {
-                  value: 16,
-                  errorMessage: 'Your name must be between 3 and 16 characters',
-                },
-              }}
+              validate={setValidationRules('name')}
             />
           </Col>
           <Col md={6}>
@@ -77,22 +66,7 @@ class StudentsForm extends React.Component {
               label='Last name'
               value={this.state.LastName}
               onChange={this.handleChange}
-                validate={{
-                required: {
-                  value: true,
-                  errorMessage: 'Please enter a last name',
-                },
-                minLength: {
-                  value: 3,
-                  errorMessage:
-                    'Your last name must be between 3 and 16 characters',
-                },
-                maxLength: {
-                  value: 16,
-                  errorMessage:
-                    'Your last name must be between 3 and 16 characters',
-                },
-              }} 
+              validate={setValidationRules('last name')}
             />
           </Col>
         </Row>
