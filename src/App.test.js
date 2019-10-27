@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 // import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
 import App from './App';
@@ -17,7 +18,10 @@ import reducers, { studentsInitilState } from './reducers/index';
 // you can provide initialState for the entire store that the ui is rendered with
 function renderWithRedux(
   ui,
-  { initialState, store = createStore(reducers, initialState) } = {},
+  {
+    initialState,
+    store = createStore(reducers, initialState, applyMiddleware(thunk)),
+  } = {},
 ) {
   return {
     ...render(<Provider store={store}>{ui}</Provider>),

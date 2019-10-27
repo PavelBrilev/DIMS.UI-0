@@ -31,9 +31,9 @@ class App extends React.Component {
     this.setState({ theme });
   };
 
-  handleUserInput = (props) => {
+  handleUserInput = ({ login, password }) => {
     const result = this.state.students.find(
-      (item) => item.name === props.login && item.password === props.password,
+      (item) => item.name === login && item.password === password,
     );
     if (result) {
       this.setState({ role: result.role });
