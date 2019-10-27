@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ThemeContext = React.createContext('white');
+const ThemeContext = React.createContext();
 
 const ThemeProvider = ({ children, color }) => {
   return (

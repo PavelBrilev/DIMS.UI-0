@@ -25,7 +25,7 @@ test('ThemeConsumer shows value from provider', () => {
       <ThemeConsumer />
     </ThemeContext.Provider>,
   );
-  expect(getByText(/^Color is:/)).toHaveTextContent('Color Is: white');
+  expect(getByText(/^Color is:/)).toHaveTextContent('Color is: white');
 });
 
 /**
