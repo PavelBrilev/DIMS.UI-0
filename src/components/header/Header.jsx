@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 import { Consumer } from '../../App';
 import logo from '../../assets/human1.png';
+
 import '../../styles/styles.css';
 
 class Header extends React.Component {
@@ -19,21 +20,17 @@ class Header extends React.Component {
             <div>
               <img src={logo} alt='Dev Incubator' />
             </div>
-            <Link to='/' className={'btn__header'}>
-              {' '}
-              LogIn{' '}
+            <Link to='/' className='btn__header'>
+              LogIn
             </Link>
-            <Link to='/students' className={'btn__header'}>
-              {' '}
-              Students{' '}
+            <Link to='/students' className='btn__header'>
+              Students
             </Link>
-            <Link to='/tasks' className={'btn__header'}>
-              {' '}
-              Tasks{' '}
+            <Link to='/tasks' className='btn__header'>
+              Tasks
             </Link>
-            <Link to='/tasksTrack' className={'btn__header'}>
-              {' '}
-              TasksTrack{' '}
+            <Link to='/tasksTrack' className='btn__header'>
+              TasksTrack
             </Link>
             <ThemeSwitcher handleTheme={this.handleTheme} />
           </div>

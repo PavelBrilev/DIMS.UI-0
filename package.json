@@ -3,12 +3,12 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.0",
+    "@testing-library/react": "^9.3.0",
     "availity-reactstrap-validation": "^2.6.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "husky": "^3.0.9",
     "immutability-helper": "^3.0.1",
-    "lint-staged": "^9.4.2",
     "pretty-quick": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
@@ -21,9 +21,10 @@
     "react-icons": "^3.8.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.1.0",
     "reactstrap": "^8.1.1",
     "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
@@ -32,7 +33,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "precommit": "pretty-quick --staged && prettier --check src/**/*.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "coveralls": "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,10 +54,11 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "coveralls": "^3.0.7",
+    "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
     "prettier": "^1.18.2"
   }
 }

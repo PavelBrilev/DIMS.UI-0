@@ -5,8 +5,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import Colors from './colors';
 import PropTypes from 'prop-types';
+import Colors from './colors';
 
 class ThemeSwitcher extends React.Component {
   constructor(props) {

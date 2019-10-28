@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import storage from '../../storage';
-import PropTypes from 'prop-types';
-import { icons } from '../common/icons';
+import storage from '../../../../storage';
+import { icons } from '../../icons';
 
 class TasksForm extends React.Component {
   constructor(props) {

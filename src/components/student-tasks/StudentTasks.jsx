@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, Table } from 'reactstrap';
 import storage from '../../storage';
 import Popup from '../popup/Popup';
-import TasksTrackForm from '../forms/TasksTrackForm';
-import '../../styles/styles.css';
+import TasksTrackForm from '../common/forms/tasks-track-from/TasksTrackForm';
 import { Consumer } from '../../App';
 import { icons } from '../common/icons';
+
+import '../../styles/styles.css';
 
 class StudentTasks extends React.Component {
   constructor(props) {

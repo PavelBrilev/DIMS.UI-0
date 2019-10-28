@@ -6,9 +6,9 @@ import {
   ADD_USER_SUCCESS,
 } from './actionTypes';
 
-const studentsInitilState = { students: [], errors: [], message: '' };
+export const studentsInitialState = { students: [], errors: [], message: '' };
 
-const studentsReduser = (state = studentsInitilState, action) => {
+const studentsReduser = (state = studentsInitialState, action) => {
   switch (action.type) {
     case FETCH_USERS:
       return { ...state, students: [...state.students, ...action.students] };
