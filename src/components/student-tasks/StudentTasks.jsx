@@ -3,8 +3,8 @@ import { Button, Table } from 'reactstrap';
 import storage from '../../storage';
 import Popup from '../popup/Popup';
 import TasksTrackForm from '../common/forms/tasks-track-from/TasksTrackForm';
-import { Consumer } from '../../App';
 import { icons } from '../common/icons';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
@@ -20,6 +20,7 @@ class StudentTasks extends React.Component {
   };
 
   render() {
+    const { Consumer } = ThemeContext;
     const studentId = parseInt(this.props.match.params.studentId);
     const student = storage.getStudent(studentId);
     const tasks = storage.getTasks();

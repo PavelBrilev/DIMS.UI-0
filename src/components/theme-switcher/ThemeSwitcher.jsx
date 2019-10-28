@@ -6,7 +6,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import Colors from './colors';
+import Colors from '../../constants/colors';
 
 class ThemeSwitcher extends React.Component {
   constructor(props) {

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
-import { Consumer } from '../../App';
 import logo from '../../assets/human1.png';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
@@ -13,6 +13,8 @@ class Header extends React.Component {
   };
 
   render() {
+    const { Consumer } = ThemeContext;
+
     return (
       <Consumer>
         {(theme) => (

@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StudentsForm from '../common/forms/students-form/StudentsForm';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';
-import { Consumer } from '../../App';
 import Popup from '../popup/Popup';
 import { icons } from '../common/icons';
 import { addUser, deleteUser } from '../../reducers/actions';
 import { FETCH_USERS, DELETE_USER } from '../../reducers/ationTypes';
 import Thead from './Thead';
 import Tbody from './Tbody';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
@@ -20,6 +20,14 @@ class AllStudents extends React.Component {
     const { students, dispatch } = this.props;
     if (!students.length) {
       return dispatch(addStudents());
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // this.props.addStudents();
+    // below we need some library fo deep checking
+    if (this.props.students !== prevProps.students) {
+      // add students to store here
     }
   }
 
@@ -92,6 +100,7 @@ class AllStudents extends React.Component {
   };
 
   render() {
+    const { Consumer } = ThemeContext;
     const { students } = this.props;
 
     if (!students || !students.length) {
