@@ -2,9 +2,8 @@ import React from 'react';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import PropTypes from 'prop-types';
-import storage from '../../../../storage';
 import { icons } from '../../icons';
-import { setValidationRules } from '../../form-validation';
+//import { setValidationRules } from '../../form-validation';
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -14,12 +13,12 @@ class StudentsForm extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { id } = this.props;
-    if (id) {
-      this.setState(storage.getStudent(id));
-    }
-  }
+  // componentDidMount() {
+  //   const { id } = this.props;
+  //   if (id) {
+  //     this.setState(storage.getStudent(id));
+  //   }
+  // }
 
   handleChange = (event) => {
     const { target } = event;

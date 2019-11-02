@@ -1,8 +1,15 @@
 .login__container {
+  position: relative;
+  top: 25%;
+  left: 15%;
   background: rgb(245, 245, 245);
   border: 1px solid gray;
   border-radius: 5px;
   margin: 50px auto;
   padding: 20px;
   width: 30%;
+}
+.login_page {
+  height: 90vh;
+  background: no-repeat 15% 40% url('../assets/human1.png');
 }

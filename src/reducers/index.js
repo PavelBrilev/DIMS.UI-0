@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { studentsReduser } from './studentsReducer';
-// import tasksReduser from './tasksReduser';
+import { tasksReduser } from './tasksReducer';
 
 const reducer = combineReducers({
   studentsState: studentsReduser,
-  // tasksState: tasksReduser
+  tasksState: tasksReduser,
 });
 
 export default reducer;

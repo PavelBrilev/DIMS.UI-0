@@ -1,21 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import storage from '../../../../storage';
 import { icons } from '../../icons';
 import { ItemTypes } from '../../../../constants/item-types';
+import { deleteUser } from '../../../../reducers/studentsActions';
+import { deleteTask } from '../../../../reducers/tasksActions';
 
 class DeleteForm extends React.Component {
   handleDelete = () => {
-    const { type, id, setNewState, toggle } = this.props;
-
-    // if (type === ItemTypes.STUDENTS) {
-    //   storage.deleteStudent(parseInt(id, 10));
-    // } else if (type === ItemTypes.TASK) {
-    //   storage.deleteTask(parseInt(id, 10));
-    // }
-
-    setNewState(id);
+    const { type, id, dispatch, toggle } = this.props;
+    if (type === ItemTypes.STUDENTS) {
+      dispatch(deleteUser(parseInt(id, 10)));
+    } else if (type === ItemTypes.TASK) {
+      dispatch(deleteTask(parseInt(id, 10)));
+    }
     toggle();
   };
 
@@ -39,7 +38,7 @@ class DeleteForm extends React.Component {
   }
 }
 
-export default DeleteForm;
+export default connect()(DeleteForm);
 
 DeleteForm.propTypes = {
   type: PropTypes.string.isRequired,

@@ -122,15 +122,15 @@ class Storage {
   getStudents() {
     return (dispatch) => {
       axios
-      .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-      .then((response) => {
-        dispatch({ type: 'ADD_ALL_USERS', students: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-}
+        .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+        .then((response) => {
+          dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  }
 
   getStudent(id) {
     axios
@@ -147,15 +147,15 @@ class Storage {
   addStudent(newStudent) {
     return (dispatch) => {
       axios
-      .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newStudent)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-}
+        .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newStudent)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  }
 
   __deleteStudent(props) {
     axios.delete({

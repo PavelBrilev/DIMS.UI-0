@@ -1,48 +1,39 @@
-// it is for AllTasks with REDUX
+import {
+  ADD_TASK_REQUEST,
+  ADD_TASK_SUCCESS,
+  EDIT_TASK_SUCCESS,
+  FETCH_TASKS,
+  DELETE_TASK_SUCCESS,
+} from './ationTypes';
 
-// const initTasksState = storage.getTasks()
+export const tasksInitialState = { tasks: [], errors: [], message: '' };
 
-//   function tasksReduser(state = initTasksState, action) {
-//     switch (action.type) {
-//         case 'ADD_TASK':
-//             return [...state, action.task]
-//         case 'DEL_TASK':
-//             return state.filter((item) => item.id !== action.taskId);
-//         case 'EDIT_TASK':
-//           return state.map(item => {
-//             if(item.id === action.updatedTask.id)
-//               {item = action.updatedTask}
-//               return item;
-//             });
-//         default: return state;
-//     }
-//   }
+export const tasksReduser = (state = tasksInitialState, action) => {
+  switch (action.type) {
+    case FETCH_TASKS:
+      return { ...state, tasks: [...action.tasks] };
+    case ADD_TASK_REQUEST:
+      return {
+        ...state,
+        message: action.message,
+      };
+    case ADD_TASK_SUCCESS:
+      return {
+        ...state,
+        message: action.message,
+      };
+    case DELETE_TASK_SUCCESS:
+      return {
+        ...state,
+        message: action.message,
+      };
+    case EDIT_TASK_SUCCESS:
+      return {
+        ...state,
+        message: action.message,
+      };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     tasks: state.tasksState
-//   };
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addTasks: (task) => {
-//       dispatch({
-//         type: 'ADD_TASK',
-//         task: task
-//       });
-//     },
-//     delTasks: (taskId) => {
-//       dispatch({
-//         type: 'DEL_TASK',
-//         taskId: taskId
-//       });
-//     },
-//     editTasks: (updatedTask) => {
-//       dispatch({
-//         type: 'EDIT_TASK',
-//         updatedTask: updatedTask
-//       });
-//     }
-//   }
-// }
+    default:
+      return state;
+  }
+};

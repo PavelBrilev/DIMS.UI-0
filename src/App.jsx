@@ -7,7 +7,7 @@ import StudentTasks from './components/student-tasks/StudentTasks';
 import StudentDoneTasks from './components/student-done-tasks/StudentDoneTasks';
 import StudentTasksTrack from './components/student-tasks-track/StudentTasksTrack';
 import LoginPage from './components/pages/LoginPage';
-import storage, { Roles as ROLES } from './storage';
+import { Roles as ROLES } from './storage';
 import { ThemeContext } from './context/ThemeContext';
 
 import './styles/styles.css';
@@ -16,27 +16,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      role: ROLES.ADMIN,
+      role: '',
       theme: '',
     };
-  }
-
-  componentDidMount() {
-    const students = storage.getStudentsLocal();
-    this.setState({ students });
   }
 
   handleTheme = (theme) => {
     this.setState({ theme });
   };
 
-  handleUserInput = ({ login, password }) => {
-    const result = this.state.students.find(
-      (item) => item.name === login && item.password === password,
-    );
-    if (result) {
-      this.setState({ role: result.role });
-    }
+  handleUserInput = () => {
+    this.state.role
+      ? this.setState({ role: '' })
+      : this.setState({ role: 'admin' });
   };
 
   render() {
@@ -46,15 +38,17 @@ class App extends React.Component {
       return (
         <Provider value={this.state.theme}>
           <div className={this.state.theme}>
-            <h1 data-testid='header' className='app-header'>
-              DIMS React App
-            </h1>
             <Router>
-              <Header handleTheme={this.handleTheme} />
+              <Header
+                handleTheme={this.handleTheme}
+                LogOut={this.handleUserInput}
+              />
               <Route
                 exact
                 path='/'
-                render={() => <LoginPage auth={this.handleUserInput} />}
+                render={() => (
+                  <LoginPage handleAuthorization={this.handleUserInput} />
+                )}
               />
               <Route exact path='/students' component={AllStudents} />
               <Route path='/tasks' component={AllTasks} />
@@ -114,7 +108,7 @@ class App extends React.Component {
         </Provider>
       );
     }
-    return <LoginPage auth={this.handleUserInput} />;
+    return <LoginPage handleAuthorization={this.handleUserInput} />;
   }
 }
 
