@@ -2,78 +2,78 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FormGroup, Label, Input, ButtonGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
-import storage from '../../../../storage';
 import { icons } from '../../icons';
+import { connect } from 'react-redux';
 
 class TasksForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      taskName: '',
-      description: '',
-      start: '',
-      deadline: '',
-      doneDate: '',
-      students: [],
-      note: '',
+      Name: '',
+      Description: '',
+      StartDate: '',
+      DeadLineDate: '',
+      SelectedUsers: [],
     };
   }
 
   componentDidMount() {
-    const { id } = this.props;
-    if (id) {
-      this.setState(storage.getTask(id));
-    }
+    // const { id } = this.props;
+    // if (id) {
+    //   this.setState(storage.getTask(id));
+    // }
   }
 
   onCheckboxBtnClick = (selected) => {
-    const index = this.state.students.indexOf(selected);
+    const index = this.state.SelectedUsers.indexOf(selected);
     if (index < 0) {
-      this.state.students.push(selected);
+      this.state.SelectedUsers.push(selected);
     } else {
-      this.state.students.splice(index, 1);
+      this.state.SelectedUsers.splice(index, 1);
     }
-    this.setState({ students: [...this.state.students] });
+    this.setState({ SelectedUsers: [...this.state.SelectedUsers] });
   };
 
-  handleChange = (event) => {
-    const { target } = event;
+  handleChange = (e) => {
+    const { target } = e;
     const { value, name } = target;
     this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    storage.saveTask(this.state);
-    this.props.setNewTasks(this.state);
-    this.props.toggle();
+    const { setNewTask, toggle } = this.props;
+    e.persist();
+    console.log(this.state);
+    setNewTask(this.state);
+    toggle();
   };
 
-  render() {
-    const checkStudents = storage.getStudents().map((student) => {
+  checkStudents = () =>
+    this.props.students.map((student) => {
       return (
         <Button
           outline
           color='secondary'
-          key={student.id}
-          onClick={() => this.onCheckboxBtnClick(student.id)}
-          active={this.state.students.includes(student.id)}
+          key={student.UserId}
+          onClick={() => this.onCheckboxBtnClick(student.UserId)}
+          active={this.state.SelectedUsers.includes(student.UserId)}
         >
-          {student.name}
+          {student.FullName}
         </Button>
       );
     });
+
+  render() {
     return (
       <AvForm onValidSubmit={this.handleSubmit}>
         <AvGroup>
           <AvField
-            name='taskName'
+            name='Name'
             type='text'
             label='Task name'
-            value={this.state.taskName}
+            value={this.state.Name}
             onChange={this.handleChange}
-            validate={{
+            /* validate={{
               required: {
                 value: true,
                 errorMessage: 'Please enter a task name',
@@ -83,17 +83,17 @@ class TasksForm extends React.Component {
                 errorMessage:
                   'Your task name must be between 3 and 16 characters',
               },
-            }}
+            }} */
           />
         </AvGroup>
         <AvGroup>
           <AvField
             type='textarea'
-            name='description'
+            name='Description'
             label='Description'
-            value={this.state.description}
+            value={this.state.Description}
             onChange={this.handleChange}
-            validate={{
+            /* validate={{
               required: {
                 value: true,
                 errorMessage: 'Please enter description',
@@ -103,32 +103,32 @@ class TasksForm extends React.Component {
                 errorMessage:
                   'Your description must be less than 300 characters',
               },
-            }}
+            }} */
           />
         </AvGroup>
         <FormGroup>
-          <Label for='direction'>Start date:</Label>
+          <Label for='start'>Start date:</Label>
           <Input
-            name='start'
+            name='StartDate'
             id='start'
             type='text'
-            value={this.state.start}
+            value={this.state.StartDate}
             onChange={this.handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Label for='deadline'>Deadline:</Label>
           <Input
-            name='deadline'
+            name='DeadLineDate'
             id='deadline'
             type='text'
-            value={this.state.deadline}
+            value={this.state.DeadLineDate}
             onChange={this.handleChange}
           />
         </FormGroup>
         <FormGroup>
           <div>Students</div>
-          <ButtonGroup>{checkStudents}</ButtonGroup>
+          <ButtonGroup>{this.checkStudents()}</ButtonGroup>
         </FormGroup>
 
         <Button outline type='submit' color='success' block>
@@ -139,7 +139,11 @@ class TasksForm extends React.Component {
   }
 }
 
-export default TasksForm;
+const mapStateToProps = ({ studentsState }) => ({
+  students: studentsState.students,
+});
+
+export default connect(mapStateToProps)(TasksForm);
 
 TasksForm.propTypes = {
   id: PropTypes.number,

@@ -1,81 +1,104 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React from 'react';
 // import HTML5Backend from 'react-dnd-html5-backend';
 // import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { Table } from 'reactstrap';
 import PropTypes from 'prop-types';
-import update from 'immutability-helper';
+//import update from 'immutability-helper';
 import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
 import { icons } from '../common/icons';
-import storage from '../../storage';
-import Task from './Task';
+//import Task from './Task';
 import { ThemeContext } from '../../context/ThemeContext';
+import { connect } from 'react-redux';
+import DeleteForm from '../common/forms/delete-form/DeleteForm';
+import { fetchTasks, addTask, editTask } from '../../reducers/tasksActions';
+import Thead from './Thead';
+import Tbody from './Tbody';
 
 import '../../styles/styles.css';
 
-const AllTasks = () => {
-  const { theme } = useContext(ThemeContext);
-  const [tasks, setTasks] = useState(storage.getTasks());
-  const moveTask = useCallback(
-    (dragIndex, hoverIndex) => {
-      const dragTask = tasks[dragIndex];
-      setTasks(
-        update(tasks, {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragTask]],
-        }),
-      );
-    },
-    [tasks],
-  );
-  const renderTask = (task, index) => {
+class AllTasks extends React.Component {
+  componentDidMount() {
+    const { tasks, dispatch } = this.props;
+    if (!tasks.length) {
+      return dispatch(fetchTasks());
+    }
+  }
+
+  listItems = (tasks) => {
+    return tasks.map((task) => (
+      <tr key={task.id}>
+        <td>{tasks.indexOf(task) + 1}</td>
+        <td>{task.taskName}</td>
+        <td>{task.start}</td>
+        <td>{task.deadline}</td>
+        <td>
+          <Popup key={`${task.id}-1`} icon={icons.editIcon} name='Edit'>
+            <TasksForm
+              setNewTask={(data) => this.props.dispatch(editTask(data))}
+              id={task.id}
+            />
+          </Popup>
+          <Popup
+            className='btn btn-outline-danger'
+            icon={icons.deleteIcon}
+            name='Delete'
+            key={`${task.id}-2`}
+          >
+            <DeleteForm type='task' id={task.id} name={task.Name} />
+          </Popup>
+        </td>
+      </tr>
+    ));
+  };
+
+  createPopUpForm = () => {
     return (
-      <Task
-        tasks={tasks}
-        setTasks={setTasks}
-        task={task}
-        key={task.id}
-        index={index}
-        id={task.id}
-        moveTask={moveTask}
-      />
+      <Popup
+        className='btn btn-outline-primary btn-block'
+        icon={icons.create}
+        name='Create'
+      >
+        <TasksForm setNewTask={(data) => this.props.dispatch(addTask(data))} />
+      </Popup>
     );
   };
-  if (!tasks || tasks.length === 0) {
+
+  render() {
+    const { Consumer } = ThemeContext;
+    const { tasks } = this.props;
+
+    if (!tasks || !tasks.length) {
+      return (
+        <div className='container'>
+          {this.createPopUpForm()}
+          <p className='text'>No tasks</p>
+        </div>
+      );
+    }
     return (
       <div className='container'>
-        <Popup
-          className='btn btn-outline-primary btn-block'
-          icon={icons.create}
-          name='Create'
-        >
-          <TasksForm setNewTasks={(task) => setTasks(tasks.concat(task))} />
-        </Popup>
-        <p className='text'>No tasks</p>
+        {this.createPopUpForm()}
+        <Consumer>
+          {(theme) => (
+            <Table hover id={`${theme}`}>
+              <Thead />
+              <Tbody>{this.listItems(tasks)}</Tbody>
+            </Table>
+          )}
+        </Consumer>
       </div>
     );
   }
-  return (
-    <div className='container'>
-      <Popup name='Create'>
-        <TasksForm setNewTasks={(task) => setTasks(tasks.concat(task))} />
-      </Popup>
-      <Table hover id={`${theme}`}>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Start</th>
-            <th>Deadline</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{tasks.map((task, i) => renderTask(task, i))}</tbody>
-      </Table>
-    </div>
-  );
-};
+}
 
-export default AllTasks;
+const mapStateToProps = ({ tasksState }) => ({
+  tasks: tasksState.tasks,
+  message: tasksState.message,
+  errors: tasksState.errors,
+});
+
+export default connect(mapStateToProps)(AllTasks);
 
 AllTasks.propTypes = {
   tasks: PropTypes.array,

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
-import logo from '../../assets/human1.png';
 import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
@@ -10,6 +9,9 @@ import '../../styles/styles.css';
 class Header extends React.Component {
   handleTheme = (theme) => {
     this.props.handleTheme(theme);
+  };
+  LogOut = () => {
+    this.props.LogOut();
   };
 
   render() {
@@ -19,12 +21,6 @@ class Header extends React.Component {
       <Consumer>
         {(theme) => (
           <div className={`header ${theme}`}>
-            <div>
-              <img src={logo} alt='Dev Incubator' />
-            </div>
-            <Link to='/' className='btn__header'>
-              LogIn
-            </Link>
             <Link to='/students' className='btn__header'>
               Students
             </Link>
@@ -32,7 +28,10 @@ class Header extends React.Component {
               Tasks
             </Link>
             <Link to='/tasksTrack' className='btn__header'>
-              TasksTrack
+              Tasks Track
+            </Link>
+            <Link to='/' className='btn__header' onClick={this.LogOut}>
+              Log Out
             </Link>
             <ThemeSwitcher handleTheme={this.handleTheme} />
           </div>

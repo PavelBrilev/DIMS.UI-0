@@ -47,7 +47,7 @@ class Storage {
     }
   }
 
-  addStudent(student) {
+  addStudentLocal(student) {
     const students = this.getStudents() || [];
 
     student.id = this.getArrayId(students);
@@ -119,17 +119,18 @@ class Storage {
     this.setTasks(tasks);
   }
 
-  // getStudents() {
-  //   axios
-  //     .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       this.setValues('students', response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+  getStudents() {
+    return (dispatch) => {
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
+        .then((response) => {
+          dispatch({ type: 'ADD_ALL_USERS', students: response.data });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  }
 
   getStudent(id) {
     axios
@@ -143,20 +144,17 @@ class Storage {
       });
   }
 
-  postStudent(student) {
-    const config = {
-      method: 'post',
-      url: `${process.env.REACT_APP_BASE_URL}api/member-profile`,
-      data: student,
+  addStudent(newStudent) {
+    return (dispatch) => {
+      axios
+        .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newStudent)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
-
-    axios(config)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   __deleteStudent(props) {

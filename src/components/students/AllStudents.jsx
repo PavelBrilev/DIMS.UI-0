@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -8,8 +7,7 @@ import StudentsForm from '../common/forms/students-form/StudentsForm';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';
 import Popup from '../popup/Popup';
 import { icons } from '../common/icons';
-import { addUser, deleteUser } from '../../reducers/actions';
-import { FETCH_USERS, DELETE_USER } from '../../reducers/ationTypes';
+import { addUser, fetchUsers, editUser } from '../../reducers/studentsActions';
 import Thead from './Thead';
 import Tbody from './Tbody';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -18,17 +16,18 @@ import '../../styles/styles.css';
 
 class AllStudents extends React.Component {
   componentDidMount() {
-    if (!this.props.students.length) {
-      this.props.addStudents();
+    const { students, dispatch } = this.props;
+    if (!students.length) {
+      return dispatch(fetchUsers());
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // this.props.addStudents();
+  componentDidUpdate(prevProps) {
+    //const { students, dispatch, message } = this.props;
     // below we need some library fo deep checking
-    if (this.props.students !== prevProps.students) {
-      // add students to store here
-    }
+    // if (prevProps.students.length !== 0 && students !== prevProps.students) {
+    //   return dispatch(fetchUsers());
+    // }
   }
 
   listItems = (students) => {
@@ -46,16 +45,14 @@ class AllStudents extends React.Component {
             className='btn btn-outline-primary'
             to={{ pathname: `/students/${student.id}/doneTasks` }}
           >
-            {icons.progressIcon}
-            Progress
+            {icons.progressIcon} Progress
           </Link>
           <Link
             key={`${student.id}-2`}
             className='btn btn-outline-primary'
             to={{ pathname: `/students/${student.id}/tasks` }}
           >
-            {icons.tasksIcon}
-            Tasks
+            {icons.tasksIcon} Tasks
           </Link>
           <Popup
             key={`${student.id}-3`}
@@ -64,7 +61,7 @@ class AllStudents extends React.Component {
             name='Edit'
           >
             <StudentsForm
-              setNewStudent={this.props.editStudent}
+              setNewState={(data) => this.props.dispatch(editUser(data))}
               id={student.UserId}
             />
           </Popup>
@@ -72,12 +69,10 @@ class AllStudents extends React.Component {
             className='btn btn-outline-danger'
             icon={icons.deleteIcon}
             name='Delete'
-            id={student.id}
             key={`${student.id}-4`}
           >
             <DeleteForm
               type='students'
-              setNewState={this.props.deleteStudent}
               id={student.UserId}
               name={student.FullName}
             />
@@ -136,50 +131,20 @@ const mapStateToProps = ({ studentsState }) => ({
   errors: studentsState.errors,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  addStudents: () => {
-    const asyncGetStudents = () => {
-      return (dispatch) => {
-        axios
-          .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
-          .then((response) => {
-            dispatch({ type: FETCH_USERS, students: response.data });
-          })
-          .catch((error) => {
-            if (error.response && error.response.data) {
-              console.log(error.response.data.ExceptionMessage);
-            }
-            console.log(`${error.message}`);
-          });
-      };
-    };
-    dispatch(asyncGetStudents());
-  },
-  deleteStudent: (id) => {
-    dispatch(
-      deleteUser({
-        type: DELETE_USER,
-        id,
-      }),
-    );
-  },
-  editStudent: (updatedStudent) => {
-    dispatch({
-      type: 'EDIT_USER',
-      updatedStudent: updatedStudent,
-    });
-  },
-  dispatch,
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AllStudents);
+export default connect(mapStateToProps)(AllStudents);
 
 AllStudents.propTypes = {
-  students: PropTypes.array,
-  deleteUser: PropTypes.func,
+  students: PropTypes.arrayOf(
+    PropTypes.shape({
+      FullName: PropTypes.string,
+      Direction: PropTypes.string,
+      Education: PropTypes.string,
+      StartDate: PropTypes.string,
+      Age: PropTypes.number,
+    }),
+  ),
+  addStudent: PropTypes.func,
+  delStudent: PropTypes.func,
   editStudent: PropTypes.func,
 };
 
