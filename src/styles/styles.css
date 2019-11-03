@@ -1,14 +1,17 @@
+.app_container {
+  min-height: 100vh;
+}
 
 .container {
   width: 70%;
   margin: auto;
+  text-align: center;
 }
 
 table {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
   font-size: 14px;
   text-align: center;
-
 }
 
 .text {
@@ -27,6 +30,23 @@ table {
   border-bottom: 1px solid gray;
 }
 
+.footer {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  line-height: 80px;
+  font-size: 20px;
+  background: #f7f7f7;
+  border-top: 1px solid gray;
+}
+.footer span {
+  position: fixed;
+  right: 0;
+  padding-right: 10px;
+}
 
 .btn__header,
 .btn__header:link,
@@ -39,7 +59,7 @@ table {
   width: 35%;
   height: 100%;
   border: none;
-  transition: .3s linear;
+  transition: 0.3s linear;
 }
 
 .btn__header:hover {
@@ -52,7 +72,6 @@ table {
   cursor: pointer;
   text-decoration: none;
   background: #d1d1d1;
-
 }
 
 img {
@@ -60,36 +79,34 @@ img {
   height: 100%;
 }
 
-
-.white table{
+.white table {
   color: black;
   background: #f7f7f7;
 }
 
 .black .btn__header,
 .black .btn__header:link,
-.black .btn__header:visited{
+.black .btn__header:visited {
   color: #ffffff;
 }
-  
+
 #black {
   color: #ffffff;
 }
 
 .black {
   background-color: #080808;
-  }
+}
 
 .black table {
   background-color: #33333b;
-  }
+}
 
 .green {
   color: #0f1612;
-  background-color:  #e0eee5;;
+  background-color: #e0eee5;
 }
 
 .green table {
-  background-color:  #a1bbac;;
+  background-color: #a1bbac;
 }
-

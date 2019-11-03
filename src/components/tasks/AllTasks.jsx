@@ -1,13 +1,9 @@
 import React from 'react';
-// import HTML5Backend from 'react-dnd-html5-backend';
-// import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { Table } from 'reactstrap';
 import PropTypes from 'prop-types';
-//import update from 'immutability-helper';
 import Popup from '../popup/Popup';
 import TasksForm from '../common/forms/tasks-form/TasksForm';
 import { icons } from '../common/icons';
-//import Task from './Task';
 import { ThemeContext } from '../../context/ThemeContext';
 import { connect } from 'react-redux';
 import DeleteForm from '../common/forms/delete-form/DeleteForm';

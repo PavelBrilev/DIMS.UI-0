@@ -4,29 +4,44 @@ import {
   ADD_USER_REQUEST,
   ADD_USER_SUCCESS,
   DELETE_USER_SUCCESS,
+  FETCH_USER_REQUEST,
   FETCH_USERS,
   EDIT_USER_SUCCESS,
 } from './ationTypes';
 
 export const fetchUsers = () => (dispatch) => {
+  dispatch({
+    type: FETCH_USER_REQUEST,
+    message: 'Request started...',
+    isLoading: true,
+  });
   axios
     .get(`${process.env.REACT_APP_BASE_URL}api/profiles`)
     .then((response) => {
-      dispatch({ type: FETCH_USERS, students: response.data });
+      dispatch({
+        type: FETCH_USERS,
+        students: response.data,
+        message: 'Data received',
+        isLoading: false,
+      });
     })
     .catch((error) => handleUserError(error, dispatch));
 };
 
 export const addUser = (newUser) => (dispatch) => {
-  dispatch({ type: ADD_USER_REQUEST, message: 'Recording started...' });
+  dispatch({
+    type: ADD_USER_REQUEST,
+    message: 'Recording started...',
+    isLoading: true,
+  });
   axios
     .post(`${process.env.REACT_APP_BASE_URL}api/member-profile`, newUser)
     .then((response) => {
       dispatch({
         type: ADD_USER_SUCCESS,
         message: response.data,
+        isLoading: false,
       });
-      dispatch(fetchUsers());
     })
     .catch((error) => handleUserError(error, dispatch));
 };
@@ -50,7 +65,6 @@ export const deleteUser = (id) => (dispatch) => {
     .delete(`${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`)
     .then((response) => {
       dispatch({ type: DELETE_USER_SUCCESS, message: 'User was deleted' });
-      dispatch(fetchUsers());
     })
     .catch((error) => handleUserError(error, dispatch));
 };
