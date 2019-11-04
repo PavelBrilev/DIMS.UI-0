@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AllStudents from './components/students/AllStudents';
 import AllTasks from './components/tasks/AllTasks';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import StudentTasks from './components/student-tasks/StudentTasks';
 import StudentDoneTasks from './components/student-done-tasks/StudentDoneTasks';
 import StudentTasksTrack from './components/student-tasks-track/StudentTasksTrack';
 import LoginPage from './components/pages/LoginPage';
 import { Roles as ROLES } from './storage';
 import { ThemeContext } from './context/ThemeContext';
-
+import BadSidebar from './components/sidebar/Sidebar';
 import './styles/styles.css';
 
 class App extends React.Component {
@@ -17,7 +18,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       role: '',
-      theme: '',
+      theme: 'white',
     };
   }
 
@@ -28,7 +29,7 @@ class App extends React.Component {
   handleUserInput = () => {
     this.state.role
       ? this.setState({ role: '' })
-      : this.setState({ role: 'admin' });
+      : this.setState({ role: ROLES.ADMIN });
   };
 
   render() {
@@ -37,7 +38,7 @@ class App extends React.Component {
     if (this.state.role === ROLES.ADMIN) {
       return (
         <Provider value={this.state.theme}>
-          <div className={this.state.theme}>
+          <div className={`app_container ${this.state.theme}`}>
             <Router>
               <Header
                 handleTheme={this.handleTheme}
@@ -62,6 +63,8 @@ class App extends React.Component {
               />
               <Route path='/tasksTrack' component={StudentTasksTrack} />
             </Router>
+            <Footer />
+            {/* <BadSidebar /> */}
           </div>
         </Provider>
       );

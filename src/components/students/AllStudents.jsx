@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table } from 'reactstrap';
+import { Table, Spinner } from 'reactstrap';
+import AlertMessage from '../common/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StudentsForm from '../common/forms/students-form/StudentsForm';
@@ -23,11 +24,11 @@ class AllStudents extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    //const { students, dispatch, message } = this.props;
-    // below we need some library fo deep checking
-    // if (prevProps.students.length !== 0 && students !== prevProps.students) {
-    //   return dispatch(fetchUsers());
-    // }
+    //   const { students, dispatch } = this.props;
+    //   //below we need some library fo deep checking
+    //   if (prevProps.students !== students) {
+    //     return dispatch(fetchUsers());
+    //   }
   }
 
   listItems = (students) => {
@@ -84,27 +85,30 @@ class AllStudents extends React.Component {
 
   createPopUpForm = () => {
     return (
-      <Popup
-        className='btn btn-outline-primary btn-block'
-        icon={icons.create}
-        name='Register'
-      >
-        <StudentsForm
-          setNewStudent={(data) => this.props.dispatch(addUser(data))}
-        />
-      </Popup>
+      <>
+        <Popup
+          className='btn btn-outline-primary btn-block'
+          icon={icons.create}
+          name='Register'
+          id='tooltip'
+        >
+          <StudentsForm
+            setNewStudent={(data) => this.props.dispatch(addUser(data))}
+          />
+        </Popup>
+      </>
     );
   };
 
   render() {
     const { Consumer } = ThemeContext;
-    const { students } = this.props;
+    const { students, isLoading } = this.props;
 
-    if (!students || !students.length) {
+    if ((!students || !students.length) && isLoading) {
       return (
         <div className='container'>
           {this.createPopUpForm()}
-          <p className='text'>No registered</p>
+          <Spinner color='dark' size='xl' />
         </div>
       );
     }
@@ -120,6 +124,7 @@ class AllStudents extends React.Component {
             </Table>
           )}
         </Consumer>
+        <AlertMessage message={this.props.message} />
       </div>
     );
   }
@@ -129,6 +134,7 @@ const mapStateToProps = ({ studentsState }) => ({
   students: studentsState.students,
   message: studentsState.message,
   errors: studentsState.errors,
+  isLoading: studentsState.isLoading,
 });
 
 export default connect(mapStateToProps)(AllStudents);

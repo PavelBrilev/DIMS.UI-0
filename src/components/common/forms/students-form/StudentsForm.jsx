@@ -3,7 +3,7 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import PropTypes from 'prop-types';
 import { icons } from '../../icons';
-//import { setValidationRules } from '../../form-validation';
+import { setValidationRules } from '../../form-validation';
 
 class StudentsForm extends React.Component {
   constructor(props) {
@@ -12,13 +12,6 @@ class StudentsForm extends React.Component {
       Sex: 'M',
     };
   }
-
-  // componentDidMount() {
-  //   const { id } = this.props;
-  //   if (id) {
-  //     this.setState(storage.getStudent(id));
-  //   }
-  // }
 
   handleChange = (event) => {
     const { target } = event;
@@ -43,7 +36,7 @@ class StudentsForm extends React.Component {
             label='First name'
             value={this.state.Name}
             onBlur={this.handleChange}
-            // validate={validateField('First name')}
+            validate={setValidationRules('First name')}
           />
         </AvGroup>
         <AvGroup>
@@ -53,7 +46,7 @@ class StudentsForm extends React.Component {
             label='Last name'
             value={this.state.LastName}
             onBlur={this.handleChange}
-            /* validate={setValidationRules('Last name')} */
+            validate={setValidationRules('Last name')}
           />
         </AvGroup>
         <AvGroup>
@@ -63,7 +56,6 @@ class StudentsForm extends React.Component {
             label='Direction (React/Angular/.NET)'
             value={this.state.DirectionId}
             onChange={this.handleChange}
-            /* validate={setValidationRules('Direction')} */
           />
         </AvGroup>
         <AvGroup>
@@ -73,7 +65,7 @@ class StudentsForm extends React.Component {
             label='Email'
             value={this.state.Email}
             onBlur={this.handleChange}
-            /* validate={setValidationRules('Valid Email')} */
+            validate={setValidationRules('Valid Email')}
           />
         </AvGroup>
         <FormGroup>
@@ -97,10 +89,10 @@ class StudentsForm extends React.Component {
             errorMessage='Enter education'
             value={this.state.Education}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true },
-            //   pattern: { value: '^[A-Za-z0-9]+$' },
-            // }}
+            validate={{
+              required: { value: true },
+              pattern: { value: '^[A-Za-z0-9]+$' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -112,10 +104,10 @@ class StudentsForm extends React.Component {
             onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
-            // validate={{
-            //   required: { value: true },
-            //   date: { format: 'MM/DD/YYYY' },
-            // }}
+            validate={{
+              required: { value: true },
+              date: { format: 'MM/DD/YYYY' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -125,11 +117,14 @@ class StudentsForm extends React.Component {
             type='number'
             value={this.state.UniversityAverageScore}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true, errorMessage: 'Enter education' },
-            //   min: { value: 18, errorMessage: 'Must be more than 18' },
-            //   max: { value: 99, errorMessage: 'Must be less than 18' },
-            // }}
+            validate={{
+              required: {
+                value: true,
+                errorMessage: 'Enter university average score',
+              },
+              min: { value: 1, errorMessage: 'Must be more than 1' },
+              max: { value: 10, errorMessage: 'Must be less than 10' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -139,11 +134,11 @@ class StudentsForm extends React.Component {
             type='number'
             value={this.state.MathScore}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true, errorMessage: 'Enter education' },
-            //   min: { value: 18, errorMessage: 'Must be more than 18' },
-            //   max: { value: 99, errorMessage: 'Must be less than 18' },
-            // }}
+            validate={{
+              required: { value: true, errorMessage: 'Enter math score' },
+              min: { value: 1, errorMessage: 'Must be more than 1' },
+              max: { value: 10, errorMessage: 'Must be less than 10' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -154,10 +149,10 @@ class StudentsForm extends React.Component {
             errorMessage='Enter Address'
             value={this.state.Address}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true },
-            //   pattern: { value: '^[A-Za-z0-9]+$' },
-            // }}
+            validate={{
+              required: { value: true },
+              pattern: { value: '^[A-Za-z0-9]+$' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -168,10 +163,10 @@ class StudentsForm extends React.Component {
             errorMessage='Enter Mobile Phone'
             value={this.state.MobilePhone}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true },
-            //   pattern: { value: '^[A-Za-z0-9]+$' },
-            // }}
+            validate={{
+              required: { value: true },
+              pattern: { value: '^[A-Za-z0-9]+$' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -182,10 +177,10 @@ class StudentsForm extends React.Component {
             errorMessage='Enter Skype'
             value={this.state.Skype}
             onBlur={this.handleChange}
-            // validate={{
-            //   required: { value: true },
-            //   pattern: { value: '^[A-Za-z0-9]+$' },
-            // }}
+            validate={{
+              required: { value: true },
+              pattern: { value: '^[A-Za-z0-9]+$' },
+            }}
           />
         </AvGroup>
         <AvGroup>
@@ -197,10 +192,10 @@ class StudentsForm extends React.Component {
             onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
-            // validate={{
-            //   required: { value: true },
-            //   date: { format: 'MM/DD/YYYY' },
-            // }}
+            validate={{
+              required: { value: true },
+              date: { format: 'MM/DD/YYYY' },
+            }}
           />
         </AvGroup>
         <Button outline type='submit' color='success' block>

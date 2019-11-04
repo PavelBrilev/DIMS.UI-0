@@ -26,7 +26,6 @@ export const addTask = (newTask) => (dispatch) => {
         type: ADD_TASK_SUCCESS,
         message: response.data,
       });
-      dispatch(fetchTasks());
     })
     .catch((error) => handleTaskError(error, dispatch));
 };
@@ -50,7 +49,6 @@ export const deleteTask = (id) => (dispatch) => {
     .delete(`${process.env.REACT_APP_BASE_URL}api/member-profile/${id}`)
     .then((response) => {
       dispatch({ type: DELETE_TASK_SUCCESS, message: 'Task was deleted' });
-      dispatch(fetchTasks());
     })
     .catch((error) => handleTaskError(error, dispatch));
 };
