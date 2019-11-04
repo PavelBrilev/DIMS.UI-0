@@ -13,7 +13,7 @@ import { ThemeContext } from './context/ThemeContext';
 import BadSidebar from './components/sidebar/Sidebar';
 import './styles/styles.css';
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,6 @@ class App extends React.Component {
               <Route path='/tasksTrack' component={StudentTasksTrack} />
             </Router>
             <Footer />
-            {/* <BadSidebar /> */}
           </div>
         </Provider>
       );

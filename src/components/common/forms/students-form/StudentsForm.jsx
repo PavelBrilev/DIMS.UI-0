@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { icons } from '../../icons';
 import { setValidationRules } from '../../form-validation';
 
-class StudentsForm extends React.Component {
+class StudentsForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -163,10 +163,6 @@ class StudentsForm extends React.Component {
             errorMessage='Enter Mobile Phone'
             value={this.state.MobilePhone}
             onBlur={this.handleChange}
-            validate={{
-              required: { value: true },
-              pattern: { value: '^[A-Za-z0-9]+$' },
-            }}
           />
         </AvGroup>
         <AvGroup>

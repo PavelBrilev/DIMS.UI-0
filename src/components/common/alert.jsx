@@ -1,11 +1,10 @@
 import React from 'react';
 import { Alert } from 'reactstrap';
 
-class AlertMessage extends React.Component {
+class AlertMessage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      message: this.props.message,
       isOpen: true,
     };
   }
@@ -28,7 +27,7 @@ class AlertMessage extends React.Component {
   render() {
     return (
       <Alert color='info' isOpen={this.state.isOpen} toggle={this.onClose}>
-        {this.state.message}
+        {this.props.message}
       </Alert>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Spinner } from 'reactstrap';
+import { Table } from 'reactstrap';
 import AlertMessage from '../common/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,6 +12,7 @@ import { addUser, fetchUsers, editUser } from '../../reducers/studentsActions';
 import Thead from './Thead';
 import Tbody from './Tbody';
 import { ThemeContext } from '../../context/ThemeContext';
+import Loader from '../common/loader/spinner';
 
 import '../../styles/styles.css';
 
@@ -90,7 +91,6 @@ class AllStudents extends React.Component {
           className='btn btn-outline-primary btn-block'
           icon={icons.create}
           name='Register'
-          id='tooltip'
         >
           <StudentsForm
             setNewStudent={(data) => this.props.dispatch(addUser(data))}
@@ -108,7 +108,7 @@ class AllStudents extends React.Component {
       return (
         <div className='container'>
           {this.createPopUpForm()}
-          <Spinner color='dark' size='xl' />
+          <Loader />
         </div>
       );
     }

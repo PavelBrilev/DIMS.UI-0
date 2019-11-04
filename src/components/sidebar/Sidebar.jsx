@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
 
-class BadSidebar extends React.Component {
+class BadSidebar extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
