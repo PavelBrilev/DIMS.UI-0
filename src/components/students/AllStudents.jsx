@@ -32,6 +32,8 @@ class AllStudents extends React.PureComponent {
     //   }
   }
 
+  editUser = () => (data) => this.props.dispatch(editUser(data));
+
   listItems = (students) => {
     return students.map((student) => (
       <tr key={students.indexOf(student)}>
@@ -62,10 +64,7 @@ class AllStudents extends React.PureComponent {
             icon={icons.editIcon}
             name='Edit'
           >
-            <StudentsForm
-              setNewState={(data) => this.props.dispatch(editUser(data))}
-              id={student.UserId}
-            />
+            <StudentsForm setNewState={this.editUSer} id={student.UserId} />
           </Popup>
           <Popup
             className='btn btn-outline-danger'
@@ -84,6 +83,8 @@ class AllStudents extends React.PureComponent {
     ));
   };
 
+  addStudent = () => (data) => this.props.dispatch(addUser(data));
+
   createPopUpForm = () => {
     return (
       <>
@@ -92,9 +93,7 @@ class AllStudents extends React.PureComponent {
           icon={icons.create}
           name='Register'
         >
-          <StudentsForm
-            setNewStudent={(data) => this.props.dispatch(addUser(data))}
-          />
+          <StudentsForm setNewStudent={this.addStudent} />
         </Popup>
       </>
     );
