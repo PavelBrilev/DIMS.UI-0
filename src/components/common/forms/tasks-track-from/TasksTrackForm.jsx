@@ -5,7 +5,7 @@ import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import storage from '../../../../storage';
 import { icons } from '../../icons';
 
-class TasksTrackForm extends React.Component {
+class TasksTrackForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -63,7 +63,6 @@ class TasksTrackForm extends React.Component {
           />
         </AvGroup>
         <Button outline type='submit' color='success' block>
-          {' '}
           {icons.submitIcon} Submit
         </Button>
       </AvForm>

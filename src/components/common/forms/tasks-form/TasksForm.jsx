@@ -5,7 +5,7 @@ import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import { icons } from '../../icons';
 import { connect } from 'react-redux';
 
-class TasksForm extends React.Component {
+class TasksForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

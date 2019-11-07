@@ -3,7 +3,12 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import PropTypes from 'prop-types';
 import { icons } from '../../icons';
-import { setValidationRules } from '../../form-validation';
+import {
+  setTextValidationRules,
+  setTextAreaValidationRules,
+  setDateValidationRules,
+  setScoreValidationRules,
+} from '../../form-validation';
 
 class StudentsForm extends React.PureComponent {
   constructor(props) {
@@ -36,7 +41,7 @@ class StudentsForm extends React.PureComponent {
             label='First name'
             value={this.state.Name}
             onBlur={this.handleChange}
-            validate={setValidationRules('First name')}
+            validate={setTextValidationRules('First name')}
           />
         </AvGroup>
         <AvGroup>
@@ -46,7 +51,7 @@ class StudentsForm extends React.PureComponent {
             label='Last name'
             value={this.state.LastName}
             onBlur={this.handleChange}
-            validate={setValidationRules('Last name')}
+            validate={setTextValidationRules('Last name')}
           />
         </AvGroup>
         <AvGroup>
@@ -65,7 +70,7 @@ class StudentsForm extends React.PureComponent {
             label='Email'
             value={this.state.Email}
             onBlur={this.handleChange}
-            validate={setValidationRules('Valid Email')}
+            validate={setTextValidationRules('Valid Email')}
           />
         </AvGroup>
         <FormGroup>
@@ -89,10 +94,7 @@ class StudentsForm extends React.PureComponent {
             errorMessage='Enter education'
             value={this.state.Education}
             onBlur={this.handleChange}
-            validate={{
-              required: { value: true },
-              pattern: { value: '^[A-Za-z0-9]+$' },
-            }}
+            validate={setTextAreaValidationRules()}
           />
         </AvGroup>
         <AvGroup>
@@ -104,10 +106,7 @@ class StudentsForm extends React.PureComponent {
             onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
-            validate={{
-              required: { value: true },
-              date: { format: 'MM/DD/YYYY' },
-            }}
+            validate={setDateValidationRules()}
           />
         </AvGroup>
         <AvGroup>
@@ -117,14 +116,7 @@ class StudentsForm extends React.PureComponent {
             type='number'
             value={this.state.UniversityAverageScore}
             onBlur={this.handleChange}
-            validate={{
-              required: {
-                value: true,
-                errorMessage: 'Enter university average score',
-              },
-              min: { value: 1, errorMessage: 'Must be more than 1' },
-              max: { value: 10, errorMessage: 'Must be less than 10' },
-            }}
+            validate={setScoreValidationRules('university average')}
           />
         </AvGroup>
         <AvGroup>
@@ -134,11 +126,7 @@ class StudentsForm extends React.PureComponent {
             type='number'
             value={this.state.MathScore}
             onBlur={this.handleChange}
-            validate={{
-              required: { value: true, errorMessage: 'Enter math score' },
-              min: { value: 1, errorMessage: 'Must be more than 1' },
-              max: { value: 10, errorMessage: 'Must be less than 10' },
-            }}
+            validate={setScoreValidationRules('math')}
           />
         </AvGroup>
         <AvGroup>
@@ -149,10 +137,7 @@ class StudentsForm extends React.PureComponent {
             errorMessage='Enter Address'
             value={this.state.Address}
             onBlur={this.handleChange}
-            validate={{
-              required: { value: true },
-              pattern: { value: '^[A-Za-z0-9]+$' },
-            }}
+            validate={setTextAreaValidationRules()}
           />
         </AvGroup>
         <AvGroup>
@@ -173,10 +158,7 @@ class StudentsForm extends React.PureComponent {
             errorMessage='Enter Skype'
             value={this.state.Skype}
             onBlur={this.handleChange}
-            validate={{
-              required: { value: true },
-              pattern: { value: '^[A-Za-z0-9]+$' },
-            }}
+            validate={setTextAreaValidationRules()}
           />
         </AvGroup>
         <AvGroup>
@@ -188,10 +170,7 @@ class StudentsForm extends React.PureComponent {
             onBlur={this.handleChange}
             errorMessage='Enter start date'
             title='Use MM/DD/YYYY'
-            validate={{
-              required: { value: true },
-              date: { format: 'MM/DD/YYYY' },
-            }}
+            validate={setDateValidationRules()}
           />
         </AvGroup>
         <Button outline type='submit' color='success' block>

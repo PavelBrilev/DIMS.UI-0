@@ -13,7 +13,7 @@ import Tbody from './Tbody';
 
 import '../../styles/styles.css';
 
-class AllTasks extends React.Component {
+class AllTasks extends React.PureComponent {
   componentDidMount() {
     const { tasks, dispatch } = this.props;
     if (!tasks.length) {

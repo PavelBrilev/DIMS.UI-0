@@ -7,8 +7,8 @@ import { ItemTypes } from '../../../../constants/item-types';
 import { deleteUser } from '../../../../reducers/studentsActions';
 import { deleteTask } from '../../../../reducers/tasksActions';
 
-class DeleteForm extends React.Component {
-  handleDelete = () => {
+const DeleteForm = () => {
+  const handleDelete = () => {
     const { type, id, dispatch, toggle } = this.props;
     if (type === ItemTypes.STUDENTS) {
       dispatch(deleteUser(parseInt(id, 10)));
@@ -18,25 +18,16 @@ class DeleteForm extends React.Component {
     toggle();
   };
 
-  render() {
-    const { name } = this.props;
-
-    return (
-      <div>
-        <p>{`Delete ${name}?`}</p>
-        <Button
-          outline
-          type='button'
-          color='danger'
-          onClick={this.handleDelete}
-          block
-        >
-          {icons.deleteIcon} Delete
-        </Button>
-      </div>
-    );
-  }
-}
+  const { name } = this.props;
+  return (
+    <div>
+      <p>{`Delete ${name}?`}</p>
+      <Button outline type='button' color='danger' onClick={handleDelete} block>
+        {icons.deleteIcon} Delete
+      </Button>
+    </div>
+  );
+};
 
 export default connect()(DeleteForm);
 

@@ -16,7 +16,7 @@ import Loader from '../common/loader/spinner';
 
 import '../../styles/styles.css';
 
-class AllStudents extends React.Component {
+class AllStudents extends React.PureComponent {
   componentDidMount() {
     const { students, dispatch } = this.props;
     if (!students.length) {

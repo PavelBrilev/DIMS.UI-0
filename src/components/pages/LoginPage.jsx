@@ -5,7 +5,7 @@ import { icons } from '../common/icons';
 
 import '../../styles/form.css';
 
-class LoginPage extends React.Component {
+class LoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

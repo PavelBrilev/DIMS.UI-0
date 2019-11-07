@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import Colors from '../../constants/colors';
 
-class ThemeSwitcher extends React.Component {
+class ThemeSwitcher extends React.PureComponent {
   constructor(props) {
     super(props);
 

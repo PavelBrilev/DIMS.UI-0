@@ -3,7 +3,7 @@ import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { icons } from '../common/icons';
 
-class Popup extends React.Component {
+class Popup extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
