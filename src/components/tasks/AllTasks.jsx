@@ -10,6 +10,9 @@ import DeleteForm from '../common/forms/delete-form/DeleteForm';
 import { fetchTasks, addTask, editTask } from '../../reducers/tasksActions';
 import Thead from './Thead';
 import Tbody from './Tbody';
+import Loader from '../common/loader/spinner';
+import AlertMessage from '../common/alert';
+import AlertErrors from '../common/alertErrors';
 
 import '../../styles/styles.css';
 
@@ -48,6 +51,10 @@ class AllTasks extends React.PureComponent {
     ));
   };
 
+  addTask = () => (data) => {
+    this.props.dispatch(addTask(data));
+  };
+
   createPopUpForm = () => {
     return (
       <Popup
@@ -55,14 +62,23 @@ class AllTasks extends React.PureComponent {
         icon={icons.create}
         name='Create'
       >
-        <TasksForm setNewTask={(data) => this.props.dispatch(addTask(data))} />
+        <TasksForm setNewTask={this.addTask()} />
       </Popup>
     );
   };
 
   render() {
     const { Consumer } = ThemeContext;
-    const { tasks } = this.props;
+    const { tasks, isLoading } = this.props;
+
+    if (isLoading) {
+      return (
+        <div className='container'>
+          {this.createPopUpForm()}
+          <Loader />
+        </div>
+      );
+    }
 
     if (!tasks || !tasks.length) {
       return (
@@ -83,6 +99,8 @@ class AllTasks extends React.PureComponent {
             </Table>
           )}
         </Consumer>
+        <AlertMessage message={this.props.message} />
+        <AlertErrors errors={this.props.errors} />
       </div>
     );
   }
@@ -92,6 +110,7 @@ const mapStateToProps = ({ tasksState }) => ({
   tasks: tasksState.tasks,
   message: tasksState.message,
   errors: tasksState.errors,
+  isLoading: tasksState.isLoading,
 });
 
 export default connect(mapStateToProps)(AllTasks);

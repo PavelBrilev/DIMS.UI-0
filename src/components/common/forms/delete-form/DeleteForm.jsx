@@ -7,9 +7,10 @@ import { ItemTypes } from '../../../../constants/item-types';
 import { deleteUser } from '../../../../reducers/studentsActions';
 import { deleteTask } from '../../../../reducers/tasksActions';
 
-const DeleteForm = () => {
-  const handleDelete = () => {
+class DeleteForm extends React.PureComponent {
+  handleDelete = () => {
     const { type, id, dispatch, toggle } = this.props;
+
     if (type === ItemTypes.STUDENTS) {
       dispatch(deleteUser(parseInt(id, 10)));
     } else if (type === ItemTypes.TASK) {
@@ -18,16 +19,24 @@ const DeleteForm = () => {
     toggle();
   };
 
-  const { name } = this.props;
-  return (
-    <div>
-      <p>{`Delete ${name}?`}</p>
-      <Button outline type='button' color='danger' onClick={handleDelete} block>
-        {icons.deleteIcon} Delete
-      </Button>
-    </div>
-  );
-};
+  render() {
+    const { name } = this.props;
+    return (
+      <div>
+        <p>{`Delete ${name}?`}</p>
+        <Button
+          outline
+          type='button'
+          color='danger'
+          onClick={this.handleDelete}
+          block
+        >
+          {icons.deleteIcon} Delete
+        </Button>
+      </div>
+    );
+  }
+}
 
 export default connect()(DeleteForm);
 
@@ -40,6 +49,5 @@ DeleteForm.propTypes = {
 };
 
 DeleteForm.defaultProps = {
-  setNewState: () => {},
   toggle: () => {},
 };

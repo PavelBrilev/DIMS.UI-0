@@ -6,38 +6,40 @@ import { ThemeContext } from '../../context/ThemeContext';
 
 import '../../styles/styles.css';
 
-const Header = () => {
-  const handleTheme = (theme) => {
+class Header extends React.PureComponent {
+  handleTheme = (theme) => {
     this.props.handleTheme(theme);
   };
-  const LogOut = () => {
+  LogOut = () => {
     this.props.LogOut();
   };
 
-  const { Consumer } = ThemeContext;
+  render() {
+    const { Consumer } = ThemeContext;
 
-  return (
-    <Consumer>
-      {(theme) => (
-        <div className={`header ${theme}`}>
-          <Link to='/students' className='btn__header'>
-            Students
-          </Link>
-          <Link to='/tasks' className='btn__header'>
-            Tasks
-          </Link>
-          <Link to='/tasksTrack' className='btn__header'>
-            Tasks Track
-          </Link>
-          <Link to='/' className='btn__header' onClick={LogOut}>
-            Log Out
-          </Link>
-          <ThemeSwitcher handleTheme={handleTheme} />
-        </div>
-      )}
-    </Consumer>
-  );
-};
+    return (
+      <Consumer>
+        {(theme) => (
+          <div className={`header ${theme}`}>
+            <Link to='/students' className='btn__header'>
+              Students
+            </Link>
+            <Link to='/tasks' className='btn__header'>
+              Tasks
+            </Link>
+            <Link to='/tasksTrack' className='btn__header'>
+              Tasks Track
+            </Link>
+            <Link to='/' className='btn__header' onClick={this.LogOut}>
+              Log Out
+            </Link>
+            <ThemeSwitcher handleTheme={this.handleTheme} />
+          </div>
+        )}
+      </Consumer>
+    );
+  }
+}
 
 export default Header;
 

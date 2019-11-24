@@ -18,6 +18,40 @@ class StudentsForm extends React.PureComponent {
     };
   }
 
+  componentDidMount() {
+    if (this.props.student) {
+      const {
+        FullName,
+        Direction,
+        Email,
+        Sex,
+        Education,
+        BirthDate,
+        UniversityAverageScore,
+        MathScore,
+        Address,
+        MobilePhone,
+        Skype,
+        StartDate,
+      } = this.props.student;
+      this.setState({
+        Name: FullName.split(' ')[0],
+        LastName: FullName.split(' ')[1],
+        DirectionId: Direction,
+        Email,
+        Sex,
+        Education,
+        BirthDate,
+        UniversityAverageScore,
+        MathScore,
+        Address,
+        MobilePhone,
+        Skype,
+        StartDate,
+      });
+    }
+  }
+
   handleChange = (event) => {
     const { target } = event;
     const { value, name } = target;
@@ -59,7 +93,7 @@ class StudentsForm extends React.PureComponent {
             type='text'
             name='DirectionId'
             label='Direction (React/Angular/.NET)'
-            value={this.state.DirectionId}
+            value={this.state.Direction}
             onChange={this.handleChange}
           />
         </AvGroup>

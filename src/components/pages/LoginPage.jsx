@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 import { icons } from '../common/icons';
+import Particles from 'react-particles-js';
 
 import '../../styles/form.css';
 
@@ -28,6 +29,31 @@ class LoginPage extends React.PureComponent {
   render() {
     return (
       <div className='login_page'>
+        <Particles
+          params={{
+            particles: {
+              number: {
+                value: 50,
+              },
+              size: {
+                value: 3,
+              },
+            },
+            interactivity: {
+              events: {
+                onhover: {
+                  enable: true,
+                  mode: 'repulse',
+                },
+              },
+            },
+          }}
+          style={{
+            position: 'fixed',
+            background: 'rgb(209, 209, 209)',
+          }}
+        />
+        <div className='logo_container'></div>
         <div className='login__container'>
           <AvForm onValidSubmit={this.handleSubmit}>
             <AvGroup>

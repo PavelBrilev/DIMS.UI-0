@@ -16,19 +16,21 @@ class Popup extends React.PureComponent {
   };
 
   render() {
+    const { className, icon, name, children } = this.props;
+
     return (
       <>
         <Button
           outline
-          className={this.props.className}
+          className={className}
           color='primary'
           onClick={this.toggle}
         >
-          {this.props.icon} {this.props.name}
+          {icon} {name}
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalBody>
-            {React.Children.map(this.props.children, (child) =>
+            {React.Children.map(children, (child) =>
               React.cloneElement(child, { toggle: this.toggle }),
             )}
           </ModalBody>

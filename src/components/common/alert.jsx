@@ -14,10 +14,10 @@ class AlertMessage extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.message !== this.props.message) {
+    if (prevProps.message.length !== this.props.message.length) {
       this.setState({ isOpen: true });
     }
-    setTimeout(this.onClose, 2500);
+    setTimeout(this.onClose, 2000);
   }
 
   onClose = () => {

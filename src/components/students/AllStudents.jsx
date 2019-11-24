@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import AlertMessage from '../common/alert';
+import AlertErrors from '../common/alertErrors';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StudentsForm from '../common/forms/students-form/StudentsForm';
@@ -64,7 +65,7 @@ class AllStudents extends React.PureComponent {
             icon={icons.editIcon}
             name='Edit'
           >
-            <StudentsForm setNewState={this.editUSer} id={student.UserId} />
+            <StudentsForm setNewState={this.editUSer} student={student} />
           </Popup>
           <Popup
             className='btn btn-outline-danger'
@@ -83,19 +84,19 @@ class AllStudents extends React.PureComponent {
     ));
   };
 
-  addStudent = () => (data) => this.props.dispatch(addUser(data));
+  addStudent = () => (data) => {
+    this.props.dispatch(addUser(data));
+  };
 
   createPopUpForm = () => {
     return (
-      <>
-        <Popup
-          className='btn btn-outline-primary btn-block'
-          icon={icons.create}
-          name='Register'
-        >
-          <StudentsForm setNewStudent={this.addStudent} />
-        </Popup>
-      </>
+      <Popup
+        className='btn btn-outline-primary btn-block'
+        icon={icons.create}
+        name='Register'
+      >
+        <StudentsForm setNewStudent={this.addStudent()} />
+      </Popup>
     );
   };
 
@@ -103,11 +104,20 @@ class AllStudents extends React.PureComponent {
     const { Consumer } = ThemeContext;
     const { students, isLoading } = this.props;
 
-    if ((!students || !students.length) && isLoading) {
+    if (isLoading) {
       return (
         <div className='container'>
           {this.createPopUpForm()}
           <Loader />
+        </div>
+      );
+    }
+
+    if (!students || !students.length) {
+      return (
+        <div className='container'>
+          {this.createPopUpForm()}
+          <p className='text'>No students</p>
         </div>
       );
     }
@@ -124,6 +134,7 @@ class AllStudents extends React.PureComponent {
           )}
         </Consumer>
         <AlertMessage message={this.props.message} />
+        <AlertErrors errors={this.props.errors} />
       </div>
     );
   }
