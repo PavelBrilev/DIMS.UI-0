@@ -6,6 +6,30 @@ import Particles from 'react-particles-js';
 
 import '../../styles/form.css';
 
+const params = {
+  particles: {
+    number: {
+      value: 50,
+    },
+    size: {
+      value: 3,
+    },
+  },
+  interactivity: {
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'repulse',
+      },
+    },
+  },
+};
+
+const style = {
+  position: 'fixed',
+  background: 'rgb(209, 209, 209)',
+};
+
 class LoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -29,30 +53,7 @@ class LoginPage extends React.PureComponent {
   render() {
     return (
       <div className='login_page'>
-        <Particles
-          params={{
-            particles: {
-              number: {
-                value: 50,
-              },
-              size: {
-                value: 3,
-              },
-            },
-            interactivity: {
-              events: {
-                onhover: {
-                  enable: true,
-                  mode: 'repulse',
-                },
-              },
-            },
-          }}
-          style={{
-            position: 'fixed',
-            background: 'rgb(209, 209, 209)',
-          }}
-        />
+        <Particles params={params} style={style} />
         <div className='logo_container'></div>
         <div className='login__container'>
           <AvForm onValidSubmit={this.handleSubmit}>

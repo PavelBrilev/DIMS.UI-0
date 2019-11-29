@@ -1,7 +1,13 @@
 import React from 'react';
-import Sidebar from 'react-sidebar';
+import { ThemeContext } from '../../context/ThemeContext';
+import { RoleContext } from '../../context/RoleContext';
+import { Link } from 'react-router-dom';
+import { icons } from '../common/icons';
+import { Roles as ROLES } from '../../storage';
 
-class BadSidebar extends React.PureComponent {
+import './sidebar.css';
+
+class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,25 +15,63 @@ class BadSidebar extends React.PureComponent {
     };
   }
 
-  onSetSidebarOpen = (open) => {
-    this.setState({ sidebarOpen: open });
+  onSetSidebarOpen = () => {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
   };
 
   render() {
     return (
-      <Sidebar
-        sidebar={<b>Sidebar content</b>}
-        open={this.state.sidebarOpen}
-        onSetOpen={this.onSetSidebarOpen}
-        styles={{ sidebar: { background: 'white' } }}
-        pullRight={true}
-      >
-        <button onClick={() => this.onSetSidebarOpen(true)}>
-          Open sidebar
-        </button>
-      </Sidebar>
+      <RoleContext.Consumer>
+        {(role) => (
+          <ThemeContext.Consumer>
+            {(theme) => (
+              <div
+                className={
+                  this.state.sidebarOpen
+                    ? `${'sidebarOpen'} ${theme}`
+                    : `${'sidebar'} ${theme}`
+                }
+              >
+                <button onClick={this.onSetSidebarOpen}>
+                  {this.state.sidebarOpen ? icons.fixedIcon : icons.unFixedIcon}
+                </button>
+                <Link
+                  to='/students'
+                  className={
+                    role === ROLES.ADMIN || role === ROLES.MENTOR
+                      ? 'btn__sidebar'
+                      : 'hidden'
+                  }
+                >
+                  Students <span>{icons.studentIcon}</span>
+                </Link>
+                <Link
+                  to='/tasks'
+                  className={
+                    role === ROLES.ADMIN || role === ROLES.MENTOR
+                      ? 'btn__sidebar'
+                      : 'hidden'
+                  }
+                >
+                  Tasks <span>{icons.taskIcon}</span>
+                </Link>
+                <Link
+                  to='/tasksTrack'
+                  className={
+                    role === ROLES.ADMIN || role === ROLES.USER
+                      ? 'btn__sidebar'
+                      : 'hidden'
+                  }
+                >
+                  Tasks Track <span>{icons.taskTrackIcon}</span>
+                </Link>
+              </div>
+            )}
+          </ThemeContext.Consumer>
+        )}
+      </RoleContext.Consumer>
     );
   }
 }
 
-export default BadSidebar;
+export default Sidebar;

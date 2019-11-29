@@ -8,10 +8,6 @@ const ThemeProvider = ({ children, color }) => {
   );
 };
 
-const ThemeConsumer = () => (
-  <ThemeContext.Consumer>
-    {(value) => <div>Color is: {value}</div>}
-  </ThemeContext.Consumer>
-);
+const ThemeConsumer = () => <ThemeContext.Consumer> </ThemeContext.Consumer>;
 
 export { ThemeContext, ThemeProvider, ThemeConsumer };

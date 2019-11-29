@@ -7,6 +7,12 @@ import {
   MdAddCircleOutline,
   MdList,
   MdEqualizer,
+  MdAccessibility,
+  MdAssignment,
+  MdTrendingUp,
+  MdBuild,
+  MdBookmarkBorder,
+  MdBookmark,
 } from 'react-icons/md';
 
 export const icons = {
@@ -17,4 +23,10 @@ export const icons = {
   create: <MdAddCircleOutline />,
   tasksIcon: <MdList />,
   progressIcon: <MdEqualizer />,
+  studentIcon: <MdAccessibility />,
+  taskIcon: <MdAssignment />,
+  taskTrackIcon: <MdTrendingUp />,
+  themeIcon: <MdBuild />,
+  unFixedIcon: <MdBookmarkBorder />,
+  fixedIcon: <MdBookmark />,
 };

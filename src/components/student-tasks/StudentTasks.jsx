@@ -51,7 +51,7 @@ class StudentTasks extends React.Component {
     ));
 
     return (
-      <div className='container'>
+      <div className='grid'>
         <h5>
           Hi, dear
           {student.name}! This is your current tasks:

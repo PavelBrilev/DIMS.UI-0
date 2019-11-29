@@ -7,6 +7,9 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/colors';
+import { icons } from '../common/icons';
+
+import '../../styles/styles.css';
 
 class ThemeSwitcher extends React.PureComponent {
   constructor(props) {
@@ -39,7 +42,7 @@ class ThemeSwitcher extends React.PureComponent {
           data-toggle='dropdown'
           aria-expanded={this.state.dropdownOpen}
         >
-          Theme
+          {icons.themeIcon}
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem value={Colors.WHITE} onClick={this.toggle}>

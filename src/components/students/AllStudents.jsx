@@ -106,7 +106,7 @@ class AllStudents extends React.PureComponent {
 
     if (isLoading) {
       return (
-        <div className='container'>
+        <div className='grid'>
           {this.createPopUpForm()}
           <Loader />
         </div>
@@ -115,7 +115,7 @@ class AllStudents extends React.PureComponent {
 
     if (!students || !students.length) {
       return (
-        <div className='container'>
+        <div className='grid'>
           {this.createPopUpForm()}
           <p className='text'>No students</p>
         </div>
@@ -123,7 +123,7 @@ class AllStudents extends React.PureComponent {
     }
 
     return (
-      <div className='container'>
+      <div className='grid'>
         {this.createPopUpForm()}
         <Consumer>
           {(theme) => (

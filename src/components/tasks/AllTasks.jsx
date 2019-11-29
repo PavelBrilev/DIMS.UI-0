@@ -73,7 +73,7 @@ class AllTasks extends React.PureComponent {
 
     if (isLoading) {
       return (
-        <div className='container'>
+        <div className='grid'>
           {this.createPopUpForm()}
           <Loader />
         </div>
@@ -82,14 +82,14 @@ class AllTasks extends React.PureComponent {
 
     if (!tasks || !tasks.length) {
       return (
-        <div className='container'>
+        <div className='grid'>
           {this.createPopUpForm()}
           <p className='text'>No tasks</p>
         </div>
       );
     }
     return (
-      <div className='container'>
+      <div className='grid'>
         {this.createPopUpForm()}
         <Consumer>
           {(theme) => (

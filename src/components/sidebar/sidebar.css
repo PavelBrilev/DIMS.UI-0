@@ -1,0 +1,80 @@
+.sidebar {
+  position: absolute;
+  display: inline-block;
+  top: 80px;
+  bottom: 0;
+  left: -20%;
+  width: 25%;
+  background: #f7f7f7;
+  transition: 0.3s linear;
+  border-right: 1px solid black;
+}
+
+.sidebar:hover {
+  position: absolute;
+  top: 80px;
+  bottom: 0;
+  left: 0px;
+  width: 25%;
+  background: #f7f7f7;
+  border: none;
+}
+
+.sidebarOpen {
+  position: absolute;
+  top: 80px;
+  bottom: 0;
+  left: 0px;
+  width: 25%;
+  background: #f7f7f7;
+  border-right: 1px solid black;
+}
+
+.sidebar:hover + div,
+.sidebarOpen + div {
+  margin-left: 30%;
+  width: 65%;
+  transition: 0.3s linear;
+}
+
+.btn__sidebar,
+.btn__sidebar:link,
+.btn__sidebar:visited {
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  height: 65px;
+  line-height: 65px;
+  width: 100%;
+  border: none;
+  transition: 0.3s linear;
+}
+
+.btn__sidebar:hover {
+  background: rgba(90, 90, 90, 0.2);
+}
+
+.btn__sidebar:active {
+  background: #d1d1d1;
+}
+
+.black .btn__sidebar,
+.black .btn__sidebar:link,
+.black .btn__sidebar:visited {
+  color: #ffffff;
+}
+.btn__sidebar span {
+  float: right;
+  padding-right: 15px;
+}
+
+button {
+  border: none;
+}
+
+.hidden {
+  visibility: hidden;
+}

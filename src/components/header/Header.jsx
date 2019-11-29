@@ -16,20 +16,10 @@ class Header extends React.PureComponent {
 
   render() {
     const { Consumer } = ThemeContext;
-
     return (
       <Consumer>
         {(theme) => (
           <div className={`header ${theme}`}>
-            <Link to='/students' className='btn__header'>
-              Students
-            </Link>
-            <Link to='/tasks' className='btn__header'>
-              Tasks
-            </Link>
-            <Link to='/tasksTrack' className='btn__header'>
-              Tasks Track
-            </Link>
             <Link to='/' className='btn__header' onClick={this.LogOut}>
               Log Out
             </Link>
